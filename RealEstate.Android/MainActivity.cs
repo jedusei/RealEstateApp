@@ -17,8 +17,15 @@ namespace RealEstate.Droid
 
             base.OnCreate(savedInstanceState);
 
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental", "Shapes_Experimental", "CarouselView_Experimental");
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            Window.SetFlags(Android.Views.WindowManagerFlags.TranslucentStatus, Android.Views.WindowManagerFlags.TranslucentStatus);
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+
             _app = new App(Finish);
             LoadApplication(_app);
         }

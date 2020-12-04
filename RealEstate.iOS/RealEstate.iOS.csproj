@@ -137,4 +137,7 @@
       <Name>RealEstate</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\background_1.jpg" />
+  </ItemGroup>
 </Project>
