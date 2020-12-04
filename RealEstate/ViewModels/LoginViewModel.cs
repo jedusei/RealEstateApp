@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using MvvmHelpers.Commands;
+using RealEstate.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -53,6 +54,7 @@ namespace RealEstate.ViewModels
         {
             NextCommand = new Command(() => CurrentPage = 1, () => IsEmailValid);
             LoginCommand = new AsyncCommand(LoginAsync, _ => IsPasswordValid);
+            SignupCommand = new AsyncCommand(() => _navigationService.GoToPageAsync<SignupPage>());
         }
 
         public override bool OnBackButtonPressed()

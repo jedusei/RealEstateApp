@@ -15,7 +15,10 @@ namespace RealEstate.Droid.Renderers
         {
             base.OnElementChanged(e);
             if (Control != null)
+            {
                 Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
+                Control.SetPadding(0, 0, 0, 0);
+            }
         }
     }
 }

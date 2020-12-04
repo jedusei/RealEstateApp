@@ -6,15 +6,20 @@
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     x:Name="this">
     <border:SfBorder
+        Padding="0"
         BindingContext="{Reference this}"
         BorderColor="#338F92A1"
         BorderThickness="0,0,0,2">
-        <StackLayout Padding="0,5" Orientation="Horizontal">
+        <StackLayout Padding="0,15" Orientation="Horizontal">
             <Entry
+                Margin="0"
+                CharacterSpacing="{Binding CharacterSpacing}"
                 HorizontalOptions="FillAndExpand"
                 Keyboard="{Binding Keyboard}"
+                MaxLength="{Binding MaxLength}"
                 Placeholder="{Binding Placeholder}"
                 PlaceholderColor="#8F92A1"
+                ReturnType="{Binding ReturnType}"
                 Text="{Binding Text}">
                 <Entry.Triggers>
                     <MultiTrigger TargetType="Entry">
