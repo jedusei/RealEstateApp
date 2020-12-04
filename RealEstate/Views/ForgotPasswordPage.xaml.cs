@@ -3,13 +3,12 @@ using Xamarin.Forms;
 
 namespace RealEstate.Views
 {
-    [SingletonPage]
-    public partial class LoginPage : BasePage
+    public partial class ForgotPasswordPage : BasePage
     {
-        public LoginPage()
+        public ForgotPasswordPage()
         {
             InitializeComponent();
-            ViewModel = new LoginViewModel();
+            ViewModel = new ForgotPasswordViewModel();
         }
         protected override void OnStart()
         {

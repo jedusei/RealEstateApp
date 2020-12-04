@@ -12,7 +12,7 @@ namespace RealEstate.Views
 
     public abstract class BasePage : ContentPage
     {
-        const int TRANSITION_DURATION = 250;
+        public const int TRANSITION_DURATION = 250;
         const int DESTROY_DELAY = 2000;
         bool _hasLoaded;
         object _newNavigationData;

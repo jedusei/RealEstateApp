@@ -1,9 +1,6 @@
 ﻿using Acr.UserDialogs;
 using MvvmHelpers.Commands;
 using RealEstate.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -36,17 +33,17 @@ namespace RealEstate.ViewModels
         public bool IsEmailValid
         {
             get => _isEmailValid;
-            set => SetProperty(ref _isEmailValid, value, onChanged: (NextCommand as Command).RaiseCanExecuteChanged);
+            set => SetProperty(ref _isEmailValid, value, onChanged: NextCommand.RaiseCanExecuteChanged);
         }
         public bool IsPasswordValid
         {
             get => _isPasswordValid;
-            set => SetProperty(ref _isPasswordValid, value, onChanged: (LoginCommand as AsyncCommand).RaiseCanExecuteChanged);
+            set => SetProperty(ref _isPasswordValid, value, onChanged: LoginCommand.RaiseCanExecuteChanged);
         }
 
-        public ICommand NextCommand { get; set; }
+        public Command NextCommand { get; set; }
         public ICommand SignupCommand { get; set; }
-        public ICommand LoginCommand { get; set; }
+        public AsyncCommand LoginCommand { get; set; }
         public ICommand ForgotPasswordCommand { get; set; }
 
 
@@ -54,7 +51,24 @@ namespace RealEstate.ViewModels
         {
             NextCommand = new Command(() => CurrentPage = 1, () => IsEmailValid);
             LoginCommand = new AsyncCommand(LoginAsync, _ => IsPasswordValid);
-            SignupCommand = new AsyncCommand(() => _navigationService.GoToPageAsync<SignupPage>());
+            SignupCommand = new AsyncCommand(async () =>
+            {
+                await _navigationService.GoToPageAsync<SignupPage>();
+                await Task.Delay(BasePage.TRANSITION_DURATION);
+                Reset();
+            });
+            ForgotPasswordCommand = new AsyncCommand(async () =>
+            {
+                await _navigationService.GoToPageAsync<ForgotPasswordPage>();
+                await Task.Delay(BasePage.TRANSITION_DURATION);
+                Reset();
+            });
+        }
+
+        void Reset()
+        {
+            CurrentPage = 0;
+            Email = Password = null;
         }
 
         public override bool OnBackButtonPressed()
