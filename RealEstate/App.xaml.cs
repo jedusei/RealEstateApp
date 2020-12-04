@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RealEstate.Services;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -26,8 +27,6 @@ namespace RealEstate
 
             On<Xamarin.Forms.PlatformConfiguration.Android>()
                 .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-
-            MainPage = new MainPage();
         }
 
         public static Task NextTickAsync()
@@ -49,8 +48,9 @@ namespace RealEstate
                 _exitAction.Invoke();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
+            await DependencyService.Get<INavigationService>().InitializeAsync();
             Status = AppStatus.Started;
         }
 
