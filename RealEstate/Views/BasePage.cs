@@ -55,9 +55,17 @@ namespace RealEstate.Views
             if (_hasLoaded)
             {
                 IsPaused = false;
+                bool isHotReload = (App.Status == AppStatus.Running);
+
                 await App.NextTickAsync();
-                OnResume(_newNavigationData);
-                _newNavigationData = null;
+
+                if (isHotReload)
+                    OnRefresh();
+                else
+                {
+                    OnResume(_newNavigationData);
+                    _newNavigationData = null;
+                }
             }
             else
             {
@@ -104,6 +112,9 @@ namespace RealEstate.Views
         protected virtual void OnStart()
         {
             _viewModel?.OnStart();
+        }
+        protected virtual void OnRefresh() // Hot Reload
+        {
         }
         protected virtual void OnResume(object navigationData)
         {

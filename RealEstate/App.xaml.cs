@@ -9,7 +9,7 @@ namespace RealEstate
     public enum AppStatus
     {
         Starting,
-        Started,
+        Running,
         Paused,
         Stopped
     }
@@ -53,7 +53,7 @@ namespace RealEstate
         protected override async void OnStart()
         {
             await DependencyService.Get<INavigationService>().InitializeAsync();
-            Status = AppStatus.Started;
+            Status = AppStatus.Running;
         }
 
         protected override void OnSleep()
@@ -61,9 +61,10 @@ namespace RealEstate
             Status = AppStatus.Paused;
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
-            Status = AppStatus.Started;
+            await NextTickAsync();
+            Status = AppStatus.Running;
         }
 
         public void OnExit()
