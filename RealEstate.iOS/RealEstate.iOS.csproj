@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\EntryRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,5 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\background_1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkmark.svg" />
   </ItemGroup>
 </Project>

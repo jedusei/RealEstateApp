@@ -5,6 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!--  COLORS  -->
+            <Color x:Key="PrimaryColor">#049FFF</Color>
+            <Color x:Key="SecondaryTextColor">#8F92A1</Color>
+
             <!--  STYLES  -->
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
@@ -17,12 +21,48 @@
             </Style>
 
             <Style x:Key="SecondaryText" TargetType="Label">
-                <Setter Property="TextColor" Value="#8F92A1" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
             </Style>
 
             <Style x:Key="FormLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="TextTransform" Value="Uppercase" />
+            </Style>
+
+            <Style TargetType="StackLayout">
+                <Setter Property="Spacing" Value="0" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="TextTransform" Value="None" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="WidthRequest" Value="300" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <Setter.Value>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Property="Opacity" Value="0.5" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="OutlineButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="#E0E0E0" />
+                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="TextColor" Value="Black" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

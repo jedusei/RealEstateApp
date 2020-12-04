@@ -118,5 +118,10 @@ namespace RealEstate.Views
         {
             _viewModel?.OnDestroy();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return _viewModel?.OnBackButtonPressed() ?? base.OnBackButtonPressed();
+        }
     }
 }

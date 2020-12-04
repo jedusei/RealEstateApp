@@ -21,6 +21,7 @@ namespace RealEstate.ViewModels
         public virtual void OnResume(object navigationData = null) { }
         public virtual void OnPause() { }
         public virtual void OnDestroy() { }
+        public virtual bool OnBackButtonPressed() => false;
 
         protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action onChanged = null)
         {

@@ -1,10 +1,55 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RealEstate.Controls.FormEntry">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="RealEstate.Controls.FormEntry"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    x:Name="this">
+    <border:SfBorder
+        BindingContext="{Reference this}"
+        BorderColor="#8F92A1"
+        BorderThickness="0,0,0,2">
+        <StackLayout Padding="0,5" Orientation="Horizontal">
+            <Entry
+                HorizontalOptions="FillAndExpand"
+                Keyboard="{Binding Keyboard}"
+                Placeholder="{Binding Placeholder}"
+                PlaceholderColor="#8F92A1"
+                Text="{Binding Text}">
+                <Entry.Triggers>
+                    <MultiTrigger TargetType="Entry">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding IsPassword}" Value="True" />
+                            <BindingCondition Binding="{Binding IsPasswordVisible}" Value="False" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsPassword" Value="True" />
+                    </MultiTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Label
+                FontFamily="MaterialIcons"
+                FontSize="22"
+                IsVisible="{Binding IsPassword}"
+                Text="&#xf0208;"
+                TextColor="{StaticResource SecondaryTextColor}"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="PasswordVisiblityToggle_Tapped" />
+                </Label.GestureRecognizers>
+                <Label.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsPasswordVisible}"
+                        TargetType="Label"
+                        Value="True">
+                        <Setter Property="Text" Value="&#xf0209;" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+            <Image
+                Margin="0,0,2,0"
+                IsVisible="{Binding IsValid}"
+                Source="checkmark"
+                WidthRequest="22" />
+        </StackLayout>
+    </border:SfBorder>
 </ContentView>

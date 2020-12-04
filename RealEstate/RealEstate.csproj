@@ -12,6 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\materialdesignicons-webfont.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\materialdesignicons-webfont.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.3.0.51" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
