@@ -7,74 +7,75 @@
     xmlns:controls="clr-namespace:RealEstate.Controls"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:views="clr-namespace:RealEstate.Views">
-    <StackLayout Spacing="-20">
-        <ffimage:CachedImage
-            Aspect="AspectFill"
-            Background="Red"
-            Source="background_1"
-            VerticalOptions="FillAndExpand" />
-        <border:SfBorder
-            BackgroundColor="White"
-            BorderWidth="0"
-            CornerRadius="25,25,0,0"
-            HeightRequest="400"
-            VerticalOptions="End">
-            <StackLayout>
-                <Label
-                    Margin="30,40,0,10"
-                    Style="{StaticResource TitleText}"
-                    Text="Welcome Back!" />
-                <CarouselView IsSwipeEnabled="False" Position="{Binding CurrentPage}">
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <ContentView Padding="30,0,30,30" Content="{Binding}" />
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                    <CarouselView.ItemsSource>
-                        <x:Array Type="{Type StackLayout}">
-                            <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:LoginPage}}}" Spacing="10">
-                                <Label Style="{StaticResource FormLabel}" Text="Email or Mobile Number" />
-                                <controls:FormEntry
-                                    IsValid="{Binding IsEmailValid}"
-                                    Keyboard="Email"
-                                    Placeholder="anne.carry@mail.com"
-                                    Text="{Binding Email}" />
-                                <Button
-                                    Margin="0,20,0,0"
-                                    Command="{Binding NextCommand}"
-                                    Text="Next Step" />
-                                <Label
-                                    HorizontalOptions="Center"
-                                    Style="{StaticResource SecondaryText}"
-                                    Text="or" />
-                                <Button
-                                    Command="{Binding SignupCommand}"
-                                    Style="{StaticResource OutlineButton}"
-                                    Text="Create an account" />
-                            </StackLayout>
-                            <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:LoginPage}}}">
-                                <Label Style="{StaticResource FormLabel}" Text="Password" />
-                                <controls:FormEntry
-                                    IsPassword="True"
-                                    Placeholder="●●●●●●"
-                                    Text="{Binding Password}" />
-                                <Button
-                                    Margin="0,20,0,0"
-                                    Command="{Binding LoginCommand}"
-                                    Text="Next Step" />
-                                <Label
-                                    HorizontalOptions="Center"
-                                    Style="{StaticResource SecondaryText}"
-                                    Text="or" />
-                                <Button
-                                    Command="{Binding ForgotPasswordCommand}"
-                                    Style="{StaticResource OutlineButton}"
-                                    Text="Create an account" />
-                            </StackLayout>
-                        </x:Array>
-                    </CarouselView.ItemsSource>
-                </CarouselView>
-            </StackLayout>
-        </border:SfBorder>
-    </StackLayout>
+    <ScrollView>
+        <AbsoluteLayout VerticalOptions="FillAndExpand">
+            <ffimage:CachedImage
+                x:Name="backgroundImage"
+                AbsoluteLayout.LayoutFlags="WidthProportional"
+                Aspect="AspectFill"
+                Background="Red"
+                Source="background_1" />
+            <border:SfBorder
+                x:Name="content"
+                AbsoluteLayout.LayoutBounds="0,1,1,400"
+                AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
+                BackgroundColor="White"
+                BorderWidth="0"
+                CornerRadius="25,25,0,0">
+                <StackLayout>
+                    <Label
+                        Margin="30,40,0,20"
+                        Style="{StaticResource TitleText}"
+                        Text="Welcome Back!" />
+                    <CarouselView IsSwipeEnabled="False" Position="{Binding CurrentPage}">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <ContentView Padding="30,0,30,30" Content="{Binding}" />
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                        <CarouselView.ItemsSource>
+                            <x:Array Type="{Type StackLayout}">
+                                <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:LoginPage}}}" Spacing="10">
+                                    <Label Style="{StaticResource FormLabel}" Text="Email or Mobile Number" />
+                                    <controls:FormEntry
+                                        IsValid="{Binding IsEmailValid}"
+                                        Keyboard="Email"
+                                        Placeholder="anne.carry@mail.com"
+                                        Text="{Binding Email}" />
+                                    <Button
+                                        Margin="0,20,0,0"
+                                        Command="{Binding NextCommand}"
+                                        Text="Next Step" />
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="or" />
+                                    <Button
+                                        Command="{Binding SignupCommand}"
+                                        Style="{StaticResource OutlineButton}"
+                                        Text="Create an account" />
+                                </StackLayout>
+                                <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:LoginPage}}}" Spacing="10">
+                                    <Label Style="{StaticResource FormLabel}" Text="Password" />
+                                    <controls:FormEntry IsPassword="True" Text="{Binding Password}" />
+                                    <Button
+                                        Margin="0,20,0,0"
+                                        Command="{Binding LoginCommand}"
+                                        Text="Login" />
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="or" />
+                                    <Button
+                                        Command="{Binding ForgotPasswordCommand}"
+                                        Style="{StaticResource OutlineButton}"
+                                        Text="Create an account" />
+                                </StackLayout>
+                            </x:Array>
+                        </CarouselView.ItemsSource>
+                    </CarouselView>
+                </StackLayout>
+            </border:SfBorder>
+        </AbsoluteLayout>
+    </ScrollView>
 </views:BasePage>

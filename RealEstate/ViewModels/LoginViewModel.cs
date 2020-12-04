@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using MvvmHelpers.Commands;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace RealEstate.ViewModels
 {
@@ -33,12 +35,12 @@ namespace RealEstate.ViewModels
         public bool IsEmailValid
         {
             get => _isEmailValid;
-            set => SetProperty(ref _isEmailValid, value, onChanged: (NextCommand as Command).ChangeCanExecute);
+            set => SetProperty(ref _isEmailValid, value, onChanged: (NextCommand as Command).RaiseCanExecuteChanged);
         }
         public bool IsPasswordValid
         {
             get => _isPasswordValid;
-            set => SetProperty(ref _isPasswordValid, value, onChanged: (LoginCommand as Command).ChangeCanExecute);
+            set => SetProperty(ref _isPasswordValid, value, onChanged: (LoginCommand as AsyncCommand).RaiseCanExecuteChanged);
         }
 
         public ICommand NextCommand { get; set; }
@@ -50,6 +52,7 @@ namespace RealEstate.ViewModels
         public LoginViewModel()
         {
             NextCommand = new Command(() => CurrentPage = 1, () => IsEmailValid);
+            LoginCommand = new AsyncCommand(LoginAsync, _ => IsPasswordValid);
         }
 
         public override bool OnBackButtonPressed()
@@ -61,6 +64,13 @@ namespace RealEstate.ViewModels
             }
 
             return base.OnBackButtonPressed();
+        }
+
+        async Task LoginAsync()
+        {
+            UserDialogs.Instance.ShowLoading("Logging in...");
+            await Task.Delay(1500);
+            UserDialogs.Instance.HideLoading();
         }
 
     }

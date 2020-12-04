@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android.Views;
+using Acr.UserDialogs;
 
 namespace RealEstate.Droid
 {
@@ -28,6 +29,8 @@ namespace RealEstate.Droid
             container.SetFitsSystemWindows(true);
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+
+            UserDialogs.Init(this);
 
             _app = new App(Finish);
             LoadApplication(_app);

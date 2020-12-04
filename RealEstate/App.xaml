@@ -27,6 +27,7 @@
             <Style x:Key="FormLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="TextTransform" Value="Uppercase" />
+                <Setter Property="CharacterSpacing" Value="2" />
             </Style>
 
             <Style TargetType="StackLayout">

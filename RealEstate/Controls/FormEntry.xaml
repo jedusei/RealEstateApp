@@ -7,7 +7,7 @@
     x:Name="this">
     <border:SfBorder
         BindingContext="{Reference this}"
-        BorderColor="#8F92A1"
+        BorderColor="#338F92A1"
         BorderThickness="0,0,0,2">
         <StackLayout Padding="0,5" Orientation="Horizontal">
             <Entry
