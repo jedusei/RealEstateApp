@@ -51,11 +51,11 @@ namespace RealEstate.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            if (IsPaused)
-                return;
 
             if (_hasLoaded)
             {
+                IsPaused = false;
+                await App.NextTickAsync();
                 OnResume(_newNavigationData);
                 _newNavigationData = null;
             }
@@ -63,7 +63,6 @@ namespace RealEstate.Views
             {
                 await App.NextTickAsync();
                 _hasLoaded = true;
-                IsPaused = false;
                 OnStart();
             }
         }
@@ -75,11 +74,11 @@ namespace RealEstate.Views
             if (IsPaused)
                 return;
 
+            IsPaused = true;
             OnPause();
 
             await Task.Delay(TRANSITION_DURATION);
 
-            IsPaused = false;
             var isDetached = true;
 
             foreach (var p in Navigation.NavigationStack)
