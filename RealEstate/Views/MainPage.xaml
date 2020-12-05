@@ -19,6 +19,7 @@
     <tabview:SfTabView
         x:Name="tabView"
         DisplayMode="Image"
+        EnableSwiping="False"
         TabHeaderPosition="Bottom"
         TabHeight="80"
         VisibleHeaderCount="4">
@@ -27,7 +28,7 @@
         </tabview:SfTabView.SelectionIndicatorSettings>
         <tabview:SfTabItem FontIconFontSize="35" IconFont="&#xf06a1;">
             <tabview:SfTabItem.Content>
-                <BoxView />
+                <views:HomeTab />
             </tabview:SfTabItem.Content>
         </tabview:SfTabItem>
         <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf02d5;">

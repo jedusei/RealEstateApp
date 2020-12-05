@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="RealEstate.Views.HomeTab"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
+    Padding="20,20,20,0">
+    <ContentView.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" Spacing="20">
+                <Button
+                    Padding="0"
+                    FontFamily="MaterialIcons"
+                    FontSize="20"
+                    HeightRequest="50"
+                    HorizontalOptions="Start"
+                    Text="&#xf0236;"
+                    WidthRequest="50" />
+                <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search via City" />
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
