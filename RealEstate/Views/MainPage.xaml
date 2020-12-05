@@ -3,37 +3,48 @@
     x:Class="RealEstate.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
     xmlns:views="clr-namespace:RealEstate.Views">
 
-    <StackLayout>
-        <Frame
-            Padding="24"
-            BackgroundColor="#2196F3"
-            CornerRadius="0">
-            <Label
-                FontSize="36"
-                HorizontalTextAlignment="Center"
-                Text="Welcome to Xamarin.Forms!"
-                TextColor="White" />
-        </Frame>
-        <Label
-            Padding="30,10,30,10"
-            FontSize="Title"
-            Text="Start developing now" />
-        <Label
-            Padding="30,0,30,0"
-            FontSize="16"
-            Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" />
-        <Label Padding="30,24,30,0" FontSize="16">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at " />
-                        <Span FontAttributes="Bold" Text="https://aka.ms/xamarin-quickstart" />
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="tabview:SfTabItem">
+                <Setter Property="FontIconFontFamily" Value="MaterialIcons" />
+                <Setter Property="FontIconFontColor" Value="#8F92A1" />
+                <Setter Property="SelectionColor" Value="#2BACFC" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <tabview:SfTabView
+        x:Name="tabView"
+        DisplayMode="Image"
+        TabHeaderPosition="Bottom"
+        TabHeight="80"
+        VisibleHeaderCount="4">
+        <tabview:SfTabView.SelectionIndicatorSettings>
+            <tabview:SelectionIndicatorSettings AnimationDuration="300" />
+        </tabview:SfTabView.SelectionIndicatorSettings>
+        <tabview:SfTabItem FontIconFontSize="35" IconFont="&#xf06a1;">
+            <tabview:SfTabItem.Content>
+                <BoxView />
+            </tabview:SfTabItem.Content>
+        </tabview:SfTabItem>
+        <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf02d5;">
+            <tabview:SfTabItem.Content>
+                <BoxView />
+            </tabview:SfTabItem.Content>
+        </tabview:SfTabItem>
+        <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf01f0;">
+            <tabview:SfTabItem.Content>
+                <BoxView />
+            </tabview:SfTabItem.Content>
+        </tabview:SfTabItem>
+        <tabview:SfTabItem FontIconFontSize="32" IconFont="&#xf0013;">
+            <tabview:SfTabItem.Content>
+                <BoxView />
+            </tabview:SfTabItem.Content>
+        </tabview:SfTabItem>
+    </tabview:SfTabView>
 
 </views:BasePage>
