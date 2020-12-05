@@ -59,6 +59,7 @@
                     </buttons:SfChipGroup>
                 </ScrollView>
                 <listview:SfListView
+                    Padding="0"
                     AutoFitMode="Height"
                     ItemSpacing="5"
                     ItemsSource="{Binding Rentals}"
@@ -71,7 +72,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="200" />
+                                    <RowDefinition Height="210" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
@@ -157,6 +158,121 @@
                             </Grid>
                         </DataTemplate>
                     </listview:SfListView.ItemTemplate>
+                    <listview:SfListView.FooterTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label
+                                    Padding="20,10"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    Text="Other offers" />
+                                <listview:SfListView
+                                    FooterSize="2"
+                                    HeaderSize="2"
+                                    HeightRequest="160"
+                                    IsScrollBarVisible="False"
+                                    ItemSize="280"
+                                    ItemSpacing="10"
+                                    ItemsSource="{Binding Rentals}"
+                                    Orientation="Horizontal"
+                                    SelectionMode="None">
+                                    <listview:SfListView.HeaderTemplate>
+                                        <DataTemplate>
+                                            <BoxView />
+                                        </DataTemplate>
+                                    </listview:SfListView.HeaderTemplate>
+                                    <listview:SfListView.FooterTemplate>
+                                        <DataTemplate>
+                                            <BoxView />
+                                        </DataTemplate>
+                                    </listview:SfListView.FooterTemplate>
+                                    <listview:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <AbsoluteLayout>
+                                                <effects:SfEffectsView
+                                                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                    AbsoluteLayout.LayoutFlags="SizeProportional"
+                                                    CornerRadius="15">
+                                                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding ImageUrl}" />
+                                                </effects:SfEffectsView>
+                                                <Grid
+                                                    Padding="20,15"
+                                                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                    AbsoluteLayout.LayoutFlags="SizeProportional"
+                                                    CascadeInputTransparent="False"
+                                                    InputTransparent="True"
+                                                    RowSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+
+                                                    <border:SfBorder
+                                                        Padding="10,0"
+                                                        BackgroundColor="#EC6B6C"
+                                                        BorderWidth="0"
+                                                        CornerRadius="5"
+                                                        HorizontalOptions="Start">
+                                                        <Label
+                                                            Text="{Binding Distance, StringFormat='{0:F1} miles'}"
+                                                            TextColor="White"
+                                                            VerticalOptions="Center" />
+                                                    </border:SfBorder>
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        FontFamily="MaterialIcons"
+                                                        FontSize="23"
+                                                        HorizontalOptions="EndAndExpand"
+                                                        Text="&#xf02d1;"
+                                                        TextColor="White"
+                                                        VerticalOptions="Center">
+                                                        <Label.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding IsFavorite}"
+                                                                TargetType="Label"
+                                                                Value="True">
+                                                                <Setter Property="TextColor" Value="#EC6B6C" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                        <Label.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand, Source={RelativeSource AncestorType={Type viewmodels:HomeViewModel}}}" CommandParameter="{Binding}" />
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
+
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        FontAttributes="Bold"
+                                                        FontSize="18"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="1"
+                                                        Text="{Binding Title}"
+                                                        TextColor="White"
+                                                        VerticalOptions="End" />
+                                                    <Label
+                                                        Grid.Row="2"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="1"
+                                                        TextColor="White">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span FontFamily="MaterialIcons" Text="&#xf07d9; " />
+                                                                <Span Text="{Binding Location}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Grid>
+                                            </AbsoluteLayout>
+                                        </DataTemplate>
+                                    </listview:SfListView.ItemTemplate>
+                                </listview:SfListView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </listview:SfListView.FooterTemplate>
                 </listview:SfListView>
             </StackLayout>
             <ActivityIndicator

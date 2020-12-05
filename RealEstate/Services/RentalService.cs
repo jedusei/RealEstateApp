@@ -21,7 +21,7 @@ namespace RealEstate.Services
             new Rental
             {
                 Title = "Sunny Apartment",
-                ImageUrl = "https://webtekdi.com/website/buynow/templates/IBGWTCT013/IBGWTCT013TMPL001/images/1.jpg",
+                ImageUrl = "https://www.supernamai.lt/wp-content/images/ebsiqvhpalepe%20daugiabucio%20dalis.jpg",
                 Location = "Los Angeles",
                 Distance = 2.3,
                 Cost = 250,
@@ -30,7 +30,7 @@ namespace RealEstate.Services
             new Rental
             {
                 Title = "Sunny Apartment",
-                ImageUrl = "https://webtekdi.com/website/buynow/templates/IBGWTCT013/IBGWTCT013TMPL001/images/1.jpg",
+                ImageUrl = "background_1.jpg",
                 Location = "Los Angeles",
                 Distance = 2.3,
                 Cost = 250,
