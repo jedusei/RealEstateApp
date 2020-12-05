@@ -27,6 +27,8 @@ namespace RealEstate.Droid
 
             UserDialogs.Init(this);
 
+            Platform.Init(this);
+
             _app = new App(Finish);
             LoadApplication(_app);
         }

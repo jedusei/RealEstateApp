@@ -21,6 +21,7 @@ namespace RealEstate
         static Action _exitAction;
         static ResourceDictionary _lightTheme = new LightTheme();
         static ResourceDictionary _darkTheme = new DarkTheme();
+        static IPlatform _platform;
 
         public static AppStatus Status { get; private set; }
         public static event Action Exit;
@@ -30,6 +31,9 @@ namespace RealEstate
             InitializeComponent();
             _exitAction = exitAction ?? Current.Quit;
 
+            if (!DesignMode.IsDesignModeEnabled)
+                _platform = DependencyService.Get<IPlatform>();
+
             Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
             RequestedThemeChanged += OnRequestedThemeChanged;
 
@@ -37,25 +41,6 @@ namespace RealEstate
 
             On<Xamarin.Forms.PlatformConfiguration.Android>()
                 .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-        }
-
-        void OnRequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
-        {
-            ResourceDictionary previousTheme, currentTheme;
-            if (e.RequestedTheme == OSAppTheme.Dark)
-            {
-                previousTheme = _lightTheme;
-                currentTheme = _darkTheme;
-            }
-            else
-            {
-                previousTheme = _darkTheme;
-                currentTheme = _lightTheme;
-            }
-
-            var mergedDictionaries = Resources.MergedDictionaries;
-            mergedDictionaries.Remove(previousTheme);
-            mergedDictionaries.Add(currentTheme);
         }
 
         public static Task NextTickAsync()
@@ -69,6 +54,12 @@ namespace RealEstate
             });
 
             return tcs.Task;
+        }
+
+        public static void SetStatusBarColor(Color color)
+        {
+            if (!DesignMode.IsDesignModeEnabled)
+                _platform.SetStatusBarColor(color);
         }
 
         public new static void Quit()
@@ -99,6 +90,25 @@ namespace RealEstate
             Status = AppStatus.Stopped;
             Exit?.Invoke();
             Exit = null;
+        }
+
+        void OnRequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
+        {
+            ResourceDictionary previousTheme, currentTheme;
+            if (e.RequestedTheme == OSAppTheme.Dark)
+            {
+                previousTheme = _lightTheme;
+                currentTheme = _darkTheme;
+            }
+            else
+            {
+                previousTheme = _darkTheme;
+                currentTheme = _lightTheme;
+            }
+
+            var mergedDictionaries = Resources.MergedDictionaries;
+            mergedDictionaries.Remove(previousTheme);
+            mergedDictionaries.Add(currentTheme);
         }
     }
 }

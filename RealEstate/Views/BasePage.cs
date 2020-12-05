@@ -12,6 +12,8 @@ namespace RealEstate.Views
 
     public abstract class BasePage : ContentPage
     {
+        public static readonly BindableProperty StatusBarColorProperty = BindableProperty.Create(nameof(StatusBarColor), typeof(Color), typeof(BasePage), propertyChanged: OnStatusBarColorChanged);
+
         public const int TRANSITION_DURATION = 250;
         const int DESTROY_DELAY = 2000;
         bool _hasLoaded;
@@ -19,6 +21,11 @@ namespace RealEstate.Views
         BaseViewModel _viewModel;
 
         protected bool IsPaused { get; private set; }
+        public Color StatusBarColor
+        {
+            get => (Color)GetValue(StatusBarColorProperty);
+            set => SetValue(StatusBarColorProperty, value);
+        }
         public BaseViewModel ViewModel
         {
             get => _viewModel;
@@ -46,6 +53,11 @@ namespace RealEstate.Views
             {
                 _viewModel = null;
             }
+        }
+
+        static void OnStatusBarColorChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            App.SetStatusBarColor((Color)newValue);
         }
 
         protected override async void OnAppearing()
