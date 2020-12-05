@@ -28,6 +28,7 @@ namespace RealEstate.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Syncfusion.XForms.iOS.Buttons.SfChipRenderer.Init();
             Syncfusion.XForms.iOS.Buttons.SfChipGroupRenderer.Init();
+            Syncfusion.XForms.iOS.EffectsView.SfEffectsViewRenderer.Init();
 
             LoadApplication(new App());
 

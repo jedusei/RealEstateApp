@@ -7,9 +7,23 @@ using RealEstate.Services;
 
 namespace RealEstate.ViewModels
 {
+    public enum LoadStatus
+    {
+        Loading,
+        Loaded,
+        Failed
+    }
+
     public class BaseViewModel : BindableObject
     {
         protected readonly INavigationService _navigationService;
+        protected LoadStatus _loadStatus = LoadStatus.Loaded;
+
+        public LoadStatus LoadStatus
+        {
+            get => _loadStatus;
+            protected set => SetProperty(ref _loadStatus, value);
+        }
 
         public BaseViewModel()
         {
