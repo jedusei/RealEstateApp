@@ -1,12 +1,10 @@
-﻿using RealEstate;
-using RealEstate.Services;
-using RealEstate.Views;
+﻿using RealEstate.Views;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(BookApp.Services.NavigationService))]
-namespace BookApp.Services
+[assembly: Dependency(typeof(RealEstate.Services.NavigationService))]
+namespace RealEstate.Services
 {
     class NavigationService : INavigationService
     {
