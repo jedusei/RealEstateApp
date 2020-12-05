@@ -7,7 +7,9 @@
     <Color x:Key="PageBackgroundColor">Black</Color>
     <Color x:Key="PrimaryTextColor">White</Color>
     <Color x:Key="SecondaryTextColor">#8F92A1</Color>
+    <Color x:Key="SecondaryTextHighlightColor">#B9BBC4</Color>
     <Color x:Key="OutlineButtonBorderColor">#8F92A1</Color>
     <Color x:Key="PlaceholderColor">#8F92A1</Color>
     <Color x:Key="ControlLightBackgroundColor">#1C1C1D</Color>
+    <Color x:Key="ControlSelectedLightBackgroundColor">#555557</Color>
 </ResourceDictionary>

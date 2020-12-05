@@ -26,6 +26,8 @@ namespace RealEstate.iOS
             global::Xamarin.Forms.Forms.Init();
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            Syncfusion.XForms.iOS.Buttons.SfChipRenderer.Init();
+            Syncfusion.XForms.iOS.Buttons.SfChipGroupRenderer.Init();
 
             LoadApplication(new App());
 

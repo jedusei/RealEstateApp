@@ -3,6 +3,7 @@
     x:Class="RealEstate.Views.HomeTab"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:controls="clr-namespace:RealEstate.Controls"
     xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:models="clr-namespace:RealEstate.Models"
@@ -23,41 +24,25 @@
                     WidthRequest="50" />
                 <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search via City" />
             </StackLayout>
-            <listview:SfListView
-                AutoFitMode="DynamicHeight"
-                HeightRequest="40"
-                IsScrollBarVisible="False"
-                ItemSpacing="5"
+            <ScrollView
+                Padding="20,0"
+                HorizontalScrollBarVisibility="Never"
                 Orientation="Horizontal">
-                <listview:SfListView.ItemsSource>
-                    <x:Array Type="{Type models:ListItem}">
-                        <models:ListItem Id="0" Value="3 Bedrooms" />
-                        <models:ListItem Id="1" Value="Apartment" />
-                        <models:ListItem Id="2" Value="Wifi" />
-                        <models:ListItem Id="3" Value="Restaurant" />
-                        <models:ListItem Id="3" Value="Swimming Pool" />
-                    </x:Array>
-                </listview:SfListView.ItemsSource>
-                <listview:SfListView.HeaderTemplate>
-                    <DataTemplate>
-                        <ContentView WidthRequest="15" />
-                    </DataTemplate>
-                </listview:SfListView.HeaderTemplate>
-                <listview:SfListView.ItemTemplate>
-                    <DataTemplate>
-                        <Button
-                            HorizontalOptions="Start"
-                            Style="{StaticResource PillButton}"
-                            Text="{Binding Value}"
-                            VerticalOptions="Start" />
-                    </DataTemplate>
-                </listview:SfListView.ItemTemplate>
-                <listview:SfListView.FooterTemplate>
-                    <DataTemplate>
-                        <ContentView WidthRequest="15" />
-                    </DataTemplate>
-                </listview:SfListView.FooterTemplate>
-            </listview:SfListView>
+                <buttons:SfChipGroup
+                    ChipBorderWidth="0"
+                    ChoiceMode="SingleOrNone"
+                    Type="Choice">
+                    <buttons:SfChipGroup.ItemsSource>
+                        <x:Array Type="{Type x:String}">
+                            <x:String>3 Bedrooms</x:String>
+                            <x:String>Apartment</x:String>
+                            <x:String>Wifi</x:String>
+                            <x:String>Restaurant</x:String>
+                            <x:String>Swimming Pool</x:String>
+                        </x:Array>
+                    </buttons:SfChipGroup.ItemsSource>
+                </buttons:SfChipGroup>
+            </ScrollView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

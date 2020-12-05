@@ -2,7 +2,8 @@
 <Application
     x:Class="RealEstate.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -77,13 +78,12 @@
                         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
                     </Style>
 
-                    <Style x:Key="PillButton" TargetType="Button">
-                        <Setter Property="BackgroundColor" Value="{DynamicResource ControlLightBackgroundColor}" />
-                        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
-                        <Setter Property="Padding" Value="20,2" />
-                        <Setter Property="FontSize" Value="14" />
-                        <Setter Property="FontAttributes" Value="None" />
-                        <Setter Property="CornerRadius" Value="5" />
+                    <Style TargetType="buttons:SfChipGroup">
+                        <Setter Property="ChipBackgroundColor" Value="{DynamicResource ControlLightBackgroundColor}" />
+                        <Setter Property="ChipTextColor" Value="{DynamicResource SecondaryTextColor}" />
+                        <Setter Property="SelectedChipBackgroundColor" Value="{StaticResource PrimaryColor}" />
+                        <Setter Property="SelectedChipTextColor" Value="White" />
+                        <Setter Property="ChipPadding" Value="5" />
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
