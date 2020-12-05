@@ -26,7 +26,7 @@
                     </DataTrigger>
                 </StackLayout.Triggers>
                 <StackLayout
-                    Padding="20"
+                    Padding="20,20,20,0"
                     Orientation="Horizontal"
                     Spacing="20">
                     <Button
@@ -40,7 +40,7 @@
                     <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search via City" />
                 </StackLayout>
                 <ScrollView
-                    Padding="20,0"
+                    Padding="20,15"
                     HorizontalScrollBarVisibility="Never"
                     Orientation="Horizontal">
                     <buttons:SfChipGroup
@@ -61,12 +61,11 @@
                 <listview:SfListView
                     Padding="0"
                     AutoFitMode="Height"
-                    ItemSpacing="5"
                     ItemsSource="{Binding Rentals}"
                     SelectionMode="None">
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="15,10" RowSpacing="0">
+                            <Grid Padding="20,0,20,15" RowSpacing="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />

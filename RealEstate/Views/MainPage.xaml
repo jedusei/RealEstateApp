@@ -21,6 +21,7 @@
         BackgroundColor="{DynamicResource PageBackgroundColor}"
         DisplayMode="Image"
         EnableSwiping="False"
+        SelectionChanged="tabView_SelectionChanged"
         TabHeaderPosition="Bottom"
         TabHeight="80"
         VisibleHeaderCount="4">
@@ -34,7 +35,7 @@
         </tabview:SfTabItem>
         <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf02d5;">
             <tabview:SfTabItem.Content>
-                <BoxView />
+                <views:FavoritesTab />
             </tabview:SfTabItem.Content>
         </tabview:SfTabItem>
         <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf01f0;">

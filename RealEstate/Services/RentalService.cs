@@ -1,4 +1,5 @@
 ﻿using RealEstate.Models;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -38,10 +39,36 @@ namespace RealEstate.Services
             }
         };
 
+        ObservableCollection<Rental> _favouriteRentals = new ObservableCollection<Rental>();
+
+        public RentalService()
+        {
+            foreach (var rental in _rentals)
+                rental.PropertyChanged += OnRentalPropertyChanged;
+        }
+
+        private void OnRentalPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Rental.IsFavorite))
+            {
+                var rental = sender as Rental;
+                if (rental.IsFavorite)
+                    _favouriteRentals.Add(rental);
+                else
+                    _favouriteRentals.Remove(rental);
+            }
+        }
+
         public async Task<Rental[]> GetRentalsAsync()
         {
             await Task.Delay(2000);
             return _rentals;
+        }
+
+        public async Task<ObservableCollection<Rental>> GetFavoriteRentalsAsync()
+        {
+            await Task.Delay(1000);
+            return _favouriteRentals;
         }
     }
 }
