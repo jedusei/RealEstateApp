@@ -2,7 +2,6 @@
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
-using Android.Views;
 using Acr.UserDialogs;
 
 namespace RealEstate.Droid
@@ -23,10 +22,6 @@ namespace RealEstate.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
-            Window.SetFlags(WindowManagerFlags.TranslucentStatus, WindowManagerFlags.TranslucentStatus);
-            var container = FindViewById<ViewGroup>(Android.Resource.Id.Content).GetChildAt(0);
-            container.SetFitsSystemWindows(true);
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
 
