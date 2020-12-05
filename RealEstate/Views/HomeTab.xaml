@@ -32,7 +32,7 @@
                     <Button
                         Padding="0"
                         FontFamily="MaterialIcons"
-                        FontSize="20"
+                        FontSize="25"
                         HeightRequest="50"
                         HorizontalOptions="Start"
                         Text="&#xf0236;"
