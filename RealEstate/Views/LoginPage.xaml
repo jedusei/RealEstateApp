@@ -17,16 +17,16 @@
                 Source="background_1" />
             <border:SfBorder
                 x:Name="content"
-                AbsoluteLayout.LayoutBounds="0,1,1,400"
+                AbsoluteLayout.LayoutBounds="0,1,1,430"
                 AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
                 BackgroundColor="White"
                 BorderWidth="0"
                 CornerRadius="25,25,0,0">
                 <StackLayout>
                     <Label
-                        Margin="30,40,0,20"
+                        Margin="30,40,0,0"
                         Style="{StaticResource TitleText}"
-                        Text="Welcome Back!" />
+                        Text="Welcome!" />
                     <CarouselView IsSwipeEnabled="False" Position="{Binding CurrentPage, Mode=OneWay}">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
@@ -36,6 +36,10 @@
                         <CarouselView.ItemsSource>
                             <x:Array Type="{Type StackLayout}">
                                 <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:LoginPage}}}" Spacing="10">
+                                    <Label
+                                        Margin="0,10"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="Enter your email address or phone number." />
                                     <Label Style="{StaticResource FormLabel}" Text="Email or Mobile Number" />
                                     <controls:FormEntry
                                         IsValid="{Binding IsEmailValid}"
@@ -56,6 +60,10 @@
                                         Text="Create an account" />
                                 </StackLayout>
                                 <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:LoginPage}}}" Spacing="10">
+                                    <Label
+                                        Margin="0,10"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="Enter your password." />
                                     <Label Style="{StaticResource FormLabel}" Text="Password" />
                                     <controls:FormEntry IsPassword="True" Text="{Binding Password}" />
                                     <Button

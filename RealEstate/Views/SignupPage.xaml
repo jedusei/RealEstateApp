@@ -17,7 +17,7 @@
                 Source="background_2" />
             <border:SfBorder
                 x:Name="content"
-                AbsoluteLayout.LayoutBounds="0,1,1,400"
+                AbsoluteLayout.LayoutBounds="0,1,1,430"
                 AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
                 BackgroundColor="White"
                 BorderWidth="0"
@@ -33,9 +33,13 @@
                             <x:Array Type="{Type StackLayout}">
                                 <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
                                     <Label
-                                        Margin="0,40,0,20"
+                                        Margin="0,40,0,0"
                                         Style="{StaticResource TitleText}"
                                         Text="Create new account" />
+                                    <Label
+                                        Margin="0,10,0,20"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="Fill this form and jump to the next step." />
                                     <Label Style="{StaticResource FormLabel}" Text="Email" />
                                     <controls:FormEntry
                                         Margin="0,0,0,30"
@@ -49,9 +53,13 @@
                                 </StackLayout>
                                 <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
                                     <Label
-                                        Margin="0,40,0,20"
+                                        Margin="0,40,0,0"
                                         Style="{StaticResource TitleText}"
                                         Text="Confirm via SMS" />
+                                    <Label
+                                        Margin="0,10,0,20"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="Enter your phone number to confirm your identity." />
                                     <Label Style="{StaticResource FormLabel}" Text="Phone number" />
                                     <controls:FormEntry
                                         IsValid="{Binding IsPhoneNumberValid}"
@@ -61,9 +69,13 @@
                                 </StackLayout>
                                 <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
                                     <Label
-                                        Margin="0,40,0,20"
+                                        Margin="0,40,0,0"
                                         Style="{StaticResource TitleText}"
                                         Text="Verification" />
+                                    <Label
+                                        Margin="0,10,0,20"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="Enter the PIN code you received via SMS." />
                                     <Label Style="{StaticResource FormLabel}" Text="PIN Code" />
                                     <controls:FormEntry
                                         CharacterSpacing="5"
