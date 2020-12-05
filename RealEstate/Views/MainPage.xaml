@@ -18,6 +18,7 @@
 
     <tabview:SfTabView
         x:Name="tabView"
+        Background="{DynamicResource PageBackgroundColor}"
         DisplayMode="Image"
         EnableSwiping="False"
         TabHeaderPosition="Bottom"

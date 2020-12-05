@@ -18,7 +18,7 @@
                 Keyboard="{Binding Keyboard}"
                 MaxLength="{Binding MaxLength}"
                 Placeholder="{Binding Placeholder}"
-                PlaceholderColor="#8F92A1"
+                PlaceholderColor="{DynamicResource SecondaryTextColor}"
                 ReturnType="{Binding ReturnType}"
                 Text="{Binding Text}">
                 <Entry.Triggers>
@@ -36,7 +36,7 @@
                 FontSize="22"
                 IsVisible="{Binding IsPassword}"
                 Text="&#xf0208;"
-                TextColor="{StaticResource SecondaryTextColor}"
+                TextColor="{DynamicResource SecondaryTextColor}"
                 VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="PasswordVisiblityToggle_Tapped" />

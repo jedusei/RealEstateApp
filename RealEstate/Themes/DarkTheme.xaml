@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="RealEstate.Themes.DarkTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--  COLORS  -->
+    <Color x:Key="PageBackgroundColor">Black</Color>
+    <Color x:Key="PrimaryTextColor">White</Color>
+    <Color x:Key="SecondaryTextColor">#8F92A1</Color>
+    <Color x:Key="OutlineButtonBorderColor">#8F92A1</Color>
+    <Color x:Key="SearchEntryBackgroundColor">#EBEBED</Color>
+</ResourceDictionary>

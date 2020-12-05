@@ -1,5 +1,7 @@
 ﻿using RealEstate.Services;
+using RealEstate.Themes;
 using System;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -17,6 +19,9 @@ namespace RealEstate
     public partial class App : Xamarin.Forms.Application
     {
         static Action _exitAction;
+        static ResourceDictionary _lightTheme;
+        static ResourceDictionary _darkTheme;
+
         public static AppStatus Status { get; private set; }
         public static event Action Exit;
 
@@ -25,10 +30,34 @@ namespace RealEstate
             InitializeComponent();
             _exitAction = exitAction ?? Current.Quit;
 
+            _lightTheme = new LightTheme();
+            _darkTheme = new DarkTheme();
+            Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
+            RequestedThemeChanged += OnRequestedThemeChanged;
+
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzU5ODk4QDMxMzgyZTMzMmUzMG9BL2xkNGVFZlZjWmo4Y0RFQ0FFMmUxN0ozVlBzQ282blRQZWJGdWdHS2s9");
 
             On<Xamarin.Forms.PlatformConfiguration.Android>()
                 .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+        }
+
+        void OnRequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
+        {
+            ResourceDictionary previousTheme, currentTheme;
+            if (e.RequestedTheme == OSAppTheme.Dark)
+            {
+                previousTheme = _lightTheme;
+                currentTheme = _darkTheme;
+            }
+            else
+            {
+                previousTheme = _darkTheme;
+                currentTheme = _lightTheme;
+            }
+
+            var mergedDictionaries = Resources.MergedDictionaries;
+            mergedDictionaries.Remove(previousTheme);
+            mergedDictionaries.Add(currentTheme);
         }
 
         public static Task NextTickAsync()

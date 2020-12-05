@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using MvvmHelpers.Commands;
+using RealEstate.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -96,6 +97,8 @@ namespace RealEstate.ViewModels
                     UserDialogs.Instance.HideLoading();
                     if (_pinCode != "12345")
                         UserDialogs.Instance.Alert("The PIN code you entered is invalid.", "Error");
+                    else
+                        await _navigationService.GoToPageAsync<MainPage>(clearHistory: true);
                     return;
             }
 

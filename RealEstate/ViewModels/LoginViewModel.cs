@@ -87,6 +87,7 @@ namespace RealEstate.ViewModels
             UserDialogs.Instance.ShowLoading("Logging in...");
             await Task.Delay(1500);
             UserDialogs.Instance.HideLoading();
+            await _navigationService.GoToPageAsync<MainPage>(clearHistory: true);
         }
 
     }

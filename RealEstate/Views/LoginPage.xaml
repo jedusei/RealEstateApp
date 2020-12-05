@@ -19,7 +19,7 @@
                 x:Name="content"
                 AbsoluteLayout.LayoutBounds="0,1,1,430"
                 AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
-                BackgroundColor="White"
+                BackgroundColor="{DynamicResource PageBackgroundColor}"
                 BorderWidth="0"
                 CornerRadius="25,25,0,0">
                 <StackLayout>
