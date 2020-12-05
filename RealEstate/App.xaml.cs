@@ -19,8 +19,8 @@ namespace RealEstate
     public partial class App : Xamarin.Forms.Application
     {
         static Action _exitAction;
-        static ResourceDictionary _lightTheme;
-        static ResourceDictionary _darkTheme;
+        static ResourceDictionary _lightTheme = new LightTheme();
+        static ResourceDictionary _darkTheme = new DarkTheme();
 
         public static AppStatus Status { get; private set; }
         public static event Action Exit;
@@ -30,8 +30,6 @@ namespace RealEstate
             InitializeComponent();
             _exitAction = exitAction ?? Current.Quit;
 
-            _lightTheme = new LightTheme();
-            _darkTheme = new DarkTheme();
             Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
             RequestedThemeChanged += OnRequestedThemeChanged;
 

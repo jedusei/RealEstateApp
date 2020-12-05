@@ -22,6 +22,7 @@
 
                     <Style TargetType="Entry">
                         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                        <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderColor}" />
                     </Style>
 
                     <Style x:Key="TitleText" TargetType="Label">
@@ -52,7 +53,7 @@
                         <Setter Property="CornerRadius" Value="30" />
                         <Setter Property="TextTransform" Value="None" />
                         <Setter Property="Padding" Value="20" />
-                        <Setter Property="WidthRequest" Value="300" />
+                        <Setter Property="MinimumWidthRequest" Value="300" />
                         <Setter Property="VisualStateManager.VisualStateGroups">
                             <Setter.Value>
                                 <VisualStateGroupList>
@@ -74,6 +75,15 @@
                         <Setter Property="BorderColor" Value="{DynamicResource OutlineButtonBorderColor}" />
                         <Setter Property="BorderWidth" Value="2" />
                         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                    </Style>
+
+                    <Style x:Key="PillButton" TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource ControlLightBackgroundColor}" />
+                        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+                        <Setter Property="Padding" Value="20,2" />
+                        <Setter Property="FontSize" Value="14" />
+                        <Setter Property="FontAttributes" Value="None" />
+                        <Setter Property="CornerRadius" Value="5" />
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

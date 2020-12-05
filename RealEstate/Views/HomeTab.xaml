@@ -4,10 +4,15 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:RealEstate.Controls"
-    Padding="20,20,20,0">
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:models="clr-namespace:RealEstate.Models"
+    Padding="0">
     <ContentView.Content>
         <StackLayout Orientation="Vertical">
-            <StackLayout Orientation="Horizontal" Spacing="20">
+            <StackLayout
+                Padding="20"
+                Orientation="Horizontal"
+                Spacing="20">
                 <Button
                     Padding="0"
                     FontFamily="MaterialIcons"
@@ -18,6 +23,41 @@
                     WidthRequest="50" />
                 <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search via City" />
             </StackLayout>
+            <listview:SfListView
+                AutoFitMode="DynamicHeight"
+                HeightRequest="40"
+                IsScrollBarVisible="False"
+                ItemSpacing="5"
+                Orientation="Horizontal">
+                <listview:SfListView.ItemsSource>
+                    <x:Array Type="{Type models:ListItem}">
+                        <models:ListItem Id="0" Value="3 Bedrooms" />
+                        <models:ListItem Id="1" Value="Apartment" />
+                        <models:ListItem Id="2" Value="Wifi" />
+                        <models:ListItem Id="3" Value="Restaurant" />
+                        <models:ListItem Id="3" Value="Swimming Pool" />
+                    </x:Array>
+                </listview:SfListView.ItemsSource>
+                <listview:SfListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ContentView WidthRequest="15" />
+                    </DataTemplate>
+                </listview:SfListView.HeaderTemplate>
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            HorizontalOptions="Start"
+                            Style="{StaticResource PillButton}"
+                            Text="{Binding Value}"
+                            VerticalOptions="Start" />
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+                <listview:SfListView.FooterTemplate>
+                    <DataTemplate>
+                        <ContentView WidthRequest="15" />
+                    </DataTemplate>
+                </listview:SfListView.FooterTemplate>
+            </listview:SfListView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

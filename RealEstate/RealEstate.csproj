@@ -23,6 +23,7 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.468" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.3.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.3.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.3.0.51" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />

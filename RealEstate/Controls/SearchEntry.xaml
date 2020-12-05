@@ -7,7 +7,7 @@
     x:Name="this">
     <border:SfBorder
         Padding="0"
-        BackgroundColor="{DynamicResource SearchEntryBackgroundColor}"
+        BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
         BindingContext="{Reference this}"
         BorderWidth="0"
         CornerRadius="40">
@@ -19,14 +19,13 @@
                 FontFamily="MaterialIcons"
                 FontSize="25"
                 Text="&#xf0349;"
-                TextColor="#662E3034"
+                TextColor="{DynamicResource PlaceholderColor}"
                 TranslationY="1"
                 VerticalOptions="Center" />
             <Entry
                 HeightRequest="50"
                 HorizontalOptions="FillAndExpand"
                 Placeholder="{Binding Placeholder}"
-                PlaceholderColor="#662E3034"
                 ReturnCommand="{Binding SearchCommand}"
                 ReturnCommandParameter="{Binding Text}"
                 ReturnType="Search"

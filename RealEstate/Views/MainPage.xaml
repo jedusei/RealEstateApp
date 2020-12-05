@@ -18,14 +18,14 @@
 
     <tabview:SfTabView
         x:Name="tabView"
-        Background="{DynamicResource PageBackgroundColor}"
+        BackgroundColor="{DynamicResource PageBackgroundColor}"
         DisplayMode="Image"
         EnableSwiping="False"
         TabHeaderPosition="Bottom"
         TabHeight="80"
         VisibleHeaderCount="4">
         <tabview:SfTabView.SelectionIndicatorSettings>
-            <tabview:SelectionIndicatorSettings AnimationDuration="300" />
+            <tabview:SelectionIndicatorSettings AnimationDuration="250" />
         </tabview:SfTabView.SelectionIndicatorSettings>
         <tabview:SfTabItem FontIconFontSize="35" IconFont="&#xf06a1;">
             <tabview:SfTabItem.Content>

@@ -3,10 +3,13 @@
     x:Class="RealEstate.Themes.LightTheme"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
     <!--  COLORS  -->
     <Color x:Key="PageBackgroundColor">White</Color>
     <Color x:Key="PrimaryTextColor">Black</Color>
     <Color x:Key="SecondaryTextColor">#8F92A1</Color>
     <Color x:Key="OutlineButtonBorderColor">#E0E0E0</Color>
-    <Color x:Key="SearchEntryBackgroundColor">#E4E4E7</Color>
+    <Color x:Key="PlaceholderColor">#662E3034</Color>
+    <Color x:Key="ControlLightBackgroundColor">#E4E4E7</Color>
+
 </ResourceDictionary>
