@@ -11,9 +11,9 @@ namespace RealEstate.Views
             InitializeComponent();
             ViewModel = new LoginViewModel();
         }
-        protected override void OnStart()
+        protected override void OnSizeAllocated(double width, double height)
         {
-            base.OnStart();
+            base.OnSizeAllocated(width, height);
             SetImageHeight();
         }
         protected override void OnRefresh()
@@ -23,7 +23,9 @@ namespace RealEstate.Views
         }
         void SetImageHeight()
         {
-            AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, 1, content.Y + 20));
+            var imageHeight = MaxSize.Height - content.Height + content.CornerRadius.Left;
+            if (AbsoluteLayout.GetLayoutBounds(backgroundImage).Height != imageHeight)
+                AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, 1, imageHeight));
         }
     }
 }
