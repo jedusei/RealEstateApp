@@ -26,7 +26,7 @@
         TabHeight="80"
         VisibleHeaderCount="4">
         <tabview:SfTabView.SelectionIndicatorSettings>
-            <tabview:SelectionIndicatorSettings AnimationDuration="250" />
+            <tabview:SelectionIndicatorSettings StrokeThickness="3" Color="#2BACFC" />
         </tabview:SfTabView.SelectionIndicatorSettings>
         <tabview:SfTabItem FontIconFontSize="35" IconFont="&#xf06a1;">
             <tabview:SfTabItem.Content>
