@@ -16,38 +16,41 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <tabview:SfTabView
-        x:Name="tabView"
-        BackgroundColor="{DynamicResource PageBackgroundColor}"
-        DisplayMode="Image"
-        EnableSwiping="False"
-        SelectionChanged="tabView_SelectionChanged"
-        TabHeaderPosition="Bottom"
-        TabHeight="80"
-        VisibleHeaderCount="4">
-        <tabview:SfTabView.SelectionIndicatorSettings>
-            <tabview:SelectionIndicatorSettings StrokeThickness="3" Color="#2BACFC" />
-        </tabview:SfTabView.SelectionIndicatorSettings>
-        <tabview:SfTabItem FontIconFontSize="35" IconFont="&#xf06a1;">
-            <tabview:SfTabItem.Content>
-                <views:HomeTab />
-            </tabview:SfTabItem.Content>
-        </tabview:SfTabItem>
-        <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf02d5;">
-            <tabview:SfTabItem.Content>
-                <views:FavoritesTab />
-            </tabview:SfTabItem.Content>
-        </tabview:SfTabItem>
-        <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf01f0;">
-            <tabview:SfTabItem.Content>
-                <BoxView />
-            </tabview:SfTabItem.Content>
-        </tabview:SfTabItem>
-        <tabview:SfTabItem FontIconFontSize="32" IconFont="&#xf0013;">
-            <tabview:SfTabItem.Content>
-                <BoxView />
-            </tabview:SfTabItem.Content>
-        </tabview:SfTabItem>
-    </tabview:SfTabView>
+    <AbsoluteLayout>
+        <tabview:SfTabView
+            x:Name="tabView"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            BackgroundColor="{DynamicResource PageBackgroundColor}"
+            DisplayMode="Image"
+            EnableSwiping="False"
+            SelectionChanged="tabView_SelectionChanged"
+            TabHeaderPosition="Bottom"
+            TabHeight="80"
+            VisibleHeaderCount="4">
+            <tabview:SfTabView.SelectionIndicatorSettings>
+                <tabview:SelectionIndicatorSettings StrokeThickness="3" Color="#2BACFC" />
+            </tabview:SfTabView.SelectionIndicatorSettings>
+            <tabview:SfTabItem FontIconFontSize="35" IconFont="&#xf06a1;">
+                <tabview:SfTabItem.Content>
+                    <views:HomeTab />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+            <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf02d5;">
+                <tabview:SfTabItem.Content>
+                    <views:FavoritesTab />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+            <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf01f0;">
+                <tabview:SfTabItem.Content>
+                    <BoxView />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+            <tabview:SfTabItem FontIconFontSize="32" IconFont="&#xf0013;">
+                <tabview:SfTabItem.Content>
+                    <BoxView />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+        </tabview:SfTabView>
+    </AbsoluteLayout>
 
 </views:BasePage>

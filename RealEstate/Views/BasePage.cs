@@ -1,6 +1,7 @@
 ﻿using RealEstate.ViewModels;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace RealEstate.Views
@@ -15,6 +16,7 @@ namespace RealEstate.Views
         public static readonly BindableProperty StatusBarColorProperty = BindableProperty.Create(nameof(StatusBarColor), typeof(Color), typeof(BasePage), propertyChanged: OnStatusBarColorChanged);
 
         public const int TRANSITION_DURATION = 250;
+        const int KEYBOARD_MIN_HEIGHT = 200;
         const int DESTROY_DELAY = 2000;
         bool _hasLoaded;
         object _newNavigationData;
@@ -31,6 +33,8 @@ namespace RealEstate.Views
             get => _viewModel;
             set => BindingContext = value;
         }
+        public bool IsKeyboardShowing { get; private set; }
+        public Size MaxSize { get; private set; }
 
         public BasePage()
         {
@@ -58,6 +62,20 @@ namespace RealEstate.Views
         static void OnStatusBarColorChanged(BindableObject bindable, object oldValue, object newValue)
         {
             App.Platform.SetStatusBarColor((Color)newValue);
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            var screenHeight = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Density;
+            IsKeyboardShowing = (screenHeight - height) >= KEYBOARD_MIN_HEIGHT;
+            if (!IsKeyboardShowing)
+            {
+                var size = MaxSize;
+                size.Width = width;
+                size.Height = height;
+                MaxSize = size;
+            }
         }
 
         protected override async void OnAppearing()

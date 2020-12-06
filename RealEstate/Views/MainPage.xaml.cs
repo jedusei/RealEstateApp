@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace RealEstate.Views
 {
@@ -11,6 +12,18 @@ namespace RealEstate.Views
         {
             InitializeComponent();
             visitedTabs = new List<int>(tabView.Items.Count);
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            SetTabViewHeight();
+        }
+
+        void SetTabViewHeight()
+        {
+            if (AbsoluteLayout.GetLayoutBounds(tabView).Height != MaxSize.Height)
+                AbsoluteLayout.SetLayoutBounds(tabView, new Rectangle(0, 0, 1, MaxSize.Height));
         }
 
         ITabContentView GetTab(int index)
@@ -29,6 +42,7 @@ namespace RealEstate.Views
         protected override void OnRefresh()
         {
             base.OnRefresh();
+            SetTabViewHeight();
             visitedTabs.Clear();
             OnStart();
         }
