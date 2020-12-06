@@ -21,9 +21,9 @@ namespace RealEstate
         static Action _exitAction;
         static ResourceDictionary _lightTheme = new LightTheme();
         static ResourceDictionary _darkTheme = new DarkTheme();
-        static IPlatform _platform;
 
         public static AppStatus Status { get; private set; }
+        public static new IPlatform Platform { get; private set; }
         public static event Action Exit;
 
         public App(Action exitAction = null)
@@ -31,8 +31,8 @@ namespace RealEstate
             InitializeComponent();
             _exitAction = exitAction ?? Current.Quit;
 
-            if (!DesignMode.IsDesignModeEnabled)
-                _platform = DependencyService.Get<IPlatform>();
+            if (!DesignMode.IsDesignModeEnabled && Platform == null)
+                Platform = DependencyService.Get<IPlatform>();
 
             Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
             RequestedThemeChanged += OnRequestedThemeChanged;
@@ -54,12 +54,6 @@ namespace RealEstate
             });
 
             return tcs.Task;
-        }
-
-        public static void SetStatusBarColor(Color color)
-        {
-            if (!DesignMode.IsDesignModeEnabled)
-                _platform.SetStatusBarColor(color);
         }
 
         public new static void Quit()

@@ -57,7 +57,7 @@ namespace RealEstate.Views
 
         static void OnStatusBarColorChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            App.SetStatusBarColor((Color)newValue);
+            App.Platform.SetStatusBarColor((Color)newValue);
         }
 
         protected override async void OnAppearing()
