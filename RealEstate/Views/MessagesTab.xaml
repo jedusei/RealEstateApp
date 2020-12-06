@@ -170,6 +170,7 @@
                 <Label
                     FontFamily="MaterialIcons"
                     FontSize="120"
+                    HorizontalOptions="Center"
                     Opacity="0.8"
                     Text="&#xf01ee;"
                     TextColor="{DynamicResource SecondaryTextColor}"
