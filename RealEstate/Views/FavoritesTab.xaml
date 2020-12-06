@@ -23,6 +23,13 @@
                         Value="{Static viewmodels:LoadStatus.Loading}">
                         <Setter Property="IsVisible" Value="False" />
                     </DataTrigger>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Rentals.Count, FallbackValue=0}" Value="0" />
+                            <BindingCondition Binding="{Binding LoadStatus}" Value="{Static viewmodels:LoadStatus.Loaded}" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsVisible" Value="False" />
+                    </MultiTrigger>
                 </StackLayout.Triggers>
                 <StackLayout
                     Padding="20,20,20,0"
@@ -136,6 +143,37 @@
                     </listview:SfListView.ItemTemplate>
                 </listview:SfListView>
             </StackLayout>
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0.5,0.5"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                IsVisible="False"
+                Orientation="Vertical">
+                <StackLayout.Triggers>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Rentals.Count, FallbackValue=0}" Value="0" />
+                            <BindingCondition Binding="{Binding LoadStatus}" Value="{Static viewmodels:LoadStatus.Loaded}" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </StackLayout.Triggers>
+
+                <Label
+                    FontFamily="MaterialIcons"
+                    FontSize="120"
+                    Opacity="0.8"
+                    Text="&#xf02d1;"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalOptions="EndAndExpand" />
+                <Label
+                    FontSize="23"
+                    HorizontalOptions="Center"
+                    Text="No favorites"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
             <ActivityIndicator
                 AbsoluteLayout.LayoutBounds="0.5,0.5"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
