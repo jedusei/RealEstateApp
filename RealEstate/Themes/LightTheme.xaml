@@ -11,7 +11,7 @@
     <Color x:Key="SecondaryTextHighlightColor">white</Color>
     <Color x:Key="OutlineButtonBorderColor">#E0E0E0</Color>
     <Color x:Key="PlaceholderColor">#662E3034</Color>
-    <Color x:Key="ControlLightBackgroundColor">#E4E4E7</Color>
+    <Color x:Key="ControlLightBackgroundColor">#66E4E4E7</Color>
     <Color x:Key="ControlSelectedLightBackgroundColor">#ABABAD</Color>
 
 </ResourceDictionary>

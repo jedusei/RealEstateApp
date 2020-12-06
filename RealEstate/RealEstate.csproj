@@ -41,6 +41,9 @@
     <Compile Update="Views\FavoritesTab.xaml.cs">
       <DependentUpon>FavoritesTab.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\MessagesTab.xaml.cs">
+      <DependentUpon>MessagesTab.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SignupPage.xaml.cs">
       <DependentUpon>SignupPage.xaml</DependentUpon>
     </Compile>
