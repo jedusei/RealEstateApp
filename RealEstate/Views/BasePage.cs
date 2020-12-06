@@ -67,7 +67,7 @@ namespace RealEstate.Views
             if (_hasLoaded)
             {
                 IsPaused = false;
-                bool isHotReload = (App.Status == AppStatus.Running);
+                bool isHotReload = (App.Status == AppStatus.Running) && System.Diagnostics.Debugger.IsAttached;
 
                 await App.NextTickAsync();
 

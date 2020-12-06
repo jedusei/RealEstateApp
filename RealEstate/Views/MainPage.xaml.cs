@@ -26,6 +26,12 @@ namespace RealEstate.Views
             var currentTab = GetTab(tabView.SelectedIndex);
             currentTab?.OnStart();
         }
+        protected override void OnRefresh()
+        {
+            base.OnRefresh();
+            visitedTabs.Clear();
+            OnStart();
+        }
         protected override void OnPause()
         {
             base.OnPause();
