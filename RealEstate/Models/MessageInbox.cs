@@ -5,8 +5,10 @@ namespace RealEstate.Models
 {
     public class MessageInbox : BindableObject
     {
+        static int _nextId = 1;
         int _unreadMessageCount;
 
+        public int Id { get; } = _nextId++;
         public User User { get; }
         public ObservableCollection<Message> Messages { get; }
         public Message LastMessage => Messages.Count > 0 ? Messages[^1] : null;

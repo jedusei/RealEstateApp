@@ -43,7 +43,10 @@
                     SelectionMode="None">
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
-                            <effects:SfEffectsView Padding="20,15">
+                            <effects:SfEffectsView
+                                Padding="20,15"
+                                TouchUpCommand="{Binding OpenInboxCommand, Source={RelativeSource AncestorType={Type viewmodels:MessagesViewModel}}}"
+                                TouchUpCommandParameter="{Binding}">
                                 <Grid
                                     ColumnSpacing="10"
                                     HeightRequest="60"

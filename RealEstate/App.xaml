@@ -3,10 +3,14 @@
     x:Class="RealEstate.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <d:ResourceDictionary Source="Themes/LightTheme.xaml" />
                 <ResourceDictionary>
                     <!--  COLORS  -->
                     <Color x:Key="PrimaryColor">#049FFF</Color>
@@ -22,6 +26,11 @@
                     </Style>
 
                     <Style TargetType="Entry">
+                        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                        <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderColor}" />
+                    </Style>
+
+                    <Style TargetType="Editor">
                         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
                         <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderColor}" />
                     </Style>

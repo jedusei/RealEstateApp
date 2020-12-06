@@ -7,6 +7,7 @@ namespace RealEstate.Services
     interface IMessageService
     {
         Task<ObservableCollection<MessageInbox>> GetMessageInboxesAsync();
-        Task SendMessageAsync(string message);
+        MessageInbox GetMessageInbox(int id);
+        Task SendMessageAsync(MessageInbox messageInbox, string message);
     }
 }

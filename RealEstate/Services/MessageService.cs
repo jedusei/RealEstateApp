@@ -1,8 +1,7 @@
 ﻿using RealEstate.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -52,9 +51,21 @@ namespace RealEstate.Services
             return _messageInboxes;
         }
 
-        public Task SendMessageAsync(string message)
+        public MessageInbox GetMessageInbox(int id)
         {
-            throw new NotImplementedException();
+            return _messageInboxes.FirstOrDefault(inbox => inbox.Id == id);
+        }
+
+        public Task SendMessageAsync(MessageInbox messageInbox, string message)
+        {
+            messageInbox.Messages.Add(new Message
+            {
+                IsFromMe = true,
+                Content = message,
+                DateCreated = DateTime.Now
+            });
+
+            return Task.CompletedTask;
         }
     }
 }
