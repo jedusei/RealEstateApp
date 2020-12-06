@@ -65,6 +65,8 @@ namespace RealEstate.Services
                 DateCreated = DateTime.Now
             });
 
+            _messageInboxes.Move(_messageInboxes.IndexOf(messageInbox), 0);
+
             return Task.CompletedTask;
         }
     }
