@@ -40,9 +40,11 @@ namespace RealEstate.Services
         };
 
         ObservableCollection<Rental> _favouriteRentals = new ObservableCollection<Rental>();
+        ObservableCollection<Rental> _rentalHistory  ;
 
         public RentalService()
         {
+            _rentalHistory = new ObservableCollection<Rental>(_rentals);
             foreach (var rental in _rentals)
                 rental.PropertyChanged += OnRentalPropertyChanged;
         }
@@ -69,6 +71,12 @@ namespace RealEstate.Services
         {
             await Task.Delay(1000);
             return _favouriteRentals;
+        }
+
+        public async Task<ObservableCollection<Rental>> GetRentalHistoryAsync()
+        {
+            await Task.Delay(1000);
+            return _rentalHistory;
         }
     }
 }

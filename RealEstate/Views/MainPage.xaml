@@ -52,7 +52,7 @@
             </tabview:SfTabItem>
             <tabview:SfTabItem FontIconFontSize="32" IconFont="&#xf0013;">
                 <tabview:SfTabItem.Content>
-                    <BoxView />
+                    <views:ProfileTab />
                 </tabview:SfTabItem.Content>
             </tabview:SfTabItem>
         </tabview:SfTabView>

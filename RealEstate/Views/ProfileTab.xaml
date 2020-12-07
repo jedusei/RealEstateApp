@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="RealEstate.Views.ProfileTab"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    mc:Ignorable="d">
+
+    <ScrollView>
+        <StackLayout>
+            <AbsoluteLayout HeightRequest="260">
+                <ffimage:CachedImage
+                    Margin="0,0,0,20"
+                    d:BackgroundColor="{StaticResource PrimaryColor}"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="SizeProportional"
+                    Aspect="AspectFill"
+                    Source="{Binding User.BannerImageUrl}" />
+                <border:SfBorder
+                    d:BackgroundColor="Red"
+                    AbsoluteLayout.LayoutBounds="20,1,90,90"
+                    AbsoluteLayout.LayoutFlags="YProportional"
+                    BorderColor="White"
+                    BorderWidth="2"
+                    CornerRadius="45"
+                    HeightRequest="90"
+                    WidthRequest="90">
+                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding User.ProfileImageUrl}" />
+                </border:SfBorder>
+                <Button
+                    Margin="0,0,10,20"
+                    Padding="0"
+                    AbsoluteLayout.LayoutBounds="1,1,90,90"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    FontFamily="MaterialIcons"
+                    FontSize="30"
+                    HeightRequest="50"
+                    HorizontalOptions="EndAndExpand"
+                    Text="&#xf090c;"
+                    VerticalOptions="Center"
+                    WidthRequest="50" />
+            </AbsoluteLayout>
+            <Label
+                Margin="20,20,0,0"
+                d:Text="Margaret Novakowska"
+                Style="{StaticResource TitleText}"
+                Text="{Binding User.Name}" />
+            <Label
+                Margin="20,0"
+                LineBreakMode="TailTruncation"
+                MaxLines="1"
+                Style="{StaticResource SecondaryText}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontFamily="MaterialIcons" Text="&#xf07d9; " />
+                        <Span d:Text="Los Angeles" Text="{Binding User.Location}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                Margin="20,10"
+                d:Text="{StaticResource LongDummyText}"
+                LineHeight="1.2"
+                Style="{StaticResource SecondaryText}"
+                Text="{Binding User.Description}" />
+            <tabview:SfTabView Margin="20,0">
+                <tabview:SfTabView.Resources>
+                    <Style TargetType="tabview:SfTabItem">
+                        <Setter Property="TitleFontSize" Value="16" />
+                        <Setter Property="TitleFontAttributes" Value="Bold" />
+                        <Setter Property="TitleFontColor" Value="{DynamicResource SecondaryTextColor}" />
+                        <Setter Property="SelectionColor" Value="{DynamicResource PrimaryTextColor}" />
+                    </Style>
+                </tabview:SfTabView.Resources>
+                <tabview:SfTabItem Title="Rent History">
+                    <tabview:SfTabItem.Content>
+                        <ContentView Padding="0,20,0,0">
+                            <listview:SfListView
+                                AutoFitMode="Height"
+                                IsScrollingEnabled="False"
+                                ItemsSource="{Binding RentalHistory}"
+                                SelectionMode="None">
+                                <listview:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="0,0,0,20" RowSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="210" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <AbsoluteLayout Grid.ColumnSpan="2" Margin="0,0,0,10">
+                                                <effects:SfEffectsView
+                                                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                    AbsoluteLayout.LayoutFlags="SizeProportional"
+                                                    CornerRadius="15">
+                                                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding ImageUrl}" />
+                                                </effects:SfEffectsView>
+                                                <StackLayout
+                                                    Padding="20,15"
+                                                    AbsoluteLayout.LayoutBounds="0,0,1,60"
+                                                    AbsoluteLayout.LayoutFlags="WidthProportional"
+                                                    Orientation="Horizontal">
+                                                    <border:SfBorder
+                                                        Padding="10,0"
+                                                        BackgroundColor="#EC6B6C"
+                                                        BorderWidth="0"
+                                                        CornerRadius="5">
+                                                        <Label
+                                                            Text="{Binding Distance, StringFormat='{0:F1} miles'}"
+                                                            TextColor="White"
+                                                            VerticalOptions="Center" />
+                                                    </border:SfBorder>
+                                                    <Label
+                                                        FontFamily="MaterialIcons"
+                                                        FontSize="23"
+                                                        HorizontalOptions="EndAndExpand"
+                                                        Text="&#xf02d1;"
+                                                        TextColor="#EC6B6C"
+                                                        VerticalOptions="Center">
+                                                        <Label.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding RemoveItemCommand, Source={RelativeSource AncestorType={Type viewmodels:ProfileViewModel}}}" CommandParameter="{Binding}" />
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
+                                                </StackLayout>
+                                            </AbsoluteLayout>
+
+                                            <Label
+                                                Grid.Row="1"
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"
+                                                Text="{Binding Title}" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Style="{StaticResource SecondaryText}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span
+                                                            FontAttributes="Bold"
+                                                            FontSize="18"
+                                                            Text="{Binding Cost, StringFormat='{0:C}'}"
+                                                            TextColor="{StaticResource PrimaryColor}" />
+                                                        <Span Text="{Binding PaymentPeriod, StringFormat=' per {0}'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label
+                                                Grid.Row="2"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"
+                                                Style="{StaticResource SecondaryText}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span FontFamily="MaterialIcons" Text="&#xf07d9; " />
+                                                        <Span Text="{Binding Location}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                                </listview:SfListView.ItemTemplate>
+                            </listview:SfListView>
+                        </ContentView>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+                <tabview:SfTabItem Title="Settings">
+                    <tabview:SfTabItem.Content>
+                        <BoxView Color="Red" />
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+            </tabview:SfTabView>
+        </StackLayout>
+    </ScrollView>
+
+</ContentView>

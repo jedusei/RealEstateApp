@@ -8,5 +8,6 @@ namespace RealEstate.Services
     {
         Task<Rental[]> GetRentalsAsync();
         Task<ObservableCollection<Rental>> GetFavoriteRentalsAsync();
+        Task<ObservableCollection<Rental>> GetRentalHistoryAsync();
     }
 }
