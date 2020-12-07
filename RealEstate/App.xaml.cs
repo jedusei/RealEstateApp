@@ -26,16 +26,23 @@ namespace RealEstate
         public static new IPlatform Platform { get; private set; }
         public static event Action Exit;
 
-        public App(Action exitAction = null)
+        public App() : this(Current.Quit)
+        {
+        }
+
+        public App(Action exitAction)
         {
             InitializeComponent();
-            _exitAction = exitAction ?? Current.Quit;
+            _exitAction = exitAction;
 
-            if (!DesignMode.IsDesignModeEnabled && Platform == null)
-                Platform = DependencyService.Get<IPlatform>();
+            if (!DesignMode.IsDesignModeEnabled)
+            {
+                if (Platform == null)
+                    Platform = DependencyService.Get<IPlatform>();
 
-            Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
-            RequestedThemeChanged += OnRequestedThemeChanged;
+                Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
+                RequestedThemeChanged += OnRequestedThemeChanged;
+            }
 
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzU5ODk4QDMxMzgyZTMzMmUzMG9BL2xkNGVFZlZjWmo4Y0RFQ0FFMmUxN0ozVlBzQ282blRQZWJGdWdHS2s9");
 

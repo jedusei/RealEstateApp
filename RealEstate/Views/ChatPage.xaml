@@ -5,11 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:controls="clr-namespace:RealEstate.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
     xmlns:views="clr-namespace:RealEstate.Views"
-    BackgroundColor="{DynamicResource ControlLightBackgroundColor}">
+    BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+    mc:Ignorable="d">
 
     <StackLayout>
         <StackLayout
@@ -95,6 +98,7 @@
             </listview:SfListView.ItemTemplate>
         </listview:SfListView>
         <ActivityIndicator
+            d:IsVisible="True"
             HorizontalOptions="Center"
             IsRunning="True"
             IsVisible="False"

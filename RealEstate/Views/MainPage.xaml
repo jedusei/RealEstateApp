@@ -3,8 +3,11 @@
     x:Class="RealEstate.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
-    xmlns:views="clr-namespace:RealEstate.Views">
+    xmlns:views="clr-namespace:RealEstate.Views"
+    mc:Ignorable="d">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,6 +22,8 @@
     <AbsoluteLayout>
         <tabview:SfTabView
             x:Name="tabView"
+            d:AbsoluteLayout.LayoutBounds="0,0,1,1"
+            d:AbsoluteLayout.LayoutFlags="SizeProportional"
             AbsoluteLayout.LayoutFlags="WidthProportional"
             BackgroundColor="{DynamicResource PageBackgroundColor}"
             DisplayMode="Image"

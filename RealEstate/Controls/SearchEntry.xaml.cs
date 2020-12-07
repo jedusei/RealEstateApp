@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 namespace RealEstate.Controls
 {
+    [System.ComponentModel.DesignTimeVisible(true)]
     public partial class SearchEntry : ContentView
     {
         public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(FormEntry), defaultBindingMode: BindingMode.TwoWay);

@@ -2,6 +2,7 @@
 
 namespace RealEstate.Controls
 {
+    [System.ComponentModel.DesignTimeVisible(true)]
     public partial class FormEntry : ContentView
     {
         public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(FormEntry), defaultBindingMode: BindingMode.TwoWay);
