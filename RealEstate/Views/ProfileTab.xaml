@@ -189,13 +189,17 @@
                                                 <effects:SfEffectsView
                                                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                                                     AbsoluteLayout.LayoutFlags="SizeProportional"
-                                                    CornerRadius="15">
+                                                    CornerRadius="15"
+                                                    TouchUpCommand="{Binding OpenRentalDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:ProfileViewModel}}}"
+                                                    TouchUpCommandParameter="{Binding}">
                                                     <ffimage:CachedImage Aspect="AspectFill" Source="{Binding ImageUrl}" />
                                                 </effects:SfEffectsView>
                                                 <StackLayout
                                                     Padding="20,15"
                                                     AbsoluteLayout.LayoutBounds="0,0,1,60"
                                                     AbsoluteLayout.LayoutFlags="WidthProportional"
+                                                    CascadeInputTransparent="False"
+                                                    InputTransparent="True"
                                                     Orientation="Horizontal">
                                                     <border:SfBorder
                                                         Padding="10,0"

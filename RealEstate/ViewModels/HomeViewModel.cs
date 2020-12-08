@@ -1,6 +1,7 @@
-﻿using RealEstate.Models;
+﻿using MvvmHelpers.Commands;
+using RealEstate.Models;
 using RealEstate.Services;
-using Xamarin.Forms;
+using RealEstate.Views;
 
 namespace RealEstate.ViewModels
 {
@@ -10,12 +11,20 @@ namespace RealEstate.ViewModels
 
         public Rental[] Rentals { get; private set; }
         public Command<Rental> ToggleFavoriteCommand { get; private set; }
+        public AsyncCommand<Rental> OpenRentalDetailsCommand { get; private set; }
 
         public HomeViewModel()
         {
-            _rentalService = DependencyService.Get<IRentalService>();
+            _rentalService = Xamarin.Forms.DependencyService.Get<IRentalService>();
             _loadStatus = LoadStatus.Loading;
             ToggleFavoriteCommand = new Command<Rental>(rental => rental.IsFavorite = !rental.IsFavorite);
+            OpenRentalDetailsCommand = new AsyncCommand<Rental>(async (rental) =>
+            {
+                await _navigationService.GoToPageAsync<RentalDetailsPage>(new RentalDetailsPage.Args
+                {
+                    Rental = rental
+                });
+            });
         }
 
         public override async void OnStart()

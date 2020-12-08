@@ -3,6 +3,8 @@ using RealEstate.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using RealEstate.Views;
+using MvvmHelpers.Commands;
 
 namespace RealEstate.ViewModels
 {
@@ -19,6 +21,7 @@ namespace RealEstate.ViewModels
         public ICommand GoToTabCommand { get; set; }
         public ICommand ToggleFavoriteCommand { get; private set; }
         public ICommand OpenSettingsCommand { get; private set; }
+        public AsyncCommand<Rental> OpenRentalDetailsCommand { get; private set; }
 
 
         public ProfileViewModel()
@@ -26,8 +29,15 @@ namespace RealEstate.ViewModels
             _userService = DependencyService.Get<IUserService>();
             _rentalService = DependencyService.Get<IRentalService>();
             _loadStatus = LoadStatus.Loading;
-            GoToTabCommand = new Command<int>(tab => CurrentTab = tab);
-            ToggleFavoriteCommand = new Command<Rental>(rental => rental.IsFavorite = !rental.IsFavorite);
+            GoToTabCommand = new Xamarin.Forms.Command<int>(tab => CurrentTab = tab);
+            ToggleFavoriteCommand = new Xamarin.Forms.Command<Rental>(rental => rental.IsFavorite = !rental.IsFavorite);
+            OpenRentalDetailsCommand = new AsyncCommand<Rental>(async (rental) =>
+            {
+                await _navigationService.GoToPageAsync<RentalDetailsPage>(new RentalDetailsPage.Args
+                {
+                    Rental = rental
+                });
+            });
         }
 
         public override async void OnStart()
