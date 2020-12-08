@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace RealEstate.Models
 {
@@ -17,11 +14,16 @@ namespace RealEstate.Models
     {
         bool _isFavorite;
 
+        public RentalOwner Owner { get; set; }
         public string Title { get; set; }
-        public string ImageUrl { get; set; }
+        public string Description { get; set; }
+        public float Rating { get; set; }
+        public string ImageUrl => (ImageUrls?.Length > 0) ? ImageUrls[0] : null;
+        public string[] ImageUrls { get; set; }
         public string Location { get; set; }
         public double Distance { get; set; }
         public double Cost { get; set; }
+        public string[] Features { get; set; }
         public PaymentPeriod PaymentPeriod { get; set; }
         public bool IsFavorite
         {
