@@ -23,10 +23,7 @@ namespace RealEstate.Views
         async void CarouselView_PositionChanged(object sender, PositionChangedEventArgs e)
         {
             if (e.CurrentPosition == 0)
-            {
-                scrollView.AbortAnimation("ScrollAnimation");
                 scrollView.IsEnabled = true;
-            }
             else
             {
                 scrollView.IsEnabled = false;
