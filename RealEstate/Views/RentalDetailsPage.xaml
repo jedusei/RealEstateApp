@@ -12,7 +12,7 @@
     xmlns:views="clr-namespace:RealEstate.Views"
     mc:Ignorable="d">
 
-    <AbsoluteLayout>
+    <AbsoluteLayout BackgroundColor="{DynamicResource PageBackgroundColor}">
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
             <ScrollView>
                 <StackLayout>
