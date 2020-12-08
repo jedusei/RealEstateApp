@@ -10,10 +10,15 @@ namespace RealEstate.ViewModels
     {
         IUserService _userService;
         IRentalService _rentalService;
+        int _currentTab;
 
         public User User => _userService.User;
+        public int CurrentTab { get => _currentTab;
+            set => SetProperty(ref _currentTab, value); }
         public ObservableCollection<Rental> RentalHistory { get; private set; }
-        public ICommand RemoveItemCommand { get; private set; }
+        public ICommand GoToTabCommand { get; set; }
+        public ICommand ToggleFavoriteCommand { get; private set; }
+        public ICommand OpenSettingsCommand { get; private set; }
 
 
         public ProfileViewModel()
@@ -21,7 +26,8 @@ namespace RealEstate.ViewModels
             _userService = DependencyService.Get<IUserService>();
             _rentalService = DependencyService.Get<IRentalService>();
             _loadStatus = LoadStatus.Loading;
-            RemoveItemCommand = new Command<Rental>(rental => rental.IsFavorite = !rental.IsFavorite);
+            GoToTabCommand = new Command<int>(tab => CurrentTab = tab);
+            ToggleFavoriteCommand = new Command<Rental>(rental => rental.IsFavorite = !rental.IsFavorite);
         }
 
         public override async void OnStart()

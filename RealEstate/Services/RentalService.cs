@@ -40,7 +40,7 @@ namespace RealEstate.Services
         };
 
         ObservableCollection<Rental> _favouriteRentals = new ObservableCollection<Rental>();
-        ObservableCollection<Rental> _rentalHistory  ;
+        ObservableCollection<Rental> _rentalHistory;
 
         public RentalService()
         {

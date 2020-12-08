@@ -7,13 +7,12 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:models="clr-namespace:RealEstate.Models"
     xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
     mc:Ignorable="d">
 
-    <ScrollView>
+    <ScrollView x:Name="scrollView">
         <StackLayout>
             <AbsoluteLayout HeightRequest="260">
                 <ffimage:CachedImage
@@ -70,26 +69,112 @@
                 LineHeight="1.2"
                 Style="{StaticResource SecondaryText}"
                 Text="{Binding User.Description}" />
-            <tabview:SfTabView Margin="20,0">
-                <tabview:SfTabView.Resources>
-                    <Style TargetType="tabview:SfTabItem">
-                        <Setter Property="TitleFontSize" Value="16" />
-                        <Setter Property="TitleFontAttributes" Value="Bold" />
-                        <Setter Property="TitleFontColor" Value="{DynamicResource SecondaryTextColor}" />
-                        <Setter Property="SelectionColor" Value="{DynamicResource PrimaryTextColor}" />
+            <Grid
+                Margin="20,5,20,0"
+                ColumnSpacing="20"
+                HorizontalOptions="Start"
+                RowSpacing="0">
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="Padding" Value="0,5,0,10" />
                     </Style>
-                </tabview:SfTabView.Resources>
-                <tabview:SfTabItem Title="Rent History">
-                    <tabview:SfTabItem.Content>
-                        <ContentView Padding="0,20,0,0">
-                            <listview:SfListView
-                                AutoFitMode="Height"
-                                IsScrollingEnabled="False"
-                                ItemsSource="{Binding RentalHistory}"
-                                SelectionMode="None">
-                                <listview:SfListView.ItemTemplate>
+                    <Style TargetType="Ellipse">
+                        <Setter Property="WidthRequest" Value="8" />
+                        <Setter Property="HeightRequest" Value="8" />
+                        <Setter Property="HorizontalOptions" Value="Center" />
+                        <Setter Property="Fill">
+                            <Setter.Value>
+                                <SolidColorBrush Color="{StaticResource PrimaryColor}" />
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Text="Rent History">
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding CurrentTab}"
+                            TargetType="Label"
+                            Value="1">
+                            <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToTabCommand}">
+                            <TapGestureRecognizer.CommandParameter>
+                                <x:Int32>0</x:Int32>
+                            </TapGestureRecognizer.CommandParameter>
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Column="1" Text="Settings">
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding CurrentTab}"
+                            TargetType="Label"
+                            Value="0">
+                            <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToTabCommand}">
+                            <TapGestureRecognizer.CommandParameter>
+                                <x:Int32>1</x:Int32>
+                            </TapGestureRecognizer.CommandParameter>
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Ellipse Grid.Row="1">
+                    <Ellipse.Triggers>
+                        <DataTrigger
+                            Binding="{Binding CurrentTab}"
+                            TargetType="Ellipse"
+                            Value="1">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <Ellipse Grid.Row="1" Grid.Column="1">
+                    <Ellipse.Triggers>
+                        <DataTrigger
+                            Binding="{Binding CurrentTab}"
+                            TargetType="Ellipse"
+                            Value="0">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+            </Grid>
+            <CarouselView
+                IsSwipeEnabled="False"
+                Position="{Binding CurrentTab}"
+                PositionChanged="CarouselView_PositionChanged">
+                <CarouselView.ItemsSource>
+                    <x:Array Type="{Type x:Object}">
+                        <StackLayout BindingContext="{Binding Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}">
+                            <StackLayout BindableLayout.ItemsSource="{Binding RentalHistory}" IsVisible="False">
+                                <StackLayout.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding LoadStatus}"
+                                        TargetType="StackLayout"
+                                        Value="{Static viewmodels:LoadStatus.Loaded}">
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                                <BindableLayout.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Padding="0,0,0,20" RowSpacing="0">
+                                        <Grid Padding="20,20,20,0" RowSpacing="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
                                                 <ColumnDefinition Width="Auto" />
@@ -127,10 +212,18 @@
                                                         FontSize="23"
                                                         HorizontalOptions="EndAndExpand"
                                                         Text="&#xf02d1;"
-                                                        TextColor="#EC6B6C"
+                                                        TextColor="White"
                                                         VerticalOptions="Center">
+                                                        <Label.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding IsFavorite}"
+                                                                TargetType="Label"
+                                                                Value="True">
+                                                                <Setter Property="TextColor" Value="#EC6B6C" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
                                                         <Label.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding RemoveItemCommand, Source={RelativeSource AncestorType={Type viewmodels:ProfileViewModel}}}" CommandParameter="{Binding}" />
+                                                            <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand, Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}" CommandParameter="{Binding}" />
                                                         </Label.GestureRecognizers>
                                                     </Label>
                                                 </StackLayout>
@@ -172,17 +265,106 @@
                                             </Label>
                                         </Grid>
                                     </DataTemplate>
-                                </listview:SfListView.ItemTemplate>
-                            </listview:SfListView>
-                        </ContentView>
-                    </tabview:SfTabItem.Content>
-                </tabview:SfTabItem>
-                <tabview:SfTabItem Title="Settings">
-                    <tabview:SfTabItem.Content>
-                        <BoxView Color="Red" />
-                    </tabview:SfTabItem.Content>
-                </tabview:SfTabItem>
-            </tabview:SfTabView>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                            <ContentView HeightRequest="250" IsVisible="False">
+                                <ContentView.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding LoadStatus}"
+                                        TargetType="ContentView"
+                                        Value="{Static viewmodels:LoadStatus.Loading}">
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </DataTrigger>
+                                </ContentView.Triggers>
+                                <ActivityIndicator
+                                    IsRunning="True"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="50" />
+                            </ContentView>
+                        </StackLayout>
+                        <StackLayout
+                            Padding="20"
+                            BindingContext="{Binding Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}"
+                            Spacing="20">
+                            <BindableLayout.ItemsSource>
+                                <x:Array Type="{Type models:MenuItem}">
+                                    <models:MenuItem Id="0" Label="Account">
+                                        <models:MenuItem.Icon>
+                                            <FontImageSource
+                                                FontFamily="MaterialIcons"
+                                                Glyph="&#xf0013;"
+                                                Color="{DynamicResource PrimaryTextColor}" />
+                                        </models:MenuItem.Icon>
+                                    </models:MenuItem>
+                                    <models:MenuItem Id="1" Label="Payment Settings">
+                                        <models:MenuItem.Icon>
+                                            <FontImageSource
+                                                FontFamily="MaterialIcons"
+                                                Glyph="&#xf019b;"
+                                                Color="{DynamicResource PrimaryTextColor}" />
+                                        </models:MenuItem.Icon>
+                                    </models:MenuItem>
+                                    <models:MenuItem Id="2" Label="Notifications">
+                                        <models:MenuItem.Icon>
+                                            <FontImageSource
+                                                FontFamily="MaterialIcons"
+                                                Glyph="&#xf009c;"
+                                                Color="{DynamicResource PrimaryTextColor}" />
+                                        </models:MenuItem.Icon>
+                                    </models:MenuItem>
+                                </x:Array>
+                            </BindableLayout.ItemsSource>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <effects:SfEffectsView
+                                        Padding="15"
+                                        BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+                                        CornerRadius="50"
+                                        TouchUpCommand="{Binding OpenSettingsCommand, Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}"
+                                        TouchUpCommandParameter="{Binding}">
+                                        <StackLayout Orientation="Horizontal" Spacing="10">
+                                            <border:SfBorder
+                                                Padding="5"
+                                                BackgroundColor="#10000000"
+                                                BorderWidth="0"
+                                                CornerRadius="30"
+                                                HeightRequest="30"
+                                                VerticalOptions="Center"
+                                                WidthRequest="30">
+                                                <Image
+                                                    HeightRequest="20"
+                                                    HorizontalOptions="Center"
+                                                    Source="{Binding Icon}"
+                                                    VerticalOptions="Center" />
+                                            </border:SfBorder>
+                                            <Label
+                                                FontAttributes="Bold"
+                                                HorizontalOptions="FillAndExpand"
+                                                Text="{Binding Label}"
+                                                VerticalOptions="Center" />
+                                            <Button
+                                                Padding="0"
+                                                FontFamily="MaterialIcons"
+                                                FontSize="25"
+                                                HeightRequest="35"
+                                                InputTransparent="True"
+                                                Text="&#xf0142;"
+                                                TranslationX="-1"
+                                                VerticalOptions="Center"
+                                                WidthRequest="35" />
+                                        </StackLayout>
+                                    </effects:SfEffectsView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </x:Array>
+                </CarouselView.ItemsSource>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Content="{Binding}" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
         </StackLayout>
     </ScrollView>
 
