@@ -1,4 +1,4 @@
-﻿using MvvmHelpers.Commands;
+using MvvmHelpers.Commands;
 using RealEstate.Models;
 using RealEstate.Views;
 using System.Threading.Tasks;
@@ -18,12 +18,11 @@ namespace RealEstate.ViewModels
             GoBackCommand = new AsyncCommand(() => _navigationService.GoBackAsync());
         }
 
-        public override Task InitializeAsync(object navigationData)
+        public override void Initialize(object navigationData)
         {
             var args = navigationData as RentalDetailsPage.Args;
             Rental = args.Rental;
             OnPropertyChanged(nameof(Rental));
-            return Task.CompletedTask;
         }
     }
 }

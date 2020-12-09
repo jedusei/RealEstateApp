@@ -30,7 +30,7 @@ namespace RealEstate.ViewModels
             _navigationService = DependencyService.Get<INavigationService>();
         }
 
-        public virtual Task InitializeAsync(object navigationData) => Task.CompletedTask;
+        public virtual void Initialize(object navigationData) { }
         public virtual void OnStart() { }
         public virtual void OnResume(object navigationData = null) { }
         public virtual void OnPause() { }

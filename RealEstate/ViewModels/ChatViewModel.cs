@@ -32,12 +32,11 @@ namespace RealEstate.ViewModels
             }, () => !string.IsNullOrEmpty(CurrentMessage?.Trim(' ', '\n')));
         }
 
-        public override Task InitializeAsync(object navigationData)
+        public override void Initialize(object navigationData)
         {
             var args = navigationData as ChatPage.Args;
             MessageInbox = _messageService.GetMessageInbox(args.MessageInboxId);
-            OnPropertyChanged(nameof(MessageInbox));
-            return Task.CompletedTask;
+            OnPropertyChanged(nameof(MessageInbox)); 
         }
     }
 }
