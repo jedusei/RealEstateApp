@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 using RealEstate.Services;
+using System.Windows.Input;
+using MvvmHelpers.Commands;
 
 namespace RealEstate.ViewModels
 {
@@ -24,10 +25,12 @@ namespace RealEstate.ViewModels
             get => _loadStatus;
             protected set => SetProperty(ref _loadStatus, value);
         }
+        public ICommand GoBackCommand { get; private set; }
 
         public BaseViewModel()
         {
             _navigationService = DependencyService.Get<INavigationService>();
+            GoBackCommand = new AsyncCommand(() => _navigationService.GoBackAsync());
         }
 
         public virtual void Initialize(object navigationData) { }

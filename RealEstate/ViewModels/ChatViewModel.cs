@@ -18,13 +18,11 @@ namespace RealEstate.ViewModels
             get => _currentMessage;
             set => SetProperty(ref _currentMessage, value, onChanged: SendMessageCommand.ChangeCanExecute);
         }
-        public ICommand GoBackCommand { get; private set; }
         public Command SendMessageCommand { get; private set; }
 
         public ChatViewModel()
         {
             _messageService = DependencyService.Get<IMessageService>();
-            GoBackCommand = new Command(() => _navigationService.GoBackAsync());
             SendMessageCommand = new Command(() =>
             {
                 _messageService.SendMessageAsync(MessageInbox, CurrentMessage.Trim(' ', '\n'));
@@ -36,7 +34,7 @@ namespace RealEstate.ViewModels
         {
             var args = navigationData as ChatPage.Args;
             MessageInbox = _messageService.GetMessageInbox(args.MessageInboxId);
-            OnPropertyChanged(nameof(MessageInbox)); 
+            OnPropertyChanged(nameof(MessageInbox));
         }
     }
 }

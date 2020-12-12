@@ -1,6 +1,5 @@
 ﻿using RealEstate.Models;
 using RealEstate.Services;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using RealEstate.Views;
@@ -17,7 +16,6 @@ namespace RealEstate.ViewModels
 
         public RentalOwner Owner { get; private set; }
         public ObservableRangeCollection<Rental> Rentals { get; private set; } = new ObservableRangeCollection<Rental>();
-        public ICommand GoBackCommand { get; private set; }
         public ICommand SendEmailCommand { get; private set; }
         public ICommand CallCommand { get; private set; }
         public ICommand ToggleFavoriteCommand { get; private set; }
@@ -27,7 +25,6 @@ namespace RealEstate.ViewModels
         public RentalOwnerProfileViewModel()
         {
             _rentalService = DependencyService.Get<IRentalService>();
-            GoBackCommand = new AsyncCommand(() => _navigationService.GoBackAsync());
             ToggleFavoriteCommand = new Xamarin.Forms.Command<Rental>(rental => rental.IsFavorite = !rental.IsFavorite);
             SendEmailCommand = new AsyncCommand(() => Launcher.TryOpenAsync($"mailto:{Owner.Email}"));
             CallCommand = new Xamarin.Forms.Command(() =>
