@@ -42,6 +42,7 @@ namespace RealEstate.Views
         public BasePage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
+            SetDynamicResource(BackgroundColorProperty, "PageBackgroundColor");
         }
 
         public void SetNavigationData(object navigationData)
