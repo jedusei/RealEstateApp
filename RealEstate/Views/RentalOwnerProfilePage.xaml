@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage
+    x:Class="RealEstate.Views.RentalOwnerProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:RealEstate.Views"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    mc:Ignorable="d">
+
+    <ScrollView x:Name="scrollView" BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <StackLayout>
+            <AbsoluteLayout HeightRequest="260">
+                <ffimage:CachedImage
+                    Margin="0,0,0,20"
+                    d:BackgroundColor="Green"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="SizeProportional"
+                    Aspect="AspectFill"
+                    Source="{Binding Owner.BannerImageUrl}" />
+                <border:SfBorder
+                    d:BackgroundColor="Red"
+                    AbsoluteLayout.LayoutBounds="20,1,90,90"
+                    AbsoluteLayout.LayoutFlags="YProportional"
+                    BorderColor="White"
+                    BorderWidth="2"
+                    CornerRadius="45"
+                    HeightRequest="90"
+                    WidthRequest="90">
+                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding Owner.ProfileImageUrl}" />
+                </border:SfBorder>
+                <Button
+                    Padding="0"
+                    AbsoluteLayout.LayoutBounds="20,20,50,50"
+                    Command="{Binding GoBackCommand}"
+                    FontFamily="MaterialIcons"
+                    FontSize="30"
+                    Text="&#xf0141;" />
+            </AbsoluteLayout>
+            <Label
+                Margin="20,20,0,0"
+                d:Text="Margaret Novakowska"
+                Style="{StaticResource TitleText}"
+                Text="{Binding Owner.Name}" />
+            <Label
+                Margin="20,0"
+                LineBreakMode="TailTruncation"
+                MaxLines="1"
+                Style="{StaticResource SecondaryText}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontFamily="MaterialIcons" Text="&#xf07d9; " />
+                        <Span d:Text="Los Angeles" Text="{Binding Owner.Location}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <StackLayout
+                Margin="20,5"
+                Orientation="Horizontal"
+                Spacing="10">
+                <rating:SfRating
+                    ItemSize="20"
+                    ItemSpacing="10"
+                    Precision="Half"
+                    ReadOnly="True"
+                    Value="{Binding Owner.Rating, FallbackValue=4.5}">
+                    <rating:SfRating.RatingSettings>
+                        <rating:SfRatingSettings
+                            RatedFill="#F2D374"
+                            RatedStrokeWidth="0"
+                            UnRatedFill="Transparent"
+                            UnRatedStrokeWidth="0" />
+                    </rating:SfRating.RatingSettings>
+                </rating:SfRating>
+                <Label
+                    d:Text="123 Reviews"
+                    Style="{StaticResource SecondaryText}"
+                    Text="{Binding Owner.ReviewCount}" />
+            </StackLayout>
+            <Label
+                Margin="20,0"
+                d:Text="{StaticResource LongDummyText}"
+                Style="{StaticResource SecondaryText}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontFamily="MaterialIcons" Text="&#xf0365;   " />
+                        <Span d:Text="Speaks in English, Deutsch, Russian" Text="{Binding Owner.Languages, Converter={StaticResource ListToStringConverter}, ConverterParameter={Static controls:ListToStringConverter.COMMA_SEPARATOR}, StringFormat='Speaks {0}'}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <StackLayout
+                Margin="20,10,20,0"
+                Orientation="Horizontal"
+                Spacing="20">
+                <StackLayout.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="WidthRequest" Value="40" />
+                        <Setter Property="HeightRequest" Value="40" />
+                        <Setter Property="BackgroundColor" Value="#53D769" />
+                        <Setter Property="FontFamily" Value="MaterialIcons" />
+                        <Setter Property="FontSize" Value="20" />
+                    </Style>
+                </StackLayout.Resources>
+                <Button Command="{Binding SendEmailCommand}" Text="&#xf01f0;" />
+                <Button Command="{Binding CallCommand}" Text="&#xf03f2;" />
+            </StackLayout>
+            <Label
+                Margin="20,10"
+                d:Text="{StaticResource LongDummyText}"
+                LineHeight="1.2"
+                Style="{StaticResource SecondaryText}"
+                Text="{Binding Owner.Description}" />
+            <Label
+                Margin="20,10,20,20"
+                FontSize="20"
+                Style="{StaticResource TitleText}"
+                Text="My apartments for rent" />
+            <StackLayout>
+                <StackLayout BindableLayout.ItemsSource="{Binding Rentals}" IsVisible="False">
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding LoadStatus}"
+                            TargetType="StackLayout"
+                            Value="{Static viewmodels:LoadStatus.Loaded}">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="20,0,20,20" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="210" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <AbsoluteLayout Grid.ColumnSpan="2" Margin="0,0,0,10">
+                                    <effects:SfEffectsView
+                                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                        AbsoluteLayout.LayoutFlags="SizeProportional"
+                                        CornerRadius="15"
+                                        TouchUpCommand="{Binding OpenRentalDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}"
+                                        TouchUpCommandParameter="{Binding}">
+                                        <ffimage:CachedImage Aspect="AspectFill" Source="{Binding ImageUrl}" />
+                                    </effects:SfEffectsView>
+                                    <StackLayout
+                                        Padding="20,15"
+                                        AbsoluteLayout.LayoutBounds="0,0,1,60"
+                                        AbsoluteLayout.LayoutFlags="WidthProportional"
+                                        CascadeInputTransparent="False"
+                                        InputTransparent="True"
+                                        Orientation="Horizontal">
+                                        <border:SfBorder
+                                            Padding="10,0"
+                                            BackgroundColor="#EC6B6C"
+                                            BorderWidth="0"
+                                            CornerRadius="5">
+                                            <Label
+                                                Text="{Binding Distance, StringFormat='{0:F1} miles'}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </border:SfBorder>
+                                        <Label
+                                            FontFamily="MaterialIcons"
+                                            FontSize="23"
+                                            HorizontalOptions="EndAndExpand"
+                                            Text="&#xf02d1;"
+                                            TextColor="White"
+                                            VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding IsFavorite}"
+                                                    TargetType="Label"
+                                                    Value="True">
+                                                    <Setter Property="TextColor" Value="#EC6B6C" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ToggleFavoriteCommand, Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}" CommandParameter="{Binding}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </StackLayout>
+                                </AbsoluteLayout>
+
+                                <Label
+                                    Grid.Row="1"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Text="{Binding Title}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Style="{StaticResource SecondaryText}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Cost, StringFormat='{0:C}'}"
+                                                TextColor="{StaticResource PrimaryColor}" />
+                                            <Span Text="{Binding PaymentPeriod, StringFormat=' per {0}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Grid.Row="2"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Style="{StaticResource SecondaryText}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span FontFamily="MaterialIcons" Text="&#xf07d9; " />
+                                            <Span Text="{Binding Location}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <ContentView HeightRequest="170" IsVisible="False">
+                    <ContentView.Triggers>
+                        <DataTrigger
+                            Binding="{Binding LoadStatus}"
+                            TargetType="ContentView"
+                            Value="{Static viewmodels:LoadStatus.Loading}">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </ContentView.Triggers>
+                    <ActivityIndicator
+                        IsRunning="True"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="50" />
+                </ContentView>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</pages:BasePage>

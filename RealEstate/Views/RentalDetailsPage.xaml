@@ -9,6 +9,7 @@
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
     xmlns:views="clr-namespace:RealEstate.Views"
     mc:Ignorable="d">
 
@@ -65,7 +66,7 @@
                             HeightRequest="50"
                             VerticalOptions="Center"
                             WidthRequest="50">
-                            <effects:SfEffectsView TouchUpCommand="{Binding OpenOwnerDetailsCommand, Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={Type Grid}}}">
+                            <effects:SfEffectsView TouchUpCommand="{Binding OpenOwnerDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}">
                                 <ffimage:CachedImage Aspect="AspectFill" Source="{Binding Rental.Owner.ProfileImageUrl}" />
                             </effects:SfEffectsView>
                         </border:SfBorder>
@@ -74,7 +75,7 @@
                             ItemSize="20"
                             Precision="Half"
                             ReadOnly="True"
-                            Value="{Binding Rental.Rating, FallbackValue=4.5}">
+                            Value="{Binding Rental.Rating}">
                             <rating:SfRating.RatingSettings>
                                 <rating:SfRatingSettings
                                     RatedFill="#F2D374"

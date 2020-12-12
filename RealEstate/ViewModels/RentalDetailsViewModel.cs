@@ -1,4 +1,4 @@
-using MvvmHelpers.Commands;
+﻿using MvvmHelpers.Commands;
 using RealEstate.Models;
 using RealEstate.Views;
 using System.Threading.Tasks;
@@ -16,6 +16,13 @@ namespace RealEstate.ViewModels
         public RentalDetailsViewModel()
         {
             GoBackCommand = new AsyncCommand(() => _navigationService.GoBackAsync());
+            OpenOwnerDetailsCommand = new AsyncCommand(async () =>
+            {
+                await _navigationService.GoToPageAsync<RentalOwnerProfilePage>(new RentalOwnerProfilePage.Args
+                {
+                    Owner = Rental.Owner
+                });
+            });
         }
 
         public override void Initialize(object navigationData)
@@ -23,6 +30,13 @@ namespace RealEstate.ViewModels
             var args = navigationData as RentalDetailsPage.Args;
             Rental = args.Rental;
             OnPropertyChanged(nameof(Rental));
+        }
+
+        public override void OnResume(object navigationData = null)
+        {
+            base.OnResume(navigationData);
+            if (navigationData != null)
+                Initialize(navigationData);
         }
     }
 }

@@ -45,6 +45,9 @@
     <Compile Update="Views\MessagesTab.xaml.cs">
       <DependentUpon>MessagesTab.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\RentalOwnerProfilePage.xaml.cs">
+      <DependentUpon>RentalOwnerProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SignupPage.xaml.cs">
       <DependentUpon>SignupPage.xaml</DependentUpon>
     </Compile>

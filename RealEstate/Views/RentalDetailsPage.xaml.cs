@@ -3,6 +3,7 @@ using RealEstate.ViewModels;
 
 namespace RealEstate.Views
 {
+    [SingletonPage]
     public partial class RentalDetailsPage : BasePage
     {
         public class Args
