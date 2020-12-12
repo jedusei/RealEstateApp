@@ -21,6 +21,9 @@ namespace RealEstate.Views
         bool _hasLoaded;
         object _newNavigationData;
         BaseViewModel _viewModel;
+#if DEBUG
+        bool _hotReloadCheck;
+#endif
 
         protected bool IsPaused { get; private set; }
         public Color StatusBarColor
@@ -84,15 +87,31 @@ namespace RealEstate.Views
 
             if (_hasLoaded)
             {
-                IsPaused = false;
-                bool isHotReload = (App.Status == AppStatus.Running) && System.Diagnostics.Debugger.IsAttached;
+                var isHotReload = false;
+                var waitForNextTick = true;
+#if DEBUG
+                if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    isHotReload = _hotReloadCheck;
+                    _hotReloadCheck = false;
 
-                await App.NextTickAsync();
+                    if (!isHotReload && App.Status != AppStatus.Paused && System.Diagnostics.Debugger.IsAttached)
+                    {
+                        waitForNextTick = false;
+                        await Task.Delay(TRANSITION_DURATION);
+                        if (Application.Current.MainPage.Navigation.NavigationStack[^1] != this)
+                            isHotReload = true;
+                    }
+                }
+#endif
+                if (waitForNextTick)
+                    await App.NextTickAsync();
 
                 if (isHotReload)
                     OnRefresh();
                 else
                 {
+                    IsPaused = false;
                     OnResume(_newNavigationData);
                     _newNavigationData = null;
                 }
@@ -108,10 +127,16 @@ namespace RealEstate.Views
         protected override async void OnDisappearing()
         {
             base.OnDisappearing();
+#if DEBUG
+            _hotReloadCheck = true; // OnAppearing() will set this to false, if called right after this
+            await App.NextTickAsync();
+            if (!_hotReloadCheck)
+                return; // Hot reload confirmed
 
-            if (IsPaused)
-                return;
-
+            _hotReloadCheck = false;
+#else
+            await App.NextTickAsync();
+#endif
             IsPaused = true;
             OnPause();
 
