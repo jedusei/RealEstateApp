@@ -152,4 +152,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\background_3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mastercard.svg" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="RealEstate.Views.SummaryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    mc:Ignorable="d">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <AbsoluteLayout>
+                <Button
+                    Padding="0"
+                    AbsoluteLayout.LayoutBounds="0,0,50,50"
+                    Command="{Binding GoBackCommand}"
+                    FontFamily="MaterialIcons"
+                    FontSize="30"
+                    Text="&#xf0141;" />
+                <Label
+                    AbsoluteLayout.LayoutBounds="0.5,0.5"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource TitleText}"
+                    Text="Summary"
+                    VerticalOptions="CenterAndExpand" />
+            </AbsoluteLayout>
+
+            <Label
+                Margin="0,30,0,10"
+                FontSize="20"
+                Style="{StaticResource TitleText}"
+                Text="15 nights in perfect room" />
+            <Grid ColumnSpacing="20" HeightRequest="180">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <border:SfBorder
+                    Grid.RowSpan="4"
+                    BackgroundColor="#332BACFC"
+                    CornerRadius="70">
+                    <border:SfBorder.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="HorizontalTextAlignment" Value="Center" />
+                            <Setter Property="VerticalTextAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10" />
+                            <Setter Property="HeightRequest" Value="{Binding Width, Source={RelativeSource Self}}" />
+                        </Style>
+                        <Style TargetType="border:SfBorder">
+                            <Setter Property="BorderWidth" Value="0" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+                            <Setter Property="CornerRadius" Value="50" />
+                        </Style>
+                    </border:SfBorder.Resources>
+                    <StackLayout Padding="10" Spacing="20">
+                        <border:SfBorder>
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Jan&#x0a;" TextColor="{DynamicResource SecondaryTextColor}" />
+                                        <Span Text="21" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </border:SfBorder>
+                        <border:SfBorder>
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Nov&#x0a;" TextColor="{DynamicResource SecondaryTextColor}" />
+                                        <Span Text="6" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </border:SfBorder>
+                    </StackLayout>
+                </border:SfBorder>
+
+                <Label
+                    Grid.Column="1"
+                    FontSize="16"
+                    Text="Check in"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalOptions="End" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="1PM - 7PM" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    FontSize="16"
+                    Text="Check out"
+                    TextColor="{DynamicResource SecondaryTextColor}" />
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="1PM - 7PM" />
+            </Grid>
+
+            <Label
+                Margin="0,30,0,10"
+                FontSize="20"
+                Style="{StaticResource TitleText}"
+                Text="Fee &amp; Tax Details" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Text="$122.00 × 15 nights" />
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"
+                    Text="$1.85" />
+                <Label Grid.Row="1" Text="Service charges" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"
+                    Text="$25.00" />
+                <BoxView
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5"
+                    HeightRequest="1"
+                    Opacity="0.3"
+                    Color="#D8D8D8" />
+                <Label
+                    Grid.Row="3"
+                    FontAttributes="Bold"
+                    Text="Total" />
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"
+                    Text="$125.00" />
+            </Grid>
+
+            <effects:SfEffectsView
+                Margin="0,50,0,10"
+                Padding="20"
+                BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+                CornerRadius="30">
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Image HorizontalOptions="EndAndExpand" Source="mastercard" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Pay with MasterCard"
+                        VerticalOptions="Center" />
+                </StackLayout>
+            </effects:SfEffectsView>
+            <Button
+                IsEnabled="False"
+                Style="{StaticResource OutlineButton}"
+                Text="Other method" />
+        </StackLayout>
+    </ScrollView>
+
+</views:BasePage>

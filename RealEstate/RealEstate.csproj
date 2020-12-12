@@ -63,6 +63,9 @@
     <Compile Update="Views\RentalDetailsPage.xaml.cs">
       <DependentUpon>RentalDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\SummaryPage.xaml.cs">
+      <DependentUpon>SummaryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\_SamplePage.xaml.cs">
       <DependentUpon>_SamplePage.xaml</DependentUpon>
     </Compile>
