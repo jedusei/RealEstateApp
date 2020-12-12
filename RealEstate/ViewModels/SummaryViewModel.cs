@@ -1,5 +1,7 @@
-﻿using RealEstate.Models;
+﻿using MvvmHelpers.Commands;
+using RealEstate.Models;
 using RealEstate.Views;
+using System.Windows.Input;
 
 namespace RealEstate.ViewModels
 {
@@ -30,6 +32,12 @@ namespace RealEstate.ViewModels
         {
             get => _totalCost;
             private set => SetProperty(ref _totalCost, value);
+        }
+        public ICommand GoToPaymentCommand { get; private set; }
+
+        public SummaryViewModel()
+        {
+            GoToPaymentCommand = new AsyncCommand(() => _navigationService.GoToPageAsync<PaymentPage>());
         }
 
         public override void Initialize(object navigationData)

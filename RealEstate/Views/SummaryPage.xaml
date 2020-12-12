@@ -25,8 +25,7 @@
                     AbsoluteLayout.LayoutBounds="0.5,0.5"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
                     Style="{StaticResource TitleText}"
-                    Text="Summary"
-                    VerticalOptions="CenterAndExpand" />
+                    Text="Summary" />
             </AbsoluteLayout>
 
             <Label
@@ -173,7 +172,8 @@
                 Margin="0,50,0,10"
                 Padding="20"
                 BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
-                CornerRadius="30">
+                CornerRadius="30"
+                TouchUpCommand="{Binding GoToPaymentCommand}">
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Image HorizontalOptions="EndAndExpand" Source="mastercard" />
                     <Label

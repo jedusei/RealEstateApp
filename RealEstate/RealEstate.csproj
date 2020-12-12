@@ -13,10 +13,12 @@
 
   <ItemGroup>
     <None Remove="Assets\materialdesignicons-webfont.ttf" />
+    <None Remove="Assets\NunitoSans-SemiBold.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Assets\materialdesignicons-webfont.ttf" />
+    <EmbeddedResource Include="Assets\NunitoSans-SemiBold.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,6 +67,9 @@
     </Compile>
     <Compile Update="Views\SummaryPage.xaml.cs">
       <DependentUpon>SummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PaymentPage.xaml.cs">
+      <DependentUpon>PaymentPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\_SamplePage.xaml.cs">
       <DependentUpon>_SamplePage.xaml</DependentUpon>
