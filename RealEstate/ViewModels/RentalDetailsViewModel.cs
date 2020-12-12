@@ -20,6 +20,14 @@ namespace RealEstate.ViewModels
                     Owner = Rental.Owner
                 });
             });
+
+            GoToBookingCommand = new AsyncCommand(async () =>
+            {
+                await _navigationService.GoToPageAsync<SummaryPage>(new SummaryPage.Args
+                {
+                    Rental = Rental
+                });
+            });
         }
 
         public override void Initialize(object navigationData)

@@ -21,8 +21,8 @@ namespace RealEstate.Models
         public string ImageUrl => (ImageUrls?.Length > 0) ? ImageUrls[0] : null;
         public string[] ImageUrls { get; set; }
         public string Location { get; set; }
-        public double Distance { get; set; }
-        public double Cost { get; set; }
+        public float Distance { get; set; }
+        public float Cost { get; set; }
         public string[] Features { get; set; }
         public PaymentPeriod PaymentPeriod { get; set; }
         public bool IsFavorite

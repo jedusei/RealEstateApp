@@ -33,7 +33,7 @@
                 Margin="0,30,0,10"
                 FontSize="20"
                 Style="{StaticResource TitleText}"
-                Text="15 nights in perfect room" />
+                Text="{Binding NightCount, StringFormat='{0} nights in perfect room'}" />
             <Grid ColumnSpacing="20" HeightRequest="180">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90" />
@@ -130,19 +130,26 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Text="$122.00 × 15 nights" />
+                <Label>
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{0:C2} × {1} nights">
+                            <Binding Path="Rental.Cost" />
+                            <Binding Path="NightCount" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
                 <Label
                     Grid.Column="1"
                     FontAttributes="Bold"
                     HorizontalOptions="End"
-                    Text="$1.85" />
+                    Text="{Binding RentCost, StringFormat='{0:C2}'}" />
                 <Label Grid.Row="1" Text="Service charges" />
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
                     FontAttributes="Bold"
                     HorizontalOptions="End"
-                    Text="$25.00" />
+                    Text="{Binding ServiceCharge, StringFormat='{0:C2}'}" />
                 <BoxView
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
@@ -159,7 +166,7 @@
                     Grid.Column="1"
                     FontAttributes="Bold"
                     HorizontalOptions="End"
-                    Text="$125.00" />
+                    Text="{Binding TotalCost, StringFormat='{0:C2}'}" />
             </Grid>
 
             <effects:SfEffectsView
