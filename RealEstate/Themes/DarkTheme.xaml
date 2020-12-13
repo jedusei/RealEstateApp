@@ -12,4 +12,5 @@
     <Color x:Key="PlaceholderColor">#8F92A1</Color>
     <Color x:Key="ControlLightBackgroundColor">#1C1C1D</Color>
     <Color x:Key="ControlSelectedLightBackgroundColor">#555557</Color>
+    <Color x:Key="PaymentSuccessPageBackgroundColor">#1C1C1D</Color>
 </ResourceDictionary>

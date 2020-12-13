@@ -74,6 +74,7 @@ namespace RealEstate.ViewModels
                 UserDialogs.Instance.ShowLoading("Initiating transaction...");
                 await Task.Delay(2000);
                 UserDialogs.Instance.HideLoading();
+                await _navigationService.GoToPageAsync<PaymentSuccessPage>();
             }, _ => _isValid);
         }
 

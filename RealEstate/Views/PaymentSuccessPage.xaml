@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="RealEstate.Views.PaymentSuccessPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    BackgroundColor="{DynamicResource PaymentSuccessPageBackgroundColor}"
+    mc:Ignorable="d">
+
+    <StackLayout Padding="20">
+        <Image
+            Margin="0,20"
+            Source="checkmark_white"
+            VerticalOptions="EndAndExpand" />
+        <Label
+            FontSize="30"
+            HorizontalOptions="Center"
+            Style="{StaticResource TitleText}"
+            Text="Success!"
+            TextColor="White" />
+        <Label
+            HorizontalTextAlignment="Center"
+            Text="The payment transaction completed successfully.&#x0A;Enjoy your stay!"
+            TextColor="White" />
+        <Button
+            Margin="0,20"
+            BackgroundColor="#53D769"
+            Command="{Binding GoHomeCommand}"
+            Text="Home"
+            VerticalOptions="EndAndExpand" />
+    </StackLayout>
+
+</views:BasePage>

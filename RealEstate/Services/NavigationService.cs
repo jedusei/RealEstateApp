@@ -68,7 +68,7 @@ namespace RealEstate.Services
             }
         }
 
-        public async Task GoBackAsync(bool animated)
+        public async Task GoBackAsync(bool animated = true)
         {
             if (Application.Current.MainPage.Navigation.NavigationStack.Count > 1)
                 await Application.Current.MainPage.Navigation.PopAsync(animated);
@@ -83,5 +83,13 @@ namespace RealEstate.Services
             return page;
         }
 
+        public Task PopToRootAsync(bool animated = true)
+        {
+            var navigation = Application.Current.MainPage.Navigation;
+            if (navigation.NavigationStack.Count > 1)
+                return navigation.PopToRootAsync(animated);
+            else
+                return Task.CompletedTask;
+        }
     }
 }
