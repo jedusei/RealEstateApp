@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using RealEstate.iOS.Renderers;
 using UIKit;
 
 namespace RealEstate.iOS
@@ -30,6 +31,7 @@ namespace RealEstate.iOS
             Syncfusion.XForms.iOS.Buttons.SfChipGroupRenderer.Init();
             Syncfusion.XForms.iOS.EffectsView.SfEffectsViewRenderer.Init();
             Syncfusion.XForms.iOS.Border.SfBorderRenderer.Init();
+            new NumericEntryRenderer();
 
             LoadApplication(new App());
 

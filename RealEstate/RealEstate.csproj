@@ -27,6 +27,7 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.3.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.3.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.3.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="18.3.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.3.0.51" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.3.0.51" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -35,6 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\FormDatePicker.xaml.cs">
+      <DependentUpon>FormDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\FormNumericEntry.xaml.cs">
+      <DependentUpon>FormNumericEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\SearchEntry.xaml.cs">
       <DependentUpon>SearchEntry.xaml</DependentUpon>
     </Compile>

@@ -68,7 +68,9 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Platform.cs" />
+    <Compile Include="Renderers\DatePickerRenderer.cs" />
     <Compile Include="Renderers\EditorRenderer.cs" />
+    <Compile Include="Renderers\NumericEntryRenderer.cs" />
     <Compile Include="Renderers\EntryRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

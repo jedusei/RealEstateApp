@@ -3,10 +3,10 @@
     x:Class="RealEstate.Views.PaymentPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:controls="clr-namespace:RealEstate.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:views="clr-namespace:RealEstate.Views"
     mc:Ignorable="d">
 
@@ -56,13 +56,22 @@
             </Frame>
 
             <Label Style="{StaticResource FormLabel}" Text="Name" />
-            <controls:FormEntry Placeholder="Jan Kowalski" ReturnType="Next" />
+            <controls:FormEntry
+                IsValid="{Binding IsNameValid}"
+                Placeholder="eg. John Doe"
+                ReturnType="Next"
+                Text="{Binding Name}" />
 
             <Label
                 Margin="0,10,0,0"
                 Style="{StaticResource FormLabel}"
                 Text="Card Number" />
-            <controls:FormEntry Placeholder="XXXX-XXXX-XXXX-XXXX-XXX" ReturnType="Next" />
+            <controls:FormEntry
+                IsValid="{Binding IsCardNumberValid}"
+                Keyboard="Numeric"
+                Placeholder="XXXX-XXXX-XXXX-XXXX-XXX"
+                ReturnType="Next"
+                Text="{Binding CardNumber}" />
 
             <Grid Margin="0,10,0,30" ColumnSpacing="20">
                 <Grid.ColumnDefinitions>
@@ -76,18 +85,26 @@
                 </Grid.RowDefinitions>
 
                 <Label Style="{StaticResource FormLabel}" Text="Date" />
+                <controls:FormDatePicker
+                    Grid.Row="1"
+                    Date="{Binding Date}"
+                    IsValid="{Binding IsDateValid}"
+                    MinimumDate="{Static system:DateTime.Now}" />
+
                 <Label
                     Grid.Column="1"
                     Style="{StaticResource FormLabel}"
                     Text="CVC" />
-                <controls:FormEntry
-                    Grid.Row="1"
-                    Placeholder="DD.MM.YY"
-                    ReturnType="Next" />
-                <controls:FormEntry
+                <controls:FormNumericEntry
                     Grid.Row="1"
                     Grid.Column="1"
-                    Placeholder="XXX" />
+                    FormatString="000"
+                    IsValid="{Binding IsCvcValid}"
+                    MaxDecimalDigitCount="0"
+                    Maximum="999"
+                    Minimum="0"
+                    Placeholder="XXX"
+                    Value="{Binding Cvc}" />
 
                 <Label
                     Grid.Row="2"
@@ -103,10 +120,10 @@
                     FontAttributes="Bold"
                     FontSize="25"
                     HorizontalOptions="End"
-                    Text="$150.00" />
+                    Text="{Binding Amount, StringFormat='{0:C2}'}" />
             </Grid>
 
-            <Button Text="Next step" />
+            <Button Command="{Binding RequestPaymentCommand}" Text="Next step" />
 
         </StackLayout>
     </ScrollView>
