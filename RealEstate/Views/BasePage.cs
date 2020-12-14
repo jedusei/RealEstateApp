@@ -1,5 +1,6 @@
 ﻿using RealEstate.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -13,7 +14,8 @@ namespace RealEstate.Views
 
     public abstract class BasePage : ContentPage
     {
-        public static readonly BindableProperty StatusBarColorProperty = BindableProperty.Create(nameof(StatusBarColor), typeof(Color), typeof(BasePage), propertyChanged: OnStatusBarColorChanged);
+        public static readonly Color DefaultStatusBarColor = (Color)Application.Current.Resources["StatusBarColor"];
+        public static readonly BindableProperty StatusBarColorProperty = BindableProperty.Create(nameof(StatusBarColor), typeof(Color), typeof(BasePage), DefaultStatusBarColor, propertyChanged: OnStatusBarColorChanged);
 
         public const int TRANSITION_DURATION = 250;
         const int KEYBOARD_MIN_HEIGHT = 200;
@@ -25,7 +27,6 @@ namespace RealEstate.Views
         bool _hotReloadCheck;
 #endif
 
-        protected bool IsPaused { get; private set; }
         public Color StatusBarColor
         {
             get => (Color)GetValue(StatusBarColorProperty);
@@ -38,11 +39,17 @@ namespace RealEstate.Views
         }
         public bool IsKeyboardShowing { get; private set; }
         public Size MaxSize { get; private set; }
+        public bool IsPaused { get; private set; }
 
         public BasePage()
         {
             NavigationPage.SetHasNavigationBar(this, false);
             SetDynamicResource(BackgroundColorProperty, "PageBackgroundColor");
+        }
+
+        protected virtual IReadOnlyList<Page> GetNavigationStack()
+        {
+            return Application.Current.MainPage.Navigation.NavigationStack;
         }
 
         public void SetNavigationData(object navigationData)
@@ -86,6 +93,8 @@ namespace RealEstate.Views
         {
             base.OnAppearing();
 
+            App.Platform.SetStatusBarColor(StatusBarColor);
+
             if (_hasLoaded)
             {
                 var isHotReload = false;
@@ -100,7 +109,8 @@ namespace RealEstate.Views
                     {
                         waitForNextTick = false;
                         await Task.Delay(TRANSITION_DURATION);
-                        if (Application.Current.MainPage.Navigation.NavigationStack[^1] != this)
+                        var navigationStack = GetNavigationStack();
+                        if (navigationStack.Count == 0 || navigationStack[^1] != this)
                             isHotReload = true;
                     }
                 }
@@ -145,7 +155,7 @@ namespace RealEstate.Views
 
             var isDetached = true;
 
-            foreach (var p in Navigation.NavigationStack)
+            foreach (var p in GetNavigationStack())
             {
                 if (p == this)
                 {

@@ -22,6 +22,7 @@
 
                     <!--  COLORS  -->
                     <Color x:Key="PrimaryColor">#049FFF</Color>
+                    <Color x:Key="StatusBarColor">#0071cb</Color>
 
                     <!--  STYLES  -->
                     <Style TargetType="Label">

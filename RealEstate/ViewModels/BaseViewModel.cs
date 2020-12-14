@@ -15,7 +15,7 @@ namespace RealEstate.ViewModels
         Failed
     }
 
-    public class BaseViewModel : BindableObject
+    public abstract class BaseViewModel : BindableObject
     {
         protected readonly INavigationService _navigationService;
         protected LoadStatus _loadStatus = LoadStatus.Loaded;
@@ -25,7 +25,7 @@ namespace RealEstate.ViewModels
             get => _loadStatus;
             protected set => SetProperty(ref _loadStatus, value);
         }
-        public ICommand GoBackCommand { get; private set; }
+        public ICommand GoBackCommand { get; protected set; }
 
         public BaseViewModel()
         {

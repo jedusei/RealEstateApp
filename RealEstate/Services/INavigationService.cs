@@ -9,5 +9,7 @@ namespace RealEstate.Services
         Task GoToPageAsync<TPage>(object navigationData = null, bool clearHistory = false, bool removeCurrentPage = false) where TPage : BasePage;
         Task GoBackAsync(bool animated = true);
         Task PopToRootAsync(bool animated = true);
+        Task<TModal> PushModalAsync<TModal>(object navigationData = null) where TModal : BaseModal;
+        Task PopModalAsync(bool animated = true);
     }
 }

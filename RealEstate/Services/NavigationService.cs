@@ -91,5 +91,16 @@ namespace RealEstate.Services
             else
                 return Task.CompletedTask;
         }
+
+        public async Task<TModal> PushModalAsync<TModal>(object navigationData = null) where TModal : BaseModal
+        {
+            var modal = CreatePage(typeof(TModal), navigationData) as TModal;
+            await Application.Current.MainPage.Navigation.PushModalAsync(modal);
+            return modal;
+        }
+        public Task PopModalAsync(bool animated = true)
+        {
+            return Application.Current.MainPage.Navigation.PopModalAsync(animated);
+        }
     }
 }

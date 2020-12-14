@@ -81,6 +81,9 @@
     <Compile Update="Views\PaymentSuccessPage.xaml.cs">
       <DependentUpon>PaymentSuccessPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\BottomSheetModal.xaml.cs">
+      <DependentUpon>BottomSheetModal.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\_SamplePage.xaml.cs">
       <DependentUpon>_SamplePage.xaml</DependentUpon>
     </Compile>
