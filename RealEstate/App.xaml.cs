@@ -1,7 +1,6 @@
 ﻿using RealEstate.Services;
 using RealEstate.Themes;
 using System;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;

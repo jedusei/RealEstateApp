@@ -6,17 +6,24 @@ namespace RealEstate.Views
 {
     public partial class BottomSheetModal : BaseModal
     {
+        public static readonly BindableProperty CollapsedHeightProperty = BindableProperty.Create(nameof(CollapsedHeight), typeof(double), typeof(BottomSheetModal), -1.0, propertyChanged: OnCollapsedHeightChanged);
         public static readonly BindableProperty IsExpandedProperty = BindableProperty.Create(nameof(IsExpanded), typeof(bool), typeof(BottomSheetModal));
 
         SfBorder _sheet;
         View _dragHandle;
         View _dragHandleBase;
         View _titleBar;
-        double _initialHeight = -1;
+        double _initialHeight;
         double _gestureStartHeight;
         bool _isGestureRunning;
+        bool _isAnimationRunning;
         const double THRESHOLD = 100;
 
+        public double CollapsedHeight
+        {
+            get => (double)GetValue(CollapsedHeightProperty);
+            set => SetValue(CollapsedHeightProperty, value);
+        }
         public bool IsExpanded
         {
             get => (bool)GetValue(IsExpandedProperty);
@@ -39,6 +46,19 @@ namespace RealEstate.Views
             }
         }
 
+        static async void OnCollapsedHeightChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var modal = bindable as BottomSheetModal;
+            var value = (double)newValue;
+            modal._initialHeight = (value == -1) ? -1 : value + 45;
+            if (!modal._isGestureRunning && !modal._isAnimationRunning)
+            {
+                modal._sheet.HeightRequest = modal._initialHeight;
+                await App.NextTickAsync();
+                modal.ResetDragHandlePosition();
+            }
+        }
+
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -46,19 +66,19 @@ namespace RealEstate.Views
             _dragHandle = GetTemplateChild("dragHandle") as View;
             _dragHandleBase = GetTemplateChild("dragHandleBase") as View;
             _titleBar = GetTemplateChild("titleBar") as View;
-        }
 
-        protected override void OnStart()
-        {
-            base.OnStart();
-            _initialHeight = _sheet.Height;
-            ResetDragHandlePosition();
+            _sheet.SizeChanged += sheet_SizeChanged;
+            (GetTemplateChild("backBtn") as Button).Clicked += (s, e) => Close();
+            var tapGestureRecognizer = (GetTemplateChild("root") as AbsoluteLayout).GestureRecognizers[0] as TapGestureRecognizer;
+            tapGestureRecognizer.Tapped += (s, e) => Close();
+
+            var panGestureRecognizer = _dragHandle.GestureRecognizers[0] as PanGestureRecognizer;
+            panGestureRecognizer.PanUpdated += PanGestureRecognizer_PanUpdated;
         }
 
         protected override void OnRefresh()
         {
             base.OnRefresh();
-            _initialHeight = _sheet.Height;
             sheet_SizeChanged(this, new EventArgs());
             ResetDragHandlePosition();
         }
@@ -143,27 +163,28 @@ namespace RealEstate.Views
             var delta = _sheet.Height - _initialHeight;
             if (delta != 0)
             {
+                _isAnimationRunning = true;
                 var animationStartHeight = _sheet.Height;
                 if (delta > THRESHOLD)
                 {
                     _sheet.Animate("slide", (t) =>
                     {
                         _sheet.HeightRequest = Lerp(animationStartHeight, MaxSize.Height, t);
-                    }, length: 300, easing: Easing.SinIn);
+                    }, easing: Easing.SinIn, finished: (d, b) => _isAnimationRunning = false);
                 }
                 else if (delta < -THRESHOLD)
                 {
                     _sheet.Animate("slide", (t) =>
                     {
                         _sheet.HeightRequest = Lerp(animationStartHeight, 0, t);
-                    }, length: 300, easing: Easing.SinIn);
+                    }, easing: Easing.SinIn, finished: (d, b) => _isAnimationRunning = false);
                 }
                 else
                 {
                     _sheet.Animate("slide", (t) =>
                     {
                         _sheet.HeightRequest = Lerp(animationStartHeight, _initialHeight, t);
-                    }, length: 300, easing: Easing.SinIn);
+                    }, easing: Easing.SinIn, finished: (d, b) => _isAnimationRunning = false);
                 }
             }
         }
@@ -176,11 +197,6 @@ namespace RealEstate.Views
         double Lerp(double from, double to, double t)
         {
             return from + t * (to - from);
-        }
-
-        void backBtn_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PopModalAsync();
         }
     }
 }

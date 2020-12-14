@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BottomSheetModal
+    x:Class="RealEstate.Views.FilterModal"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    x:Name="this"
+    Title="Filters"
+    CollapsedHeight="455"
+    mc:Ignorable="d">
+
+    <StackLayout>
+        <ScrollView IsEnabled="{Binding IsExpanded, Source={Reference this}}">
+            <ScrollView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsExpanded, Source={Reference this}}"
+                    TargetType="ScrollView"
+                    Value="False">
+                    <Setter Property="VerticalScrollBarVisibility" Value="Never" />
+                </DataTrigger>
+            </ScrollView.Triggers>
+            <StackLayout Padding="0,0,0,20" Spacing="10">
+                <StackLayout Padding="20,0" Spacing="10">
+                    <BoxView HeightRequest="350" Color="Red" />
+
+                    <Label Style="{StaticResource SectionTitleText}" Text="Price Range" />
+                    <Slider
+                        MaximumTrackColor="#338F92A1"
+                        MinimumTrackColor="{StaticResource PrimaryColor}"
+                        ThumbColor="{StaticResource PrimaryColor}" />
+
+                    <Label Style="{StaticResource SectionTitleText}" Text="Star Range" />
+                    <Grid RowSpacing="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="25" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+
+                        <rating:SfRating
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="5">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image Grid.Column="1" Source="checkmark_gray" />
+
+                        <rating:SfRating
+                            Grid.Row="1"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="4">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Source="checkmark_gray" />
+
+                        <rating:SfRating
+                            Grid.Row="2"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="3">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Source="checkmark_blue" />
+
+                        <rating:SfRating
+                            Grid.Row="3"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="2">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Source="checkmark_gray" />
+
+                        <rating:SfRating
+                            Grid.Row="4"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="1">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Source="checkmark_gray" />
+                    </Grid>
+
+                    <Label Style="{StaticResource SectionTitleText}" Text="Rooms" />
+                </StackLayout>
+
+                <ScrollView
+                    Margin="0"
+                    Padding="20,0"
+                    HorizontalScrollBarVisibility="Never"
+                    Orientation="Horizontal">
+                    <buttons:SfChipGroup
+                        ChipBorderWidth="0"
+                        ChoiceMode="SingleOrNone"
+                        Type="Choice">
+                        <buttons:SfChipGroup.ItemsSource>
+                            <x:Array Type="{Type x:String}">
+                                <x:String>Studio</x:String>
+                                <x:String>2 Bedroom</x:String>
+                                <x:String>3 Bedroom</x:String>
+                                <x:String>4 Bedroom</x:String>
+                                <x:String>5 Bedroom</x:String>
+                            </x:Array>
+                        </buttons:SfChipGroup.ItemsSource>
+                    </buttons:SfChipGroup>
+                </ScrollView>
+
+            </StackLayout>
+        </ScrollView>
+
+        <Button Margin="20" Text="Apply Filters" />
+    </StackLayout>
+</views:BottomSheetModal>

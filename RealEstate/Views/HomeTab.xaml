@@ -31,6 +31,7 @@
                     Spacing="20">
                     <Button
                         Padding="0"
+                        Command="{Binding ShowFiltersCommand}"
                         FontFamily="MaterialIcons"
                         FontSize="25"
                         HeightRequest="50"

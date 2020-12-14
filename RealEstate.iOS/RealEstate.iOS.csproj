@@ -175,4 +175,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\Default%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkmark_blue.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checkmark_gray.svg" />
+  </ItemGroup>
 </Project>

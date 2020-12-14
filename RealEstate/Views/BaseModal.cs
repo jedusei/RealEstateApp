@@ -11,6 +11,11 @@ namespace RealEstate.Views
         public bool IsCompleted => _resultTcs.Task.IsCompleted;
         public object Result => _resultTcs.Task.Result;
 
+        public Task Close()
+        {
+            return Navigation.PopModalAsync();
+        }
+
         protected override IReadOnlyList<Page> GetNavigationStack()
         {
             return Application.Current.MainPage.Navigation.ModalStack;

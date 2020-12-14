@@ -14,6 +14,7 @@ namespace RealEstate.ViewModels
         IRentalService _rentalService;
 
         public ObservableCollection<Rental> Rentals { get; private set; }
+        public AsyncCommand ShowFiltersCommand { get; private set; }
         public ICommand RemoveItemCommand { get; private set; }
         public AsyncCommand<Rental> OpenRentalDetailsCommand { get; private set; }
 
@@ -21,6 +22,12 @@ namespace RealEstate.ViewModels
         {
             _rentalService = DependencyService.Get<IRentalService>();
             _loadStatus = LoadStatus.Loading;
+
+            ShowFiltersCommand = new AsyncCommand(async () =>
+            {
+                var modal = await _navigationService.PushModalAsync<FilterModal>();
+                var result = await modal.GetResultAsync();
+            });
             RemoveItemCommand = new AsyncCommand<Rental>(async (rental) =>
             {
                 bool proceed = await UserDialogs.Instance.ConfirmAsync("Are you sure you want to remove this item from your favorites list?", "Remove Item");

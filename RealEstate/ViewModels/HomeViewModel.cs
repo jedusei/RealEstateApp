@@ -10,6 +10,7 @@ namespace RealEstate.ViewModels
         IRentalService _rentalService;
 
         public Rental[] Rentals { get; private set; }
+        public AsyncCommand ShowFiltersCommand { get; private set; }
         public Command<Rental> ToggleFavoriteCommand { get; private set; }
         public AsyncCommand<Rental> OpenRentalDetailsCommand { get; private set; }
 
@@ -17,6 +18,12 @@ namespace RealEstate.ViewModels
         {
             _rentalService = Xamarin.Forms.DependencyService.Get<IRentalService>();
             _loadStatus = LoadStatus.Loading;
+
+            ShowFiltersCommand = new AsyncCommand(async () =>
+            {
+                var modal = await _navigationService.PushModalAsync<FilterModal>();
+                var result = await modal.GetResultAsync();
+            });
             ToggleFavoriteCommand = new Command<Rental>(rental => rental.IsFavorite = !rental.IsFavorite);
             OpenRentalDetailsCommand = new AsyncCommand<Rental>(async (rental) =>
             {

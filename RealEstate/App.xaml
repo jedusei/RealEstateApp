@@ -7,6 +7,7 @@
     xmlns:controls="clr-namespace:RealEstate.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
     mc:Ignorable="d">
     <Application.Resources>
         <ResourceDictionary>
@@ -43,6 +44,13 @@
                     <Style x:Key="TitleText" TargetType="Label">
                         <Setter Property="FontSize" Value="24" />
                         <Setter Property="FontAttributes" Value="Bold" />
+                    </Style>
+
+                    <Style
+                        x:Key="SectionTitleText"
+                        BasedOn="{StaticResource TitleText}"
+                        TargetType="Label">
+                        <Setter Property="FontSize" Value="20" />
                     </Style>
 
                     <Style x:Key="SecondaryText" TargetType="Label">

@@ -84,6 +84,9 @@
     <Compile Update="Views\BottomSheetModal.xaml.cs">
       <DependentUpon>BottomSheetModal.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\FilterModal.xaml.cs">
+      <DependentUpon>FilterModal.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\_SamplePage.xaml.cs">
       <DependentUpon>_SamplePage.xaml</DependentUpon>
     </Compile>

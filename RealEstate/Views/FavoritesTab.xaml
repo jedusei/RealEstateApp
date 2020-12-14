@@ -37,6 +37,7 @@
                     Spacing="20">
                     <Button
                         Padding="0"
+                        Command="{Binding ShowFiltersCommand}"
                         FontFamily="MaterialIcons"
                         FontSize="25"
                         HeightRequest="50"
@@ -80,7 +81,7 @@
                                     <StackLayout
                                         Padding="20,15"
                                         AbsoluteLayout.LayoutBounds="0,0,1,60"
-                                        AbsoluteLayout.LayoutFlags="WidthProportional" 
+                                        AbsoluteLayout.LayoutFlags="WidthProportional"
                                         CascadeInputTransparent="False"
                                         InputTransparent="True"
                                         Orientation="Horizontal">

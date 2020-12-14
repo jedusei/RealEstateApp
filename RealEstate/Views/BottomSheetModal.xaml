@@ -12,15 +12,18 @@
 
     <ContentPage.ControlTemplate>
         <ControlTemplate>
-            <AbsoluteLayout>
+            <AbsoluteLayout x:Name="root">
+                <AbsoluteLayout.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </AbsoluteLayout.GestureRecognizers>
+
                 <border:SfBorder
                     x:Name="sheet"
                     AbsoluteLayout.LayoutBounds="0,1,1,AutoSize"
                     AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
                     BackgroundColor="{DynamicResource BottomSheetBackgroundColor}"
                     BorderWidth="0"
-                    CornerRadius="25,25,0,0"
-                    SizeChanged="sheet_SizeChanged">
+                    CornerRadius="25,25,0,0">
                     <border:SfBorder.Triggers>
                         <DataTrigger
                             Binding="{TemplateBinding IsExpanded}"
@@ -42,9 +45,9 @@
                         <ContentView x:Name="titleBar" HeightRequest="0">
                             <AbsoluteLayout VerticalOptions="Start">
                                 <Button
+                                    x:Name="backBtn"
                                     Padding="0"
                                     AbsoluteLayout.LayoutBounds="20,0,50,50"
-                                    Clicked="backBtn_Clicked"
                                     FontFamily="MaterialIcons"
                                     FontSize="30"
                                     Text="&#xf0141;" />
@@ -55,9 +58,9 @@
                                     Text="{TemplateBinding Title}" />
                             </AbsoluteLayout>
                         </ContentView>
-                        <AbsoluteLayout Padding="20,0,20,20">
-                            <ContentPresenter AbsoluteLayout.LayoutBounds="0,0,1,AutoSize" AbsoluteLayout.LayoutFlags="WidthProportional" />
-                        </AbsoluteLayout>
+
+                        <ContentPresenter />
+
                     </StackLayout>
                 </border:SfBorder>
                 <BoxView
@@ -68,7 +71,7 @@
                     InputTransparent="{TemplateBinding IsExpanded}"
                     Color="Transparent">
                     <BoxView.GestureRecognizers>
-                        <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated" />
+                        <PanGestureRecognizer />
                     </BoxView.GestureRecognizers>
                 </BoxView>
             </AbsoluteLayout>
