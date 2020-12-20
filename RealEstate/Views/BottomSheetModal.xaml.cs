@@ -1,4 +1,5 @@
-﻿using Syncfusion.XForms.Border;
+﻿using RealEstate.Utils;
+using Syncfusion.XForms.Border;
 using System;
 using Xamarin.Forms;
 
@@ -36,13 +37,8 @@ namespace RealEstate.Views
             var currentPage = Application.Current.MainPage.Navigation.NavigationStack[^1] as BasePage;
             if (currentPage != null)
             {
-                var statusBarColor = currentPage.StatusBarColor;
                 var backgroundColor = BackgroundColor;
-                StatusBarColor = new Color(
-                    Lerp(statusBarColor.R, backgroundColor.R, backgroundColor.A),
-                    Lerp(statusBarColor.G, backgroundColor.G, backgroundColor.A),
-                    Lerp(statusBarColor.B, backgroundColor.B, backgroundColor.A)
-                );
+                StatusBarColor = MathUtils.Lerp(currentPage.StatusBarColor, backgroundColor, backgroundColor.A);
             }
         }
 
@@ -128,8 +124,8 @@ namespace RealEstate.Views
             if (_sheet.Y <= 70)
             {
                 var t = _sheet.Y / 70f;
-                _titleBar.HeightRequest = Lerp(70, 0, t);
-                _dragHandleBase.HeightRequest = Lerp(20, 45, t);
+                _titleBar.HeightRequest = MathUtils.Lerp(70, 0, t);
+                _dragHandleBase.HeightRequest = MathUtils.Lerp(20, 45, t);
 
                 t = _sheet.Y / 20f;
                 _dragHandleBase.Opacity = t;
@@ -145,7 +141,7 @@ namespace RealEstate.Views
 
             if (_sheet.Y <= 25)
             {
-                var newCornerRadius = Lerp(0, 25, _sheet.Y / 25f);
+                var newCornerRadius = MathUtils.Lerp(0, 25, _sheet.Y / 25f);
                 var cornerRadius = _sheet.CornerRadius;
                 cornerRadius.Left = cornerRadius.Top = newCornerRadius;
                 _sheet.CornerRadius = cornerRadius;
@@ -169,21 +165,21 @@ namespace RealEstate.Views
                 {
                     _sheet.Animate("slide", (t) =>
                     {
-                        _sheet.HeightRequest = Lerp(animationStartHeight, MaxSize.Height, t);
+                        _sheet.HeightRequest = MathUtils.Lerp(animationStartHeight, MaxSize.Height, t);
                     }, easing: Easing.SinIn, finished: (d, b) => _isAnimationRunning = false);
                 }
                 else if (delta < -THRESHOLD)
                 {
                     _sheet.Animate("slide", (t) =>
                     {
-                        _sheet.HeightRequest = Lerp(animationStartHeight, 0, t);
+                        _sheet.HeightRequest = MathUtils.Lerp(animationStartHeight, 0, t);
                     }, easing: Easing.SinIn, finished: (d, b) => _isAnimationRunning = false);
                 }
                 else
                 {
                     _sheet.Animate("slide", (t) =>
                     {
-                        _sheet.HeightRequest = Lerp(animationStartHeight, _initialHeight, t);
+                        _sheet.HeightRequest = MathUtils.Lerp(animationStartHeight, _initialHeight, t);
                     }, easing: Easing.SinIn, finished: (d, b) => _isAnimationRunning = false);
                 }
             }
@@ -194,9 +190,5 @@ namespace RealEstate.Views
             _sheet.AbortAnimation("slide");
         }
 
-        double Lerp(double from, double to, double t)
-        {
-            return from + t * (to - from);
-        }
     }
 }
