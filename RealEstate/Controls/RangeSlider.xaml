@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="RealEstate.Controls.RangeSlider"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="this"
+    d:Margin="20"
+    HeightRequest="45"
+    mc:Ignorable="d">
+    <ContentView.Resources>
+        <Style x:Key="ThumbStyle" TargetType="border:SfBorder">
+            <Setter Property="WidthRequest" Value="25" />
+            <Setter Property="HeightRequest" Value="25" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="BorderWidth" Value="6" />
+            <Setter Property="CornerRadius" Value="13" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <AbsoluteLayout BindingContext="{Reference this}">
+        <BoxView
+            AbsoluteLayout.LayoutBounds="0,12,1,2"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            Color="{DynamicResource ControlLightBackgroundColor}" />
+        <BoxView
+            x:Name="rangeTrack"
+            d:AbsoluteLayout.LayoutBounds="0.5,12,0.5,2"
+            AbsoluteLayout.LayoutBounds="0.75,12,0.5,2"
+            AbsoluteLayout.LayoutFlags="XProportional,WidthProportional"
+            Color="{StaticResource PrimaryColor}" />
+        <Label
+            d:Text="$0"
+            AbsoluteLayout.LayoutBounds="0,28"
+            Style="{StaticResource SecondaryText}">
+            <Label.Text>
+                <MultiBinding Converter="{StaticResource ObjectToStringMultiConverter}">
+                    <Binding Path="Minimum" />
+                    <Binding Path="LabelFormat" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+        <Label
+            d:Text="$100"
+            AbsoluteLayout.LayoutBounds="1,28"
+            AbsoluteLayout.LayoutFlags="XProportional"
+            Style="{StaticResource SecondaryText}">
+            <Label.Text>
+                <MultiBinding Converter="{StaticResource ObjectToStringMultiConverter}">
+                    <Binding Path="Maximum" />
+                    <Binding Path="LabelFormat" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+        <StackLayout
+            x:Name="minThumb"
+            d:AbsoluteLayout.LayoutBounds="0.25,0"
+            AbsoluteLayout.LayoutFlags="XProportional"
+            Spacing="2">
+            <border:SfBorder Style="{StaticResource ThumbStyle}" />
+            <Label
+                d:Text="$25"
+                BackgroundColor="{DynamicResource PageBackgroundColor}"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center">
+                <Label.Text>
+                    <MultiBinding Converter="{StaticResource ObjectToStringMultiConverter}">
+                        <Binding Path="ValueStart" />
+                        <Binding Path="LabelFormat" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </StackLayout>
+        <StackLayout
+            x:Name="maxThumb"
+            d:AbsoluteLayout.LayoutBounds="0.75,0"
+            AbsoluteLayout.LayoutFlags="XProportional"
+            Spacing="2">
+            <border:SfBorder Style="{StaticResource ThumbStyle}" />
+            <Label
+                d:Text="$75"
+                BackgroundColor="{DynamicResource PageBackgroundColor}"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center">
+                <Label.Text>
+                    <MultiBinding Converter="{StaticResource ObjectToStringMultiConverter}">
+                        <Binding Path="ValueEnd" />
+                        <Binding Path="LabelFormat" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </StackLayout>
+        <BoxView
+            x:Name="minThumbHandle"
+            d:AbsoluteLayout.LayoutBounds="0.25,0"
+            d:Color="#8F00"
+            AbsoluteLayout.LayoutFlags="XProportional"
+            HeightRequest="{Binding Height, Source={Reference minThumb}}"
+            WidthRequest="{Binding Width, Source={Reference minThumb}}">
+            <BoxView.GestureRecognizers>
+                <PanGestureRecognizer />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+        <BoxView
+            x:Name="maxThumbHandle"
+            d:AbsoluteLayout.LayoutBounds="0.75,0"
+            d:Color="#80F0"
+            AbsoluteLayout.LayoutFlags="XProportional"
+            HeightRequest="{Binding Height, Source={Reference maxThumb}}"
+            WidthRequest="{Binding Width, Source={Reference maxThumb}}">
+            <BoxView.GestureRecognizers>
+                <PanGestureRecognizer />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+    </AbsoluteLayout>
+</ContentView>
