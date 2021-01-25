@@ -4,36 +4,36 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:controls="clr-namespace:RealEstate.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
     xmlns:views="clr-namespace:RealEstate.Views"
-    BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+    ios:Page.UseSafeArea="True"
+    BackgroundColor="{DynamicResource PageBackgroundColor}"
     mc:Ignorable="d">
 
     <StackLayout>
         <StackLayout
             Padding="20"
-            BackgroundColor="{DynamicResource PageBackgroundColor}"
             Orientation="Horizontal"
             Spacing="20">
-            <Button
-                Padding="0"
+            <buttons:SfButton
                 Command="{Binding GoBackCommand}"
-                FontFamily="MaterialIcons"
                 FontSize="30"
-                HeightRequest="50"
                 HorizontalOptions="Start"
-                Text="&#xf0141;"
-                WidthRequest="50" />
+                Style="{StaticResource IconButton}"
+                Text="&#xf0141;" />
             <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search in messages" />
         </StackLayout>
         <listview:SfListView
             x:Name="listView"
             AutoFitMode="Height"
+            BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
             IsVisible="False"
             ItemsSource="{Binding MessageInbox.Messages}"
             SelectionMode="None">
@@ -70,7 +70,10 @@
                                     HorizontalOptions="Start"
                                     MinimumWidthRequest="50"
                                     VerticalOptions="Start">
-                                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding MessageInbox.User.ProfileImageUrl, Source={RelativeSource AncestorType={Type viewmodels:ChatViewModel}}}" />
+                                    <ffimage:CachedImage
+                                        Aspect="AspectFill"
+                                        BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                                        Source="{Binding MessageInbox.User.ProfileImageUrl, Source={RelativeSource AncestorType={Type viewmodels:ChatViewModel}}}" />
                                 </border:SfBorder>
                                 <border:SfBorder
                                     Padding="20,20,20,40"
@@ -86,11 +89,13 @@
                         <DataTemplate>
                             <border:SfBorder
                                 Margin="90,5,20,5"
-                                Padding="20,20,20,40"
                                 BackgroundColor="{StaticResource PrimaryColor}"
                                 BorderWidth="0"
                                 CornerRadius="20,20,0,20">
-                                <Label Text="{Binding Content}" TextColor="White" />
+                                <Label
+                                    Padding="20,20,20,40"
+                                    Text="{Binding Content}"
+                                    TextColor="White" />
                             </border:SfBorder>
                         </DataTemplate>
                     </controls:ChatMessageTemplateSelector.OutgoingMessageTemplate>
@@ -132,18 +137,15 @@
                         Text="{Binding CurrentMessage}"
                         VerticalOptions="Center" />
                 </border:SfBorder>
-                <Button
-                    Padding="0"
+                <buttons:SfButton
+                    Padding="5,0,0,0"
                     Clicked="SendButton_Clicked"
                     Command="{Binding SendMessageCommand}"
-                    FontFamily="MaterialIcons"
-                    FontSize="25"
-                    HeightRequest="50"
-                    HorizontalOptions="Start"
+                    HorizontalOptions="End"
+                    Style="{StaticResource IconButton}"
                     Text="&#xf048a;"
                     TranslationX="-2"
-                    VerticalOptions="End"
-                    WidthRequest="50" />
+                    VerticalOptions="End" />
             </StackLayout>
         </border:SfBorder>
     </StackLayout>

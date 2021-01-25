@@ -7,94 +7,93 @@
     xmlns:controls="clr-namespace:RealEstate.Controls"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:views="clr-namespace:RealEstate.Views">
-    <ScrollView>
-        <AbsoluteLayout VerticalOptions="FillAndExpand">
-            <ffimage:CachedImage
-                x:Name="backgroundImage"
-                AbsoluteLayout.LayoutFlags="WidthProportional"
-                Aspect="AspectFill"
-                Background="Red"
-                Source="background_2" />
-            <border:SfBorder
-                x:Name="content"
-                AbsoluteLayout.LayoutBounds="0,1,1,430"
-                AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
-                BackgroundColor="{DynamicResource PageBackgroundColor}"
-                BorderWidth="0"
-                CornerRadius="25,25,0,0">
-                <StackLayout>
-                    <CarouselView IsSwipeEnabled="False" Position="{Binding CurrentStep}">
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <ContentView Padding="30,0,30,30" Content="{Binding}" />
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                        <CarouselView.ItemsSource>
-                            <x:Array Type="{Type StackLayout}">
-                                <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
-                                    <Label
-                                        Margin="0,40,0,0"
-                                        Style="{StaticResource TitleText}"
-                                        Text="Create new account" />
-                                    <Label
-                                        Margin="0,10,0,20"
-                                        Style="{StaticResource SecondaryText}"
-                                        Text="Fill this form and jump to the next step." />
-                                    <Label Style="{StaticResource FormLabel}" Text="Email" />
-                                    <controls:FormEntry
-                                        Margin="0,0,0,30"
-                                        IsValid="{Binding IsEmailValid}"
-                                        Keyboard="Email"
-                                        Placeholder="anne.carry@mail.com"
-                                        ReturnType="Next"
-                                        Text="{Binding Email}" />
-                                    <Label Style="{StaticResource FormLabel}" Text="Password" />
-                                    <controls:FormEntry IsPassword="True" Text="{Binding Password}" />
-                                </StackLayout>
-                                <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
-                                    <Label
-                                        Margin="0,40,0,0"
-                                        Style="{StaticResource TitleText}"
-                                        Text="Confirm via SMS" />
-                                    <Label
-                                        Margin="0,10,0,20"
-                                        Style="{StaticResource SecondaryText}"
-                                        Text="Enter your phone number to confirm your identity." />
-                                    <Label Style="{StaticResource FormLabel}" Text="Phone number" />
-                                    <controls:FormEntry
-                                        IsValid="{Binding IsPhoneNumberValid}"
-                                        Keyboard="Telephone"
-                                        Placeholder="+48 293 942 952"
-                                        Text="{Binding PhoneNumber}" />
-                                </StackLayout>
-                                <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
-                                    <Label
-                                        Margin="0,40,0,0"
-                                        Style="{StaticResource TitleText}"
-                                        Text="Verification" />
-                                    <Label
-                                        Margin="0,10,0,20"
-                                        Style="{StaticResource SecondaryText}"
-                                        Text="Enter the PIN code you received via SMS." />
-                                    <Label Style="{StaticResource FormLabel}" Text="PIN Code" />
-                                    <controls:FormEntry
-                                        CharacterSpacing="5"
-                                        IsValid="{Binding IsPinCodeValid}"
-                                        Keyboard="Telephone"
-                                        MaxLength="5"
-                                        Placeholder="XXXXX"
-                                        Text="{Binding PinCode}" />
-                                </StackLayout>
-                            </x:Array>
-                        </CarouselView.ItemsSource>
-                    </CarouselView>
-                    <Button
-                        Margin="30"
-                        Command="{Binding NextStepCommand}"
-                        Text="Next Step"
-                        VerticalOptions="EndAndExpand" />
-                </StackLayout>
-            </border:SfBorder>
-        </AbsoluteLayout>
-    </ScrollView>
+
+    <AbsoluteLayout VerticalOptions="FillAndExpand">
+        <ffimage:CachedImage
+            x:Name="backgroundImage"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            Aspect="AspectFill"
+            Source="background_2.jpg" />
+        <border:SfBorder
+            x:Name="content"
+            AbsoluteLayout.LayoutBounds="0,1,1,430"
+            AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
+            BackgroundColor="{DynamicResource PageBackgroundColor}"
+            BorderWidth="0"
+            CornerRadius="25,25,0,0">
+            <StackLayout>
+                <CarouselView IsSwipeEnabled="False" Position="{Binding CurrentStep}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView Padding="30,0,30,30" Content="{Binding}" />
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                    <CarouselView.ItemsSource>
+                        <x:Array Type="{Type StackLayout}">
+                            <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
+                                <Label
+                                    Margin="0,40,0,0"
+                                    Style="{StaticResource TitleText}"
+                                    Text="Create new account" />
+                                <Label
+                                    Margin="0,10,0,20"
+                                    Style="{StaticResource SecondaryText}"
+                                    Text="Fill this form and jump to the next step." />
+                                <Label Style="{StaticResource FormLabel}" Text="Email" />
+                                <controls:FormEntry
+                                    Margin="0,0,0,30"
+                                    IsValid="{Binding IsEmailValid}"
+                                    Keyboard="Email"
+                                    Placeholder="anne.carry@mail.com"
+                                    ReturnType="Next"
+                                    Text="{Binding Email}" />
+                                <Label Style="{StaticResource FormLabel}" Text="Password" />
+                                <controls:FormEntry IsPassword="True" Text="{Binding Password}" />
+                            </StackLayout>
+                            <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
+                                <Label
+                                    Margin="0,40,0,0"
+                                    Style="{StaticResource TitleText}"
+                                    Text="Confirm via SMS" />
+                                <Label
+                                    Margin="0,10,0,20"
+                                    Style="{StaticResource SecondaryText}"
+                                    Text="Enter your phone number to confirm your identity." />
+                                <Label Style="{StaticResource FormLabel}" Text="Phone number" />
+                                <controls:FormEntry
+                                    IsValid="{Binding IsPhoneNumberValid}"
+                                    Keyboard="Telephone"
+                                    Placeholder="+48 293 942 952"
+                                    Text="{Binding PhoneNumber}" />
+                            </StackLayout>
+                            <StackLayout BindingContext="{Binding BindingContext, Source={RelativeSource AncestorType={Type views:SignupPage}}}">
+                                <Label
+                                    Margin="0,40,0,0"
+                                    Style="{StaticResource TitleText}"
+                                    Text="Verification" />
+                                <Label
+                                    Margin="0,10,0,20"
+                                    Style="{StaticResource SecondaryText}"
+                                    Text="Enter the PIN code you received via SMS." />
+                                <Label Style="{StaticResource FormLabel}" Text="PIN Code" />
+                                <controls:FormEntry
+                                    CharacterSpacing="5"
+                                    IsValid="{Binding IsPinCodeValid}"
+                                    Keyboard="Telephone"
+                                    MaxLength="5"
+                                    Placeholder="XXXXX"
+                                    Text="{Binding PinCode}" />
+                            </StackLayout>
+                        </x:Array>
+                    </CarouselView.ItemsSource>
+                </CarouselView>
+                <Button
+                    Margin="30"
+                    Command="{Binding NextStepCommand}"
+                    Text="Next Step"
+                    VerticalOptions="EndAndExpand" />
+            </StackLayout>
+        </border:SfBorder>
+    </AbsoluteLayout>
+
 </views:BasePage>

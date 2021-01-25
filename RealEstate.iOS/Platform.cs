@@ -10,6 +10,7 @@ namespace RealEstate.iOS
     {
         public void SetStatusBarColor(Color color)
         {
+            return;
             UIView statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
             if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))
                 statusBar.BackgroundColor = color.ToUIColor();

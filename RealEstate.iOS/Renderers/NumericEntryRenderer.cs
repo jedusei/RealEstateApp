@@ -1,5 +1,6 @@
 ﻿using RealEstate.Controls;
 using Syncfusion.SfNumericTextBox.XForms;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -12,7 +13,11 @@ namespace RealEstate.iOS.Renderers
         {
             base.OnElementChanged(e);
             if (Control != null)
-                Control.BackgroundColor = Color.Transparent.ToUIColor();
+            {
+                Control.LayoutMargins = new UIEdgeInsets();
+              //  Control.BorderStyle = UITextBorderStyle.None;
+                Control.BackgroundColor = UIColor.Clear;
+            }
         }
     }
 }

@@ -3,6 +3,7 @@
     x:Class="RealEstate.Views.SamplePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:RealEstate.Views"
@@ -10,10 +11,12 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Label
+            <controls:RangeSlider Margin="20" LabelFormat="C0" />
+            <!--<Label
                 HorizontalOptions="Center"
                 Text="Hello World!"
-                VerticalOptions="CenterAndExpand" />
+                VerticalOptions="CenterAndExpand" />-->
+
         </StackLayout>
     </ContentPage.Content>
 

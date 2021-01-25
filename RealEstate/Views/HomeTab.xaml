@@ -9,8 +9,7 @@
     xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
-    Padding="0">
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels">
     <ContentView.Content>
         <AbsoluteLayout>
             <StackLayout
@@ -26,18 +25,15 @@
                     </DataTrigger>
                 </StackLayout.Triggers>
                 <StackLayout
-                    Padding="20,20,20,0"
+                    Padding="{OnPlatform '20,20,20,0',
+                                         iOS='20,10,20,0'}"
                     Orientation="Horizontal"
                     Spacing="20">
-                    <Button
-                        Padding="0"
+                    <buttons:SfButton
                         Command="{Binding ShowFiltersCommand}"
-                        FontFamily="MaterialIcons"
-                        FontSize="25"
-                        HeightRequest="50"
                         HorizontalOptions="Start"
-                        Text="&#xf0236;"
-                        WidthRequest="50" />
+                        Style="{StaticResource IconButton}"
+                        Text="&#xf0236;" />
                     <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search via City" />
                 </StackLayout>
                 <ScrollView
@@ -84,7 +80,10 @@
                                         CornerRadius="15"
                                         TouchUpCommand="{Binding OpenRentalDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:HomeViewModel}}}"
                                         TouchUpCommandParameter="{Binding}">
-                                        <ffimage:CachedImage Aspect="AspectFill" Source="{Binding ImageUrl}" />
+                                        <ffimage:CachedImage
+                                            Aspect="AspectFill"
+                                            BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                                            Source="{Binding ImageUrl}" />
                                     </effects:SfEffectsView>
                                     <StackLayout
                                         Padding="20,15"
@@ -199,7 +198,10 @@
                                                     CornerRadius="15"
                                                     TouchUpCommand="{Binding OpenRentalDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:HomeViewModel}}}"
                                                     TouchUpCommandParameter="{Binding}">
-                                                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding ImageUrl}" />
+                                                    <ffimage:CachedImage
+                                                        Aspect="AspectFill"
+                                                        BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                                                        Source="{Binding ImageUrl}" />
                                                 </effects:SfEffectsView>
                                                 <Grid
                                                     Padding="20,15"

@@ -11,7 +11,10 @@ namespace RealEstate.iOS.Renderers
         {
             base.OnElementChanged(e);
             if (Control != null)
+            {
+                Control.BorderStyle = UITextBorderStyle.None;
                 Control.BackgroundColor = UIColor.Clear;
+            }
         }
     }
 }

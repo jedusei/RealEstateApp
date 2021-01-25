@@ -10,7 +10,7 @@
     xmlns:views="clr-namespace:RealEstate.Views"
     x:Name="this"
     Title="Filters"
-    CollapsedHeight="455"
+    CollapsedHeight="474"
     mc:Ignorable="d">
 
     <StackLayout>
@@ -27,13 +27,16 @@
                 <StackLayout Padding="20,0" Spacing="10">
                     <BoxView HeightRequest="350" Color="Red" />
 
-                    <Label Style="{StaticResource SectionTitleText}" Text="Price Range" />
-                    <Slider
-                        MaximumTrackColor="#338F92A1"
-                        MinimumTrackColor="{StaticResource PrimaryColor}"
-                        ThumbColor="{StaticResource PrimaryColor}" />
+                    <Label
+                        Margin="0,10,0,0"
+                        Style="{StaticResource SectionTitleText}"
+                        Text="Price Range" />
 
-                    <Label Style="{StaticResource SectionTitleText}" Text="Star Range" />
+
+                    <Label
+                        Margin="0,10,0,0"
+                        Style="{StaticResource SectionTitleText}"
+                        Text="Star Range" />
                     <Grid RowSpacing="15">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -134,7 +137,10 @@
                             Source="checkmark_gray" />
                     </Grid>
 
-                    <Label Style="{StaticResource SectionTitleText}" Text="Rooms" />
+                    <Label
+                        Margin="0,10,0,0"
+                        Style="{StaticResource SectionTitleText}"
+                        Text="Rooms" />
                 </StackLayout>
 
                 <ScrollView
@@ -160,7 +166,7 @@
 
             </StackLayout>
         </ScrollView>
-
+        <BoxView HeightRequest="2" Color="{DynamicResource SecondaryTextHighlightColor}" />
         <Button Margin="20" Text="Apply Filters" />
     </StackLayout>
 </views:BottomSheetModal>

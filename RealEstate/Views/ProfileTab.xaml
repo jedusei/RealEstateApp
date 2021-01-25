@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -21,6 +22,7 @@
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="SizeProportional"
                     Aspect="AspectFill"
+                    BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
                     Source="{Binding User.BannerImageUrl}" />
                 <border:SfBorder
                     d:BackgroundColor="Red"
@@ -31,20 +33,20 @@
                     CornerRadius="45"
                     HeightRequest="90"
                     WidthRequest="90">
-                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding User.ProfileImageUrl}" />
+                    <ffimage:CachedImage
+                        Aspect="AspectFill"
+                        BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                        Source="{Binding User.ProfileImageUrl}" />
                 </border:SfBorder>
-                <Button
+                <buttons:SfButton
                     Margin="0,0,10,20"
-                    Padding="0"
                     AbsoluteLayout.LayoutBounds="1,1,90,90"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
-                    FontFamily="MaterialIcons"
                     FontSize="30"
-                    HeightRequest="50"
                     HorizontalOptions="EndAndExpand"
+                    Style="{StaticResource IconButton}"
                     Text="&#xf090c;"
-                    VerticalOptions="Center"
-                    WidthRequest="50" />
+                    VerticalOptions="Center" />
             </AbsoluteLayout>
             <Label
                 Margin="20,20,0,0"
@@ -135,7 +137,7 @@
                         </TapGestureRecognizer>
                     </Label.GestureRecognizers>
                 </Label>
-                <Ellipse Grid.Row="1">
+                <Ellipse Grid.Row="1" StrokeThickness="0">
                     <Ellipse.Triggers>
                         <DataTrigger
                             Binding="{Binding CurrentTab}"
@@ -145,7 +147,10 @@
                         </DataTrigger>
                     </Ellipse.Triggers>
                 </Ellipse>
-                <Ellipse Grid.Row="1" Grid.Column="1">
+                <Ellipse
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    StrokeThickness="0">
                     <Ellipse.Triggers>
                         <DataTrigger
                             Binding="{Binding CurrentTab}"
@@ -192,7 +197,10 @@
                                                     CornerRadius="15"
                                                     TouchUpCommand="{Binding OpenRentalDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:ProfileViewModel}}}"
                                                     TouchUpCommandParameter="{Binding}">
-                                                    <ffimage:CachedImage Aspect="AspectFill" Source="{Binding ImageUrl}" />
+                                                    <ffimage:CachedImage
+                                                        Aspect="AspectFill"
+                                                        BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                                                        Source="{Binding ImageUrl}" />
                                                 </effects:SfEffectsView>
                                                 <StackLayout
                                                     Padding="20,15"
@@ -346,16 +354,23 @@
                                                 HorizontalOptions="FillAndExpand"
                                                 Text="{Binding Label}"
                                                 VerticalOptions="Center" />
-                                            <Button
-                                                Padding="0"
-                                                FontFamily="MaterialIcons"
-                                                FontSize="25"
+                                            <border:SfBorder
+                                                BackgroundColor="{StaticResource PrimaryColor}"
+                                                BorderWidth="0"
+                                                CornerRadius="20"
                                                 HeightRequest="35"
-                                                InputTransparent="True"
-                                                Text="&#xf0142;"
-                                                TranslationX="-1"
                                                 VerticalOptions="Center"
-                                                WidthRequest="35" />
+                                                WidthRequest="35">
+                                                <Label
+                                                    FontFamily="MaterialIcons"
+                                                    FontSize="25"
+                                                    HorizontalOptions="Center"
+                                                    Text="&#xf0142;"
+                                                    TextColor="White"
+                                                    TranslationX="1"
+                                                    VerticalOptions="Center" />
+                                            </border:SfBorder>
+
                                         </StackLayout>
                                     </effects:SfEffectsView>
                                 </DataTemplate>

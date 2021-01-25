@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application
     x:Class="RealEstate.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -62,7 +62,7 @@
                         <Setter Property="FontSize" Value="12" />
                         <Setter Property="FontAttributes" Value="Bold" />
                         <Setter Property="TextTransform" Value="Uppercase" />
-                        <Setter Property="CharacterSpacing" Value="2" />
+                        <Setter Property="CharacterSpacing" Value="{OnPlatform 2, iOS=0}" />
                     </Style>
 
                     <Style TargetType="StackLayout">
@@ -114,6 +114,17 @@
                                 </VisualStateGroupList>
                             </Setter.Value>
                         </Setter>
+                    </Style>
+
+                    <Style x:Key="IconButton" TargetType="buttons:SfButton">
+                        <Setter Property="WidthRequest" Value="50" />
+                        <Setter Property="HeightRequest" Value="50" />
+                        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                        <Setter Property="CornerRadius" Value="30" />
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="FontFamily" Value="MaterialIcons" />
                     </Style>
 
                     <Style TargetType="buttons:SfChipGroup">

@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace RealEstate
 {
@@ -25,7 +26,7 @@ namespace RealEstate
         public static new IPlatform Platform { get; private set; }
         public static event Action Exit;
 
-        public App() : this(Current.Quit)
+        public App() : this(() => Current.Quit())
         {
         }
 
@@ -47,6 +48,9 @@ namespace RealEstate
 
             On<Xamarin.Forms.PlatformConfiguration.Android>()
                 .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+
+           On<Xamarin.Forms.PlatformConfiguration.iOS>()
+                .SetHandleControlUpdatesOnMainThread(true);
         }
 
         public static Task NextTickAsync()

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Application = Xamarin.Forms.Application;
+using NavigationPage = Xamarin.Forms.NavigationPage;
+using Page = Xamarin.Forms.Page;
 
 namespace RealEstate.Views
 {
@@ -85,6 +89,9 @@ namespace RealEstate.Views
                 var size = MaxSize;
                 size.Width = width;
                 size.Height = height;
+                var safeAreaInsets = On<Xamarin.Forms.PlatformConfiguration.iOS>().SafeAreaInsets();
+                size.Width -= safeAreaInsets.HorizontalThickness;
+                size.Height -= safeAreaInsets.VerticalThickness;
                 MaxSize = size;
             }
         }
