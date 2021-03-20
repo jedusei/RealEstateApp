@@ -24,12 +24,14 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.468" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.3.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.3.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.3.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="18.3.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.3.0.51" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.3.0.51" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRangeSlider" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.48" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />

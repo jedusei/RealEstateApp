@@ -44,7 +44,7 @@ namespace RealEstate
                 RequestedThemeChanged += OnRequestedThemeChanged;
             }
 
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzU5ODk4QDMxMzgyZTMzMmUzMG9BL2xkNGVFZlZjWmo4Y0RFQ0FFMmUxN0ozVlBzQ282blRQZWJGdWdHS2s9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDE0ODkzQDMxMzgyZTM0MmUzMGlQc3dpYzlhaEZxTk9hV2FtTjNaZ1FZSndCOWFucGc4THVoWVdab2FHZ2s9");
 
             On<Xamarin.Forms.PlatformConfiguration.Android>()
                 .UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
