@@ -4,7 +4,6 @@ using Xamarin.Forms.Xaml;
 
 namespace RealEstate.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Skip)]
     public partial class ProfileTab : ContentView, ITabContentView
     {
         ProfileViewModel _viewModel;
@@ -20,15 +19,10 @@ namespace RealEstate.Views
             _viewModel.OnStart();
         }
 
-        async void CarouselView_PositionChanged(object sender, PositionChangedEventArgs e)
+        private void SfTabView_SelectionChanged(object sender, Syncfusion.XForms.TabView.SelectionChangedEventArgs e)
         {
-            if (e.CurrentPosition == 0)
-                scrollView.IsEnabled = true;
-            else
-            {
-                scrollView.IsEnabled = false;
-                await scrollView.ScrollToAsync(0, 0, true);
-            }
+            if (e.Index == 1)
+                _ = scrollView.ScrollToAsync(0, 0, true);
         }
     }
 }

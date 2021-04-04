@@ -10,7 +10,9 @@
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:RealEstate.Models"
+    xmlns:tabs="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
     xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    x:DataType="viewmodels:ProfileViewModel"
     mc:Ignorable="d">
 
     <ScrollView x:Name="scrollView">
@@ -18,14 +20,12 @@
             <AbsoluteLayout HeightRequest="260">
                 <ffimage:CachedImage
                     Margin="0,0,0,20"
-                    d:BackgroundColor="{StaticResource PrimaryColor}"
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="SizeProportional"
                     Aspect="AspectFill"
                     BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
                     Source="{Binding User.BannerImageUrl}" />
                 <border:SfBorder
-                    d:BackgroundColor="Red"
                     AbsoluteLayout.LayoutBounds="20,1,90,90"
                     AbsoluteLayout.LayoutFlags="YProportional"
                     BorderColor="White"
@@ -161,14 +161,19 @@
                     </Ellipse.Triggers>
                 </Ellipse>
             </Grid>
-            <CarouselView
-                IsSwipeEnabled="False"
-                Position="{Binding CurrentTab}"
-                PositionChanged="CarouselView_PositionChanged">
-                <CarouselView.ItemsSource>
-                    <x:Array Type="{Type x:Object}">
-                        <StackLayout BindingContext="{Binding Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}">
-                            <StackLayout BindableLayout.ItemsSource="{Binding RentalHistory}" IsVisible="False">
+            <tabs:SfTabView
+                DisplayMode="NoHeader"
+                EnableSwiping="False"
+                HeightRequest="{Binding Height, Source={Reference rentalListView}}"
+                SelectedIndex="{Binding CurrentTab}"
+                SelectionChanged="SfTabView_SelectionChanged">
+                <tabs:SfTabItem>
+                    <tabs:SfTabItem.Content>
+                        <StackLayout>
+                            <StackLayout
+                                x:Name="rentalListView"
+                                BindableLayout.ItemsSource="{Binding RentalHistory}"
+                                IsVisible="False">
                                 <StackLayout.Triggers>
                                     <DataTrigger
                                         Binding="{Binding LoadStatus}"
@@ -178,7 +183,7 @@
                                     </DataTrigger>
                                 </StackLayout.Triggers>
                                 <BindableLayout.ItemTemplate>
-                                    <DataTemplate>
+                                    <DataTemplate x:DataType="models:Rental">
                                         <Grid Padding="20,20,20,0" RowSpacing="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
@@ -294,10 +299,11 @@
                                     WidthRequest="50" />
                             </ContentView>
                         </StackLayout>
-                        <StackLayout
-                            Padding="20"
-                            BindingContext="{Binding Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}"
-                            Spacing="20">
+                    </tabs:SfTabItem.Content>
+                </tabs:SfTabItem>
+                <tabs:SfTabItem>
+                    <tabs:SfTabItem.Content>
+                        <StackLayout Padding="20" Spacing="20">
                             <BindableLayout.ItemsSource>
                                 <x:Array Type="{Type models:MenuItem}">
                                     <models:MenuItem Id="0" Label="Account">
@@ -327,7 +333,7 @@
                                 </x:Array>
                             </BindableLayout.ItemsSource>
                             <BindableLayout.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="models:MenuItem">
                                     <effects:SfEffectsView
                                         Padding="15"
                                         BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
@@ -376,14 +382,9 @@
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
-                    </x:Array>
-                </CarouselView.ItemsSource>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <ContentView Content="{Binding}" />
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+                    </tabs:SfTabItem.Content>
+                </tabs:SfTabItem>
+            </tabs:SfTabView>
         </StackLayout>
     </ScrollView>
 
