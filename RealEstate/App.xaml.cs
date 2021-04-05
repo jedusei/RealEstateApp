@@ -38,10 +38,11 @@ namespace RealEstate
             if (!DesignMode.IsDesignModeEnabled)
             {
                 if (Platform == null)
-                    Platform = DependencyService.Get<IPlatform>();
+                    Platform ??= DependencyService.Get<IPlatform>();
 
-                Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
-                RequestedThemeChanged += OnRequestedThemeChanged;
+                Resources.MergedDictionaries.Add(_lightTheme);
+                //Resources.MergedDictionaries.Add(RequestedTheme == OSAppTheme.Dark ? _darkTheme : _lightTheme);
+                //RequestedThemeChanged += OnRequestedThemeChanged;
             }
 
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDE0ODkzQDMxMzgyZTM0MmUzMGlQc3dpYzlhaEZxTk9hV2FtTjNaZ1FZSndCOWFucGc4THVoWVdab2FHZ2s9");
