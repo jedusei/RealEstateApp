@@ -30,5 +30,11 @@ namespace RealEstate.Views
             if (!IsCompleted)
                 SetResult(null);
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Close();
+            return true;
+        }
     }
 }
