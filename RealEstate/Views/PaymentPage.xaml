@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="RealEstate.Views.PaymentPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    mc:Ignorable="d">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <AbsoluteLayout>
+                <Button
+                    Padding="0"
+                    AbsoluteLayout.LayoutBounds="0,0,50,50"
+                    Command="{Binding GoBackCommand}"
+                    FontFamily="MaterialIcons"
+                    FontSize="30"
+                    Text="&#xf0141;" />
+                <Label
+                    AbsoluteLayout.LayoutBounds="0.5,0.5"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Style="{StaticResource TitleText}"
+                    Text="Payment" />
+            </AbsoluteLayout>
+            <Frame
+                Margin="0,20"
+                Padding="30"
+                BackgroundColor="Red"
+                CornerRadius="25"
+                HeightRequest="180">
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,1">
+                        <GradientStop Offset="0" Color="Black" />
+                        <GradientStop Offset="1" Color="#4A5055" />
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <StackLayout>
+                    <StackLayout.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="FontFamily" Value="NunitoSans" />
+                            <Setter Property="TextColor" Value="White" />
+                            <Setter Property="FontSize" Value="20" />
+                        </Style>
+                    </StackLayout.Resources>
+                    <Image
+                        HeightRequest="45"
+                        HorizontalOptions="Start"
+                        Source="mastercard" />
+                    <Label Text="Platinum" />
+                    <Label Text="• • • • 0212" VerticalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+
+            <Label Style="{StaticResource FormLabel}" Text="Name" />
+            <controls:FormEntry
+                IsValid="{Binding IsNameValid}"
+                Placeholder="eg. John Doe"
+                ReturnType="Next"
+                Text="{Binding Name}" />
+
+            <Label
+                Margin="0,10,0,0"
+                Style="{StaticResource FormLabel}"
+                Text="Card Number" />
+            <controls:FormEntry
+                IsValid="{Binding IsCardNumberValid}"
+                Keyboard="Numeric"
+                Placeholder="XXXX-XXXX-XXXX-XXXX-XXX"
+                ReturnType="Next"
+                Text="{Binding CardNumber}" />
+
+            <Grid Margin="0,10,0,30" ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Style="{StaticResource FormLabel}" Text="Date" />
+                <controls:FormDatePicker
+                    Grid.Row="1"
+                    Date="{Binding Date}"
+                    IsValid="{Binding IsDateValid}"
+                    MinimumDate="{Static system:DateTime.Now}" />
+
+                <Label
+                    Grid.Column="1"
+                    Style="{StaticResource FormLabel}"
+                    Text="CVC" />
+                <controls:FormNumericEntry
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FormatString="000"
+                    IsValid="{Binding IsCvcValid}"
+                    MaxDecimalDigitCount="0"
+                    Maximum="999"
+                    Minimum="0"
+                    Placeholder="XXX"
+                    Value="{Binding Cvc}" />
+
+                <Label
+                    Grid.Row="2"
+                    Margin="0,10,0,0"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="Amount"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,10,0,0"
+                    FontAttributes="Bold"
+                    FontSize="25"
+                    HorizontalOptions="End"
+                    Text="{Binding Amount, StringFormat='{0:C2}'}" />
+            </Grid>
+
+            <Button Command="{Binding RequestPaymentCommand}" Text="Next step" />
+
+        </StackLayout>
+    </ScrollView>
+
+</views:BasePage>

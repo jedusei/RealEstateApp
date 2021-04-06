@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="RealEstate.Views.ChatPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    ios:Page.UseSafeArea="True"
+    BackgroundColor="{DynamicResource PageBackgroundColor}"
+    mc:Ignorable="d">
+
+    <StackLayout>
+        <StackLayout
+            Padding="20"
+            Orientation="Horizontal"
+            Spacing="20">
+            <buttons:SfButton
+                Command="{Binding GoBackCommand}"
+                FontSize="30"
+                HorizontalOptions="Start"
+                Style="{StaticResource IconButton}"
+                Text="&#xf0141;" />
+            <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search in messages" />
+        </StackLayout>
+        <listview:SfListView
+            x:Name="listView"
+            AutoFitMode="Height"
+            BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+            IsVisible="False"
+            ItemsSource="{Binding MessageInbox.Messages}"
+            SelectionMode="None">
+            <listview:SfListView.Triggers>
+                <DataTrigger
+                    Binding="{Binding LoadStatus}"
+                    TargetType="listview:SfListView"
+                    Value="{Static viewmodels:LoadStatus.Loaded}">
+                    <Setter Property="IsVisible" Value="True" />
+                </DataTrigger>
+            </listview:SfListView.Triggers>
+            <listview:SfListView.HeaderTemplate>
+                <DataTemplate>
+                    <BoxView HeightRequest="15" />
+                </DataTemplate>
+            </listview:SfListView.HeaderTemplate>
+            <listview:SfListView.FooterTemplate>
+                <DataTemplate>
+                    <BoxView HeightRequest="15" />
+                </DataTemplate>
+            </listview:SfListView.FooterTemplate>
+            <listview:SfListView.ItemTemplate>
+                <controls:ChatMessageTemplateSelector>
+                    <controls:ChatMessageTemplateSelector.IncomingMessageTemplate>
+                        <DataTemplate>
+                            <StackLayout
+                                Margin="20,5"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <border:SfBorder
+                                    BorderWidth="0"
+                                    CornerRadius="30"
+                                    HeightRequest="50"
+                                    HorizontalOptions="Start"
+                                    MinimumWidthRequest="50"
+                                    VerticalOptions="Start">
+                                    <ffimage:CachedImage
+                                        Aspect="AspectFill"
+                                        BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                                        Source="{Binding MessageInbox.User.ProfileImageUrl, Source={RelativeSource AncestorType={Type viewmodels:ChatViewModel}}}" />
+                                </border:SfBorder>
+                                <border:SfBorder
+                                    Padding="20,20,20,40"
+                                    BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                    BorderWidth="0"
+                                    CornerRadius="0,20,20,20">
+                                    <Label Text="{Binding Content}" />
+                                </border:SfBorder>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:ChatMessageTemplateSelector.IncomingMessageTemplate>
+                    <controls:ChatMessageTemplateSelector.OutgoingMessageTemplate>
+                        <DataTemplate>
+                            <border:SfBorder
+                                Margin="90,5,20,5"
+                                BackgroundColor="{StaticResource PrimaryColor}"
+                                BorderWidth="0"
+                                CornerRadius="20,20,0,20">
+                                <Label
+                                    Padding="20,20,20,40"
+                                    Text="{Binding Content}"
+                                    TextColor="White" />
+                            </border:SfBorder>
+                        </DataTemplate>
+                    </controls:ChatMessageTemplateSelector.OutgoingMessageTemplate>
+                </controls:ChatMessageTemplateSelector>
+            </listview:SfListView.ItemTemplate>
+        </listview:SfListView>
+        <ActivityIndicator
+            d:IsVisible="True"
+            HorizontalOptions="Center"
+            IsRunning="True"
+            IsVisible="False"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="50">
+            <ActivityIndicator.Triggers>
+                <DataTrigger
+                    Binding="{Binding LoadStatus}"
+                    TargetType="ActivityIndicator"
+                    Value="{Static viewmodels:LoadStatus.Loading}">
+                    <Setter Property="IsVisible" Value="True" />
+                </DataTrigger>
+            </ActivityIndicator.Triggers>
+        </ActivityIndicator>
+        <border:SfBorder
+            Padding="20,40"
+            BackgroundColor="{DynamicResource PageBackgroundColor}"
+            BorderWidth="0"
+            CornerRadius="25,25,0,0">
+            <StackLayout Orientation="Horizontal" Spacing="20">
+                <border:SfBorder
+                    Padding="20,10"
+                    BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+                    BorderWidth="0"
+                    CornerRadius="30"
+                    HorizontalOptions="FillAndExpand">
+                    <Editor
+                        AutoSize="TextChanges"
+                        IsSpellCheckEnabled="False"
+                        Placeholder="Write a comment..."
+                        Text="{Binding CurrentMessage}"
+                        VerticalOptions="Center" />
+                </border:SfBorder>
+                <buttons:SfButton
+                    Padding="5,0,0,0"
+                    Clicked="SendButton_Clicked"
+                    Command="{Binding SendMessageCommand}"
+                    HorizontalOptions="End"
+                    Style="{StaticResource IconButton}"
+                    Text="&#xf048a;"
+                    TranslationX="-2"
+                    VerticalOptions="End" />
+            </StackLayout>
+        </border:SfBorder>
+    </StackLayout>
+
+</views:BasePage>

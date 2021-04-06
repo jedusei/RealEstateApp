@@ -1,8 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RealEstate.App">
+<Application
+    x:Class="RealEstate.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <d:ResourceDictionary Source="Themes/LightTheme.xaml" />
+                <ResourceDictionary>
+                    <!--  CONVERTERS  -->
+                    <controls:ListLengthConverter x:Key="ListLengthConverter" />
+                    <controls:ListToStringConverter x:Key="ListToStringConverter" />
+                    <controls:ObjectToStringMultiConverter x:Key="ObjectToStringMultiConverter" />
 
+                    <!--  STRINGS  -->
+                    <x:String x:Key="LongDummyText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</x:String>
+
+                    <!--  COLORS  -->
+                    <Color x:Key="PrimaryColor">#049FFF</Color>
+                    <Color x:Key="StatusBarColor">#0071cb</Color>
+
+                    <!--  STYLES  -->
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="16" />
+                        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                    </Style>
+
+                    <Style TargetType="Entry">
+                        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                        <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderColor}" />
+                    </Style>
+
+                    <Style TargetType="Editor">
+                        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                        <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderColor}" />
+                    </Style>
+
+                    <Style x:Key="TitleText" TargetType="Label">
+                        <Setter Property="FontSize" Value="24" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                    </Style>
+
+                    <Style
+                        x:Key="SectionTitleText"
+                        BasedOn="{StaticResource TitleText}"
+                        TargetType="Label">
+                        <Setter Property="FontSize" Value="20" />
+                    </Style>
+
+                    <Style x:Key="SecondaryText" TargetType="Label">
+                        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+                    </Style>
+
+                    <Style x:Key="FormLabel" TargetType="Label">
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="TextTransform" Value="Uppercase" />
+                        <Setter Property="CharacterSpacing" Value="{OnPlatform 2, iOS=0}" />
+                    </Style>
+
+                    <Style TargetType="StackLayout">
+                        <Setter Property="Spacing" Value="0" />
+                    </Style>
+
+                    <Style TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="FontSize" Value="16" />
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="CornerRadius" Value="30" />
+                        <Setter Property="TextTransform" Value="None" />
+                        <Setter Property="Padding" Value="20" />
+                        <Setter Property="MinimumWidthRequest" Value="300" />
+                        <Setter Property="VisualStateManager.VisualStateGroups">
+                            <Setter.Value>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <Style x:Key="OutlineButton" TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+                        <Setter Property="BorderColor" Value="{DynamicResource OutlineButtonBorderColor}" />
+                        <Setter Property="BorderWidth" Value="2" />
+                        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                        <Setter Property="VisualStateManager.VisualStateGroups">
+                            <Setter.Value>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                                <Setter Property="TextColor" Value="#8F92A1" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <Style x:Key="IconButton" TargetType="buttons:SfButton">
+                        <Setter Property="WidthRequest" Value="50" />
+                        <Setter Property="HeightRequest" Value="50" />
+                        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                        <Setter Property="CornerRadius" Value="30" />
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="FontFamily" Value="MaterialIcons" />
+                    </Style>
+
+                    <Style TargetType="buttons:SfChipGroup">
+                        <Setter Property="ChipBackgroundColor" Value="{DynamicResource ControlLightBackgroundColor}" />
+                        <Setter Property="ChipTextColor" Value="{DynamicResource SecondaryTextColor}" />
+                        <Setter Property="SelectedChipBackgroundColor" Value="{StaticResource PrimaryColor}" />
+                        <Setter Property="SelectedChipTextColor" Value="White" />
+                        <Setter Property="ChipPadding" Value="5" />
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

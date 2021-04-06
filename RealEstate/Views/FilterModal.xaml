@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BottomSheetModal
+    x:Class="RealEstate.Views.FilterModal"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:slider="clr-namespace:Syncfusion.SfRangeSlider.XForms;assembly=Syncfusion.SfRangeSlider.XForms"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    x:Name="this"
+    Title="Filters"
+    x:DataType="viewmodels:FilterViewModel"
+    CollapsedHeight="474"
+    mc:Ignorable="d">
+
+    <StackLayout>
+        <ScrollView>
+            <ScrollView.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsExpanded, Source={Reference this}}"
+                    TargetType="ScrollView"
+                    Value="False">
+                    <Setter Property="VerticalScrollBarVisibility" Value="Never" />
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </ScrollView.Triggers>
+            <StackLayout Padding="0,0,0,20" Spacing="10">
+                <StackLayout Padding="20,0" Spacing="10">
+                    <calendar:SfCalendar
+                        HeightRequest="350"
+                        SelectedDates="{Binding SelectedDates}"
+                        SelectionMode="MultiSelection" />
+
+                    <Label
+                        Margin="0,10,0,0"
+                        Style="{StaticResource SectionTitleText}"
+                        Text="Price Range" />
+
+                    <slider:SfRangeSlider
+                        FontSize="18"
+                        HeightRequest="90"
+                        KnobColor="{DynamicResource PageBackgroundColor}"
+                        LabelColor="{DynamicResource PrimaryTextColor}"
+                        LabelFormat="{}{0:C0}"
+                        Maximum="10000"
+                        Orientation="Horizontal"
+                        RangeEnd="{Binding PriceRangeEnd}"
+                        RangeStart="{Binding PriceRangeStart}"
+                        ShowRange="True"
+                        ShowValueLabel="True"
+                        SnapsTo="None"
+                        ThumbBorderColor="#049FFF"
+                        ThumbBorderThickness="20"
+                        ThumbSize="1.25"
+                        TickFrequency="{Binding Maximum, Source={RelativeSource Self}}"
+                        TickPlacement="None"
+                        TrackColor="{DynamicResource ControlLightBackgroundColor}"
+                        TrackSelectionColor="#049FFF"
+                        TrackSelectionThickness="1.5"
+                        TrackThickness="1"
+                        TranslationY="-20" />
+
+                    <Label
+                        Margin="0,10,0,0"
+                        Style="{StaticResource SectionTitleText}"
+                        Text="Star Range" />
+                    <Grid RowSpacing="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="25" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+
+                        <rating:SfRating
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="5">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image Grid.Column="1" Source="checkmark_gray">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedRatings[0]}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="checkmark_blue" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleRatingFilter}">
+                                    <TapGestureRecognizer.CommandParameter>
+                                        <x:Int32>1</x:Int32>
+                                    </TapGestureRecognizer.CommandParameter>
+                                </TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <rating:SfRating
+                            Grid.Row="1"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="4">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Source="checkmark_gray">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedRatings[1]}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="checkmark_blue" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleRatingFilter}">
+                                    <TapGestureRecognizer.CommandParameter>
+                                        <x:Int32>2</x:Int32>
+                                    </TapGestureRecognizer.CommandParameter>
+                                </TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <rating:SfRating
+                            Grid.Row="2"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="3">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Source="checkmark_gray">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedRatings[2]}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="checkmark_blue" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleRatingFilter}">
+                                    <TapGestureRecognizer.CommandParameter>
+                                        <x:Int32>3</x:Int32>
+                                    </TapGestureRecognizer.CommandParameter>
+                                </TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <rating:SfRating
+                            Grid.Row="3"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="2">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Source="checkmark_gray">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedRatings[3]}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="checkmark_blue" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleRatingFilter}">
+                                    <TapGestureRecognizer.CommandParameter>
+                                        <x:Int32>4</x:Int32>
+                                    </TapGestureRecognizer.CommandParameter>
+                                </TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <rating:SfRating
+                            Grid.Row="4"
+                            ItemSize="20"
+                            ReadOnly="True"
+                            VerticalOptions="Center"
+                            Value="1">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="{StaticResource PrimaryColor}"
+                                    RatedStrokeWidth="0"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                        <Image
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Source="checkmark_gray">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedRatings[4]}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="checkmark_blue" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleRatingFilter}">
+                                    <TapGestureRecognizer.CommandParameter>
+                                        <x:Int32>5</x:Int32>
+                                    </TapGestureRecognizer.CommandParameter>
+                                </TapGestureRecognizer>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+
+                    <Label
+                        Margin="0,10,0,0"
+                        Style="{StaticResource SectionTitleText}"
+                        Text="Rooms" />
+                </StackLayout>
+
+                <ScrollView
+                    Margin="0"
+                    Padding="20,0"
+                    HorizontalScrollBarVisibility="Never"
+                    Orientation="Horizontal">
+                    <buttons:SfChipGroup
+                        ChipBorderWidth="0"
+                        ChoiceMode="SingleOrNone"
+                        SelectedItems="{Binding SelectedRoomTypes}"
+                        Type="Choice">
+                        <buttons:SfChipGroup.ItemsSource>
+                            <x:Array Type="{Type x:String}">
+                                <x:String>Studio</x:String>
+                                <x:String>2 Bedroom</x:String>
+                                <x:String>3 Bedroom</x:String>
+                                <x:String>4 Bedroom</x:String>
+                                <x:String>5 Bedroom</x:String>
+                            </x:Array>
+                        </buttons:SfChipGroup.ItemsSource>
+                    </buttons:SfChipGroup>
+                </ScrollView>
+
+            </StackLayout>
+        </ScrollView>
+        <BoxView HeightRequest="2" Color="{DynamicResource SecondaryTextHighlightColor}" />
+        <Button
+            Margin="20"
+            Command="{Binding ApplyCommand}"
+            Text="Apply Filters" />
+    </StackLayout>
+</views:BottomSheetModal>

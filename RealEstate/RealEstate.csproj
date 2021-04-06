@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -11,7 +12,94 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\materialdesignicons-webfont.ttf" />
+    <None Remove="Assets\NunitoSans-SemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\materialdesignicons-webfont.ttf" />
+    <EmbeddedResource Include="Assets\NunitoSans-SemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.468" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRangeSlider" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.48" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\FormDatePicker.xaml.cs">
+      <DependentUpon>FormDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\FormNumericEntry.xaml.cs">
+      <DependentUpon>FormNumericEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\SearchEntry.xaml.cs">
+      <DependentUpon>SearchEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FavoritesTab.xaml.cs">
+      <DependentUpon>FavoritesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MessagesTab.xaml.cs">
+      <DependentUpon>MessagesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RentalOwnerProfilePage.xaml.cs">
+      <DependentUpon>RentalOwnerProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SignupPage.xaml.cs">
+      <DependentUpon>SignupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProfileTab.xaml.cs">
+      <DependentUpon>ProfileTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RentalDetailsPage.xaml.cs">
+      <DependentUpon>RentalDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SummaryPage.xaml.cs">
+      <DependentUpon>SummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PaymentPage.xaml.cs">
+      <DependentUpon>PaymentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PaymentSuccessPage.xaml.cs">
+      <DependentUpon>PaymentSuccessPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BottomSheetModal.xaml.cs">
+      <DependentUpon>BottomSheetModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\FilterModal.xaml.cs">
+      <DependentUpon>FilterModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\_SamplePage.xaml.cs">
+      <DependentUpon>_SamplePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\FormEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HomeTab.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

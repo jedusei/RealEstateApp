@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseModal
+    x:Class="RealEstate.Views.BottomSheetModal"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    BackgroundColor="#7F000000"
+    mc:Ignorable="d">
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <AbsoluteLayout x:Name="root">
+                <AbsoluteLayout.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </AbsoluteLayout.GestureRecognizers>
+
+                <border:SfBorder
+                    x:Name="sheet"
+                    AbsoluteLayout.LayoutBounds="0,1,1,AutoSize"
+                    AbsoluteLayout.LayoutFlags="YProportional,WidthProportional"
+                    BackgroundColor="{DynamicResource BottomSheetBackgroundColor}"
+                    BorderWidth="0"
+                    CornerRadius="25,25,0,0">
+                    <border:SfBorder.Triggers>
+                        <DataTrigger
+                            Binding="{TemplateBinding IsExpanded}"
+                            TargetType="border:SfBorder"
+                            Value="True">
+                            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
+                            <Setter Property="AbsoluteLayout.LayoutFlags" Value="SizeProportional" />
+                        </DataTrigger>
+                    </border:SfBorder.Triggers>
+                    <StackLayout>
+                        <AbsoluteLayout x:Name="dragHandleBase" HeightRequest="45">
+                            <BoxView
+                                AbsoluteLayout.LayoutBounds="0.5,0.5,40,5"
+                                AbsoluteLayout.LayoutFlags="PositionProportional"
+                                CornerRadius="10"
+                                HorizontalOptions="Center"
+                                Color="{DynamicResource SecondaryTextColor}" />
+                        </AbsoluteLayout>
+                        <ContentView x:Name="titleBar" HeightRequest="0">
+                            <AbsoluteLayout VerticalOptions="Start">
+                                <Button
+                                    x:Name="backBtn"
+                                    Padding="0"
+                                    AbsoluteLayout.LayoutBounds="20,0,50,50"
+                                    FontFamily="MaterialIcons"
+                                    FontSize="30"
+                                    Text="&#xf0141;" />
+                                <Label
+                                    AbsoluteLayout.LayoutBounds="0.5,0.5"
+                                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                                    Style="{StaticResource TitleText}"
+                                    Text="{TemplateBinding Title}" />
+                            </AbsoluteLayout>
+                        </ContentView>
+
+                        <ContentPresenter />
+
+                    </StackLayout>
+                </border:SfBorder>
+                <BoxView
+                    x:Name="dragHandle"
+                    AbsoluteLayout.LayoutBounds="0,0,1,AutoSize"
+                    AbsoluteLayout.LayoutFlags="WidthProportional"
+                    HeightRequest="{Binding Height, Source={Reference dragHandleBase}}"
+                    InputTransparent="{TemplateBinding IsExpanded}"
+                    Color="Transparent">
+                    <BoxView.GestureRecognizers>
+                        <PanGestureRecognizer />
+                    </BoxView.GestureRecognizers>
+                </BoxView>
+            </AbsoluteLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+</views:BaseModal>

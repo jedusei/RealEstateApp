@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="RealEstate.Views.FavoritesTab"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
+    xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    Padding="0">
+    <ContentView.Content>
+        <AbsoluteLayout>
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                Orientation="Vertical">
+                <StackLayout.Triggers>
+                    <DataTrigger
+                        Binding="{Binding LoadStatus}"
+                        TargetType="StackLayout"
+                        Value="{Static viewmodels:LoadStatus.Loading}">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Rentals.Count, FallbackValue=0}" Value="0" />
+                            <BindingCondition Binding="{Binding LoadStatus}" Value="{Static viewmodels:LoadStatus.Loaded}" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsVisible" Value="False" />
+                    </MultiTrigger>
+                </StackLayout.Triggers>
+                <StackLayout
+                    Padding="{OnPlatform '20,20,20,0',
+                                         iOS='20,10,20,0'}"
+                    Orientation="Horizontal"
+                    Spacing="20">
+                    <buttons:SfButton
+                        Command="{Binding ShowFiltersCommand}"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource IconButton}"
+                        Text="&#xf0236;" />
+                    <controls:SearchEntry HorizontalOptions="FillAndExpand" Placeholder="Search for apartments" />
+                </StackLayout>
+                <Label
+                    Padding="20,10"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="Favorite apartments" />
+                <listview:SfListView
+                    Padding="0"
+                    AutoFitMode="Height"
+                    ItemsSource="{Binding Rentals}"
+                    SelectionMode="None">
+                    <listview:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="20,0,20,15" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="210" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <AbsoluteLayout Grid.ColumnSpan="2" Margin="0,0,0,10">
+                                    <effects:SfEffectsView
+                                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                        AbsoluteLayout.LayoutFlags="SizeProportional"
+                                        CornerRadius="15"
+                                        TouchUpCommand="{Binding OpenRentalDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:FavoritesViewModel}}}"
+                                        TouchUpCommandParameter="{Binding}">
+                                        <ffimage:CachedImage
+                                            Aspect="AspectFill"
+                                            BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                                            Source="{Binding ImageUrl}" />
+                                    </effects:SfEffectsView>
+                                    <StackLayout
+                                        Padding="20,15"
+                                        AbsoluteLayout.LayoutBounds="0,0,1,60"
+                                        AbsoluteLayout.LayoutFlags="WidthProportional"
+                                        CascadeInputTransparent="False"
+                                        InputTransparent="True"
+                                        Orientation="Horizontal">
+                                        <border:SfBorder
+                                            Padding="10,0"
+                                            BackgroundColor="#EC6B6C"
+                                            BorderWidth="0"
+                                            CornerRadius="5">
+                                            <Label
+                                                Text="{Binding Distance, StringFormat='{0:F1} miles'}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </border:SfBorder>
+                                        <Label
+                                            FontFamily="MaterialIcons"
+                                            FontSize="23"
+                                            HorizontalOptions="EndAndExpand"
+                                            Text="&#xf02d1;"
+                                            TextColor="#EC6B6C"
+                                            VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding RemoveItemCommand, Source={RelativeSource AncestorType={Type viewmodels:FavoritesViewModel}}}" CommandParameter="{Binding}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </StackLayout>
+                                </AbsoluteLayout>
+
+                                <Label
+                                    Grid.Row="1"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Text="{Binding Title}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Style="{StaticResource SecondaryText}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Cost, StringFormat='{0:C}'}"
+                                                TextColor="{StaticResource PrimaryColor}" />
+                                            <Span Text="{Binding PaymentPeriod, StringFormat=' per {0}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Grid.Row="2"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    Style="{StaticResource SecondaryText}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span FontFamily="MaterialIcons" Text="&#xf07d9; " />
+                                            <Span Text="{Binding Location}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </listview:SfListView.ItemTemplate>
+                </listview:SfListView>
+            </StackLayout>
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0.5,0.5"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                IsVisible="False"
+                Orientation="Vertical">
+                <StackLayout.Triggers>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Rentals.Count, FallbackValue=0}" Value="0" />
+                            <BindingCondition Binding="{Binding LoadStatus}" Value="{Static viewmodels:LoadStatus.Loaded}" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </StackLayout.Triggers>
+
+                <Label
+                    FontFamily="MaterialIcons"
+                    FontSize="120"
+                    Opacity="0.8"
+                    Text="&#xf02d1;"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalOptions="EndAndExpand" />
+                <Label
+                    FontSize="23"
+                    HorizontalOptions="Center"
+                    Text="No favorites"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+            <ActivityIndicator
+                AbsoluteLayout.LayoutBounds="0.5,0.5"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                IsRunning="True"
+                IsVisible="False"
+                WidthRequest="50">
+                <ActivityIndicator.Triggers>
+                    <DataTrigger
+                        Binding="{Binding LoadStatus}"
+                        TargetType="ActivityIndicator"
+                        Value="{Static viewmodels:LoadStatus.Loading}">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </ActivityIndicator.Triggers>
+            </ActivityIndicator>
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

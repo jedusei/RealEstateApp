@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using RealEstate.iOS.Renderers;
 using UIKit;
 
 namespace RealEstate.iOS
@@ -22,7 +23,21 @@ namespace RealEstate.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental", "Shapes_Experimental", "CarouselView_Experimental");
             global::Xamarin.Forms.Forms.Init();
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
+            {
+                ExecuteCallbacksOnUIThread = true
+            });
+
+            Syncfusion.XForms.iOS.Buttons.SfChipRenderer.Init();
+            Syncfusion.XForms.iOS.Buttons.SfChipGroupRenderer.Init();
+            Syncfusion.XForms.iOS.EffectsView.SfEffectsViewRenderer.Init();
+            Syncfusion.XForms.iOS.Border.SfBorderRenderer.Init();
+            new NumericEntryRenderer();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

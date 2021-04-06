@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="RealEstate.Views.MessagesTab"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:controls="clr-namespace:RealEstate.Controls"
+    xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    Padding="0">
+    <ContentView.Content>
+        <AbsoluteLayout>
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="SizeProportional"
+                Orientation="Vertical">
+                <StackLayout.Triggers>
+                    <DataTrigger
+                        Binding="{Binding LoadStatus}"
+                        TargetType="StackLayout"
+                        Value="{Static viewmodels:LoadStatus.Loading}">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding MessageInboxes.Count, FallbackValue=0}" Value="0" />
+                            <BindingCondition Binding="{Binding LoadStatus}" Value="{Static viewmodels:LoadStatus.Loaded}" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsVisible" Value="False" />
+                    </MultiTrigger>
+                </StackLayout.Triggers>
+                <controls:SearchEntry
+                    Padding="20"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Search in messages" />
+                <listview:SfListView
+                    Padding="0"
+                    AutoFitMode="Height"
+                    BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+                    ItemsSource="{Binding MessageInboxes}"
+                    SelectionMode="None">
+                    <listview:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <effects:SfEffectsView
+                                Padding="20,15"
+                                TouchUpCommand="{Binding OpenInboxCommand, Source={RelativeSource AncestorType={Type viewmodels:MessagesViewModel}}}"
+                                TouchUpCommandParameter="{Binding}">
+                                <Grid
+                                    ColumnSpacing="10"
+                                    HeightRequest="60"
+                                    RowSpacing="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <border:SfBorder
+                                        Grid.RowSpan="2"
+                                        BorderWidth="0"
+                                        CornerRadius="30"
+                                        HeightRequest="60">
+                                        <ffimage:CachedImage
+                                            Aspect="AspectFill"
+                                            BackgroundColor="{DynamicResource ControlSelectedLightBackgroundColor}"
+                                            Source="{Binding User.ProfileImageUrl}" />
+                                    </border:SfBorder>
+
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="18"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="1"
+                                        Text="{Binding User.Name}"
+                                        VerticalOptions="End" />
+
+                                    <Label
+                                        Grid.Column="2"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="{Binding LastMessage.DateCreated, StringFormat='{0:h:mm tt}'}"
+                                        VerticalOptions="End" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="1"
+                                        Style="{StaticResource SecondaryText}"
+                                        Text="{Binding LastMessage.Content, FallbackValue='Tap here to send your first message.'}"
+                                        VerticalOptions="Start">
+                                        <Label.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding LastMessage.IsFromMe, FallbackValue=False}"
+                                                TargetType="Label"
+                                                Value="True">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                Binding="{Binding LastMessage, TargetNullValue=0}"
+                                                TargetType="Label"
+                                                Value="0">
+                                                <Setter Property="FontAttributes" Value="Italic" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        IsVisible="{Binding LastMessage.IsFromMe, FallbackValue=False}"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="1"
+                                        Style="{StaticResource SecondaryText}"
+                                        VerticalOptions="Start">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span
+                                                    FontAttributes="Bold"
+                                                    FontSize="16"
+                                                    Text="You: " />
+                                                <Span Text="{Binding LastMessage.Content}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <border:SfBorder
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Padding="5,0"
+                                        BackgroundColor="#FF4E4E"
+                                        BorderWidth="0"
+                                        CornerRadius="10"
+                                        HeightRequest="20"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start">
+                                        <border:SfBorder.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding UnreadMessageCount}"
+                                                TargetType="border:SfBorder"
+                                                Value="0">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+                                        </border:SfBorder.Triggers>
+
+                                        <Label
+                                            Text="{Binding UnreadMessageCount}"
+                                            TextColor="White"
+                                            TranslationY="-1" />
+                                    </border:SfBorder>
+                                </Grid>
+                            </effects:SfEffectsView>
+                        </DataTemplate>
+                    </listview:SfListView.ItemTemplate>
+                </listview:SfListView>
+            </StackLayout>
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0.5,0.5"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                IsVisible="False"
+                Orientation="Vertical">
+                <StackLayout.Triggers>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding MessageInboxes.Count, FallbackValue=0}" Value="0" />
+                            <BindingCondition Binding="{Binding LoadStatus}" Value="{Static viewmodels:LoadStatus.Loaded}" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsVisible" Value="True" />
+                    </MultiTrigger>
+                </StackLayout.Triggers>
+
+                <Label
+                    FontFamily="MaterialIcons"
+                    FontSize="120"
+                    HorizontalOptions="Center"
+                    Opacity="0.8"
+                    Text="&#xf01ee;"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalOptions="EndAndExpand" />
+                <Label
+                    FontSize="23"
+                    HorizontalOptions="Center"
+                    Text="No messages"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+            <ActivityIndicator
+                AbsoluteLayout.LayoutBounds="0.5,0.5"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                IsRunning="True"
+                IsVisible="False"
+                WidthRequest="50">
+                <ActivityIndicator.Triggers>
+                    <DataTrigger
+                        Binding="{Binding LoadStatus}"
+                        TargetType="ActivityIndicator"
+                        Value="{Static viewmodels:LoadStatus.Loading}">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </ActivityIndicator.Triggers>
+            </ActivityIndicator>
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

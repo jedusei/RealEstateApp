@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="RealEstate.Views.RentalDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:effects="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:viewmodels="clr-namespace:RealEstate.ViewModels"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    mc:Ignorable="d">
+
+    <AbsoluteLayout BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+            <ScrollView>
+                <StackLayout>
+                    <border:SfBorder
+                        d:BackgroundColor="Red"
+                        BorderWidth="0"
+                        CornerRadius="0,0,25,25">
+                        <AbsoluteLayout HeightRequest="350">
+                            <CarouselView
+                                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                AbsoluteLayout.LayoutFlags="SizeProportional"
+                                IndicatorView="indicatorView"
+                                ItemsSource="{Binding Rental.ImageUrls}">
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ffimage:CachedImage Aspect="AspectFill" Source="{Binding}" />
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+                            <IndicatorView
+                                x:Name="indicatorView"
+                                Margin="0,20"
+                                AbsoluteLayout.LayoutBounds="0.5,1"
+                                AbsoluteLayout.LayoutFlags="PositionProportional"
+                                IndicatorColor="#3BFFFFFF"
+                                IndicatorSize="10"
+                                SelectedIndicatorColor="White" />
+                        </AbsoluteLayout>
+                    </border:SfBorder>
+                    <Grid Padding="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            d:Text="Luxury Apartments"
+                            Style="{StaticResource TitleText}"
+                            Text="{Binding Rental.Title}" />
+                        <border:SfBorder
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            d:BackgroundColor="Red"
+                            BorderColor="{StaticResource PrimaryColor}"
+                            CornerRadius="30"
+                            HeightRequest="50"
+                            VerticalOptions="Center"
+                            WidthRequest="50">
+                            <effects:SfEffectsView TouchUpCommand="{Binding OpenOwnerDetailsCommand, Source={RelativeSource AncestorType={Type viewmodels:BaseViewModel}}}">
+                                <ffimage:CachedImage Aspect="AspectFill" Source="{Binding Rental.Owner.ProfileImageUrl}" />
+                            </effects:SfEffectsView>
+                        </border:SfBorder>
+                        <rating:SfRating
+                            Grid.Row="1"
+                            ItemSize="20"
+                            Precision="Half"
+                            ReadOnly="True"
+                            Value="{Binding Rental.Rating}">
+                            <rating:SfRating.RatingSettings>
+                                <rating:SfRatingSettings
+                                    RatedFill="#F2D374"
+                                    RatedStrokeWidth="0"
+                                    UnRatedFill="Transparent"
+                                    UnRatedStrokeWidth="0" />
+                            </rating:SfRating.RatingSettings>
+                        </rating:SfRating>
+                    </Grid>
+
+                    <Label
+                        Margin="30,0"
+                        FontSize="18"
+                        Style="{StaticResource TitleText}"
+                        Text="Features" />
+                    <ScrollView
+                        Margin="0,10"
+                        Padding="30,0,20,0"
+                        HorizontalScrollBarVisibility="Never"
+                        Orientation="Horizontal">
+                        <StackLayout BindableLayout.ItemsSource="{Binding Rental.Features}" Orientation="Horizontal">
+                            <d:BindableLayout.ItemsSource>
+                                <x:Array Type="{Type x:String}">
+                                    <x:String>3 Bedrooms</x:String>
+                                    <x:String>Apartment</x:String>
+                                    <x:String>Wifi</x:String>
+                                    <x:String>Restaurant</x:String>
+                                    <x:String>Swimming Pool</x:String>
+                                </x:Array>
+                            </d:BindableLayout.ItemsSource>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <border:SfBorder
+                                        Margin="0,0,10,0"
+                                        BackgroundColor="{DynamicResource ControlLightBackgroundColor}"
+                                        BorderWidth="0"
+                                        CornerRadius="5">
+                                        <Label
+                                            Padding="20,5"
+                                            Text="{Binding}"
+                                            TextColor="{DynamicResource SecondaryTextColor}" />
+                                    </border:SfBorder>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <Label
+                        Margin="30,10"
+                        FontSize="18"
+                        Style="{StaticResource TitleText}"
+                        Text="Description" />
+                    <Label
+                        Margin="30,0,30,30"
+                        d:Text="{StaticResource LongDummyText}"
+                        LineHeight="1.2"
+                        Style="{StaticResource SecondaryText}"
+                        Text="{Binding Rental.Description}" />
+                </StackLayout>
+            </ScrollView>
+
+            <border:SfBorder BorderColor="{DynamicResource OutlineButtonBorderColor}" BorderThickness="0,2,0,0">
+                <StackLayout Padding="30" Orientation="Horizontal">
+                    <Label VerticalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="24"
+                                    Text="{Binding Rental.Cost, StringFormat='{0:C2}'}" />
+                                <Span Text="{Binding Rental.PaymentPeriod, StringFormat=' per {0}'}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Button
+                        Command="{Binding GoToBookingCommand}"
+                        HorizontalOptions="EndAndExpand"
+                        Text="Booking"
+                        WidthRequest="150" />
+                </StackLayout>
+            </border:SfBorder>
+        </StackLayout>
+
+        <Button
+            Padding="0"
+            AbsoluteLayout.LayoutBounds="20,20"
+            Command="{Binding GoBackCommand}"
+            FontFamily="MaterialIcons"
+            FontSize="30"
+            HeightRequest="50"
+            HorizontalOptions="Start"
+            Text="&#xf0141;"
+            WidthRequest="50" />
+    </AbsoluteLayout>
+</views:BasePage>

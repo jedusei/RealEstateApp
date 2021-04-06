@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="RealEstate.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:views="clr-namespace:RealEstate.Views"
+    ios:Page.UseSafeArea="True"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="tabview:SfTabItem">
+                <Setter Property="FontIconFontFamily" Value="MaterialIcons" />
+                <Setter Property="FontIconFontColor" Value="#8F92A1" />
+                <Setter Property="SelectionColor" Value="#2BACFC" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <tabview:SfTabView
+            x:Name="tabView"
+            d:AbsoluteLayout.LayoutBounds="0,0,1,1"
+            d:AbsoluteLayout.LayoutFlags="SizeProportional"
+            AbsoluteLayout.LayoutFlags="WidthProportional"
+            BackgroundColor="{DynamicResource PageBackgroundColor}"
+            DisplayMode="Image"
+            EnableSwiping="False"
+            SelectionChanged="tabView_SelectionChanged"
+            TabHeaderPosition="Bottom"
+            TabHeight="80"
+            VisibleHeaderCount="4">
+            <tabview:SfTabView.SelectionIndicatorSettings>
+                <tabview:SelectionIndicatorSettings StrokeThickness="3" Color="#2BACFC" />
+            </tabview:SfTabView.SelectionIndicatorSettings>
+            <tabview:SfTabItem FontIconFontSize="35" IconFont="&#xf06a1;">
+                <tabview:SfTabItem.Content>
+                    <views:HomeTab />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+            <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf02d5;">
+                <tabview:SfTabItem.Content>
+                    <views:FavoritesTab />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+            <tabview:SfTabItem FontIconFontSize="30" IconFont="&#xf01f0;">
+                <tabview:SfTabItem.Content>
+                    <views:MessagesTab />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+            <tabview:SfTabItem FontIconFontSize="32" IconFont="&#xf0013;">
+                <tabview:SfTabItem.Content>
+                    <views:ProfileTab />
+                </tabview:SfTabItem.Content>
+            </tabview:SfTabItem>
+        </tabview:SfTabView>
+    </AbsoluteLayout>
+
+</views:BasePage>
